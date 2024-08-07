@@ -1,3 +1,4 @@
+import { timeStamp } from "console";
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
@@ -51,6 +52,19 @@ const postSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
+
+const sessionSchema = new mongoose.Schema({
+  userId: {
+    type: String,
+    required: true,
+  },
+  expiresAt: {
+    type: Date,
+    required: true,
+  }
+}, { timestamps: true });
+
 export const User = mongoose.models.User || mongoose.model("User", userSchema);
 export const Post = mongoose.models.Post || mongoose.model("Post", postSchema);
+export const Session = mongoose.models.Session || mongoose.model("Session", sessionSchema);
 
