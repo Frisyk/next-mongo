@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
     required: true,
     min: 6,
   },
+  point: {
+    type: Number,
+    required: true,
+  },
   img: {
     type: String,
   },
@@ -26,9 +30,6 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  point: {
-    type: Number,
-  }
 }, { timestamps: true });
 
 const postSchema = new mongoose.Schema({

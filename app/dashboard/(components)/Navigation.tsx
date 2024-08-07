@@ -20,7 +20,7 @@ export default function Navigation() {
   const path = usePathname();
   
   return (
-    <div className="relative">
+    <div className=" h-screen sticky top-0">
       <div className="hidden md:block w-80 border-r">
         <div className="flex h-screen flex-col gap-2">
           <div className="h-14 items-center border-b px-4 flex">

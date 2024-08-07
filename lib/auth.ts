@@ -26,7 +26,6 @@ export const signup = async (state: FormState, formData: FormData): Promise<Form
         const existingUser = await User.findOne({ email });
 
         if (existingUser) {
-            console.log(1);
             return { message: 'Email already exists, please use a different email or login.' };
         }
 
@@ -35,7 +34,7 @@ export const signup = async (state: FormState, formData: FormData): Promise<Form
         
 
         // 4. Insert the user into the database
-        const user = await User.create({ username, email, password: hashedPassword });
+        const user = await User.create({ username, email, point: 100, password: hashedPassword });
         if (!user) {
             return { message: 'An error occurred while creating your account.' };
         }

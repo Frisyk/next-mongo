@@ -12,12 +12,14 @@ export default async function Layout({
 }) {
   const user = await getUser();
   
+  console.log(user);
+  
   return (
     <div className="flex min-h-screen w-full">
       <Navigation/>
       <div className="flex w-full flex-col">
-        <Header username={user.username} point={user._point}/>
-        <main className="flex-1 p-4 md:p-6">{children}</main>
+        <Header username={user.username} point={user.point}/>
+        <main className="flex-1 p-6 pb-20 md:p-8 bg-gradient-to-br from-white to-purple-200">{children}</main>
       </div>
     </div>
   );

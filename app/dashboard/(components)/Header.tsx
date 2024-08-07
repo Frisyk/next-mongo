@@ -17,9 +17,9 @@ export default function Header({username, point}: {username: string, point: numb
             <span className="sr-only">Batik</span>
           </Link>
           <h1 className="md:block hidden text-lg font-semibold capitalize">{path}</h1>
-          <div className="ml-auto flex items-center gap-4">
-            <h1>Selamat Datang <span className='uppercase font-semibold'>{username}</span></h1>
-            <Button className="rounded-full bg-purple-300" size="icon" variant="ghost">
+          <div className="ml-auto flex items-center gap-2">
+            <h1>Halo, </h1><span className='uppercase font-semibold'>{username}!</span>
+            <Button className="rounded-full hidden md:block bg-purple-300" size="icon" variant="ghost">
               <div
                 className="rounded-full "
                 style={{
@@ -29,8 +29,8 @@ export default function Header({username, point}: {username: string, point: numb
               />
               <span className="sr-only">View profile</span>
             </Button>
+          <h1 className='font-bold p-2 rounded bg-purple-900 text-white'>{`${point}✨`}</h1>
           </div>
-          <h1>{`${point}s`}</h1>
           </header>
   )
 }

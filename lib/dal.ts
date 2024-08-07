@@ -1,7 +1,7 @@
 import 'server-only';
 import { cache } from 'react';
 import { verifySession } from '@/lib/stateless-session';
-import { User } from './models';
+import { Post, User } from './models';
 import connecttoDB from './db';
 
 export const getUser = cache(async () => {
@@ -12,12 +12,23 @@ export const getUser = cache(async () => {
     connecttoDB()
     const user = await User.findOne({
       _id: session.userId
-    });      
-    console.log(user?._point);
-    
+    });          
     return user;
   } catch (error) {
     console.log('Failed to fetch user');
+    return null;
+  }
+});
+export const getMateri = cache(async () => {
+  const session = await verifySession();
+  if (!session) return null;
+
+  try {
+    connecttoDB()
+    const materi = await Post.find();          
+    return materi;
+  } catch (error) {
+    console.log('Failed to fetch materi');
     return null;
   }
 });

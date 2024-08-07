@@ -17,6 +17,7 @@
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "framer-motion": "^11.3.22",
     "jose": "^5.2.3",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.356.0",
