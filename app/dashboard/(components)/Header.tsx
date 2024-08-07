@@ -5,10 +5,10 @@ import { PackageIcon } from '@/components/ui/icons'
 import { Button } from '@/components/ui/button'
 import { usePathname } from 'next/navigation'
 
-export default function Header({username}: {username: string}) {
+export default function Header({username, point}: {username: string, point: number}) {
     const path = usePathname().split('/').pop()
   return (
-    <header className="flex h-14 items-center border-b px-4 md:gap-4">
+    <header className="flex h-14 items-center border-b border-purple-100 px-4 md:gap-4">
           <Link
             className="flex items-center rounded-md bg-purple-100 px-2 py-2 lg:hidden"
             href="#"
@@ -30,6 +30,7 @@ export default function Header({username}: {username: string}) {
               <span className="sr-only">View profile</span>
             </Button>
           </div>
-        </header>
+          <h1>{`${point}s`}</h1>
+          </header>
   )
 }

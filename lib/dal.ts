@@ -13,6 +13,8 @@ export const getUser = cache(async () => {
     const user = await User.findOne({
       _id: session.userId
     });      
+    console.log(user?._point);
+    
     return user;
   } catch (error) {
     console.log('Failed to fetch user');

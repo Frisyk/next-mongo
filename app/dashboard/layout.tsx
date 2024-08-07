@@ -16,7 +16,7 @@ export default async function Layout({
     <div className="flex min-h-screen w-full">
       <Navigation/>
       <div className="flex w-full flex-col">
-        <Header username={user.username}/>
+        <Header username={user.username} point={user._point}/>
         <main className="flex-1 p-4 md:p-6">{children}</main>
       </div>
     </div>

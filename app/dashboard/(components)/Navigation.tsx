@@ -7,7 +7,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { usePathname } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { PackageIcon } from '@/components/ui/icons';
-import LogoutButton from '../logout-button';
+import LogoutButton from './logout-button';
 
 export default function Navigation() {
   const navLinks = [
