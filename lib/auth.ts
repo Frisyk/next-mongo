@@ -5,7 +5,6 @@ import { User } from "./models"
 import { FormState, LoginFormSchema, SignupFormSchema } from '@/lib/definitions';
 import { createSession, deleteSession } from '@/lib/stateless-session';
 import bcrypt from 'bcrypt';
-import { redirect } from "next/navigation";
 
 export const signup = async (state: FormState, formData: FormData): Promise<FormState> => {
         connecttoDB();

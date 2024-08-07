@@ -11,7 +11,7 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   const user = await getUser();
-
+  
   return (
     <div className="flex min-h-screen w-full">
       <Navigation/>
