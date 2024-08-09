@@ -29,7 +29,7 @@ export default function Header({username, point}: {username: string, point: numb
               />
               <span className="sr-only">View profile</span>
             </Button>
-          <h1 className='font-bold p-2 rounded bg-purple-900 text-white'>{`${point}✨`}</h1>
+          <h1 className='font-bold p-2 hidden md:block rounded bg-purple-900 text-white'>{`${point}✨`}</h1>
           </div>
           </header>
   )

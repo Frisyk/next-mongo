@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { PackageIcon } from '@/components/ui/icons';
 import LogoutButton from './logout-button';
+import clsx from 'clsx';
 
 export default function Navigation() {
   const navLinks = [
@@ -33,17 +34,18 @@ export default function Navigation() {
             <nav className="flex flex-col gap-5 px-4 text-sm font-medium">
               {navLinks.map((link) => (
                 <Link
-                  className={`${
-                    path === link.href
-                      ? 'bg-purple-100 text-purple-900 hover:text-purple-900'
-                      : ''
-                  } flex items-center gap-3 rounded-lg px-3 py-2 text-purple-500 transition-all hover:text-purple-900`}
-                  href={link.href}
-                  key={link.title}
-                >
-                  {link.badge}
-                  <span>{link.title}</span>
-                </Link>
+                className={clsx(
+                  'flex items-center gap-3 rounded-lg px-3 py-2 text-[#E3DCEA] transition-all hover:text-purple-900',
+                  {
+                    'bg-purple-100  text-[#2b274f] hover:text-purple-900': path === link.href, 
+                  },
+                )} 
+                href={link.href}
+                key={link.title}
+              >
+                {link.badge}
+                <span>{link.title}</span>
+              </Link>
               ))}
             </nav>
           </div>
@@ -60,9 +62,9 @@ export default function Navigation() {
             <Link
               className={`${
                 path === link.href
-                  ? 'bg-purple-100 text-purple-900 hover:text-purple-900'
+                  ? 'bg-purple-100 text-[#2b274f] hover:text-purple-900'
                   : ''
-              } flex flex-col items-center gap-1 px-3 py-2 text-purple-500 transition-all hover:text-purple-900`}
+              } flex flex-col items-center gap-1 px-3 py-2 text-[#E3DCEA] transition-all hover:text-purple-900`}
               href={link.href}
               key={link.title}
             >

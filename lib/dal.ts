@@ -1,7 +1,7 @@
 import 'server-only';
 import { cache } from 'react';
 import { verifySession } from '@/lib/stateless-session';
-import { Post, User } from './models';
+import { Post, User, Game } from './models';
 import connecttoDB from './db';
 
 export const getUser = cache(async () => {
@@ -19,13 +19,28 @@ export const getUser = cache(async () => {
     return null;
   }
 });
+
 export const getMateri = cache(async () => {
   const session = await verifySession();
-  if (!session) return null;
+  if (!session) return alert('login dulu yaa!');
 
   try {
     connecttoDB()
     const materi = await Post.find();          
+    return materi;
+  } catch (error) {
+    console.log('Failed to fetch materi');
+    return null;
+  }
+});
+
+export const getGamesList = cache(async () => {
+  const session = await verifySession();
+  if (!session) return alert('login dulu yaa!');
+
+  try {
+    connecttoDB()
+    const materi = await Game.find();          
     return materi;
   } catch (error) {
     console.log('Failed to fetch materi');
