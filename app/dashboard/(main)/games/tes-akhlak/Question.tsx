@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Define the types for answers and questions
 interface AnswerOption {
@@ -16,28 +16,28 @@ interface Question {
 }
 
 interface ResultSummaryProps {
-    date: string;
+    examtitle: string;
+    currentQuestion: number;
     totalQuestions: number;
     score: number;
     message: string;
 }
 
-const ResultSummary: React.FC<ResultSummaryProps> = ({ date, totalQuestions, score, message }) => {
+const ResultSummary: React.FC<ResultSummaryProps> = ({ examtitle, currentQuestion, totalQuestions, score, message }) => {
     return (
         <div className="p-6 bg-gray-900 text-white rounded-lg shadow-lg">
-            <h2 className="text-xl font-semibold mb-4">Hasil Exam</h2>
-            <p className="text-sm mb-2">Tanggal Ujian: {date}</p>
+                <h2 className="text-xl font-semibold mb-4">{examtitle}</h2>
             <div className="flex justify-between mb-2">
                 <div>
-                    <p>Total soal</p>
-                    <p className="text-4xl font-bold">{totalQuestions}</p>
+                    <p>Soal</p>
+                    <p className="text-4xl font-bold">{currentQuestion}/{totalQuestions}</p>
                 </div>
                 <div>
                     <p>Score</p>
                     <p className="text-4xl font-bold">{score}</p>
                 </div>
             </div>
-            <p className="mt-4">{message}</p>
+            {/* <p className="mt-4">{message}</p> */}
         </div>
     );
 };
@@ -53,8 +53,8 @@ interface QuestionComponentProps {
 const QuestionComponent: React.FC<QuestionComponentProps> = ({ category, questionText, answers, selectedAnswer, onAnswerClick }) => {
     return (
         <div className="p-6 bg-gray-900 text-white rounded-lg shadow-lg mt-4">
-            <h2 className="text-xl font-semibold mb-4">Kategori: {category}</h2>
-            <p className="mb-4">{questionText}</p>
+            <h2 className="text-xl mb-4">Kategori: {category}</h2>
+            <p className="mb-4 font-semibold text-2xl">{questionText}</p>
             <div className="space-y-4">
                 {answers.map((answer) => (
                     <div 
@@ -79,32 +79,38 @@ interface NavigationComponentProps {
     onPrevious: () => void;
     onNext: () => void;
     onSubmit: () => void;
+    onSelect: (questionNumber: number) => void;
 }
 
-const NavigationComponent: React.FC<NavigationComponentProps> = ({ currentQuestion, totalQuestions, onPrevious, onNext, onSubmit }) => {
+const NavigationComponent: React.FC<NavigationComponentProps> = ({ currentQuestion, totalQuestions, onPrevious, onNext, onSubmit, onSelect }) => {
     return (
         <div className="flex justify-between items-center mt-6">
-            <button onClick={onPrevious} className="flex items-center px-4 py-2 rounded-lg bg-gray-800 text-white">
+            <button 
+                onClick={onPrevious} 
+                className={`flex items-center px-4 py-2 rounded-lg ${currentQuestion === 1 ? 'bg-gray-600 text-gray-400 cursor-not-allowed' : 'bg-gray-800 text-white cursor-pointer'}`}
+                disabled={currentQuestion === 1} // Disable button when currentQuestion is 1
+            >
                 Sebelumnya
             </button>
             <div className="flex space-x-2">
                 {[...Array(totalQuestions)].map((_, i) => (
                     <div 
                         key={i} 
-                        className={`w-8 h-8 flex items-center justify-center rounded-lg ${i + 1 === currentQuestion ? 'bg-teal-400 text-gray-900' : 'bg-gray-800 text-white'}`}
+                        onClick={() => onSelect(i + 1)}
+                        className={`w-8 h-8 flex cursor-pointer items-center justify-center rounded-lg ${i + 1 === currentQuestion ? 'bg-teal-400 text-gray-900' : 'bg-gray-800 text-white'}`}
                     >
                         {i + 1}
                     </div>
                 ))}
             </div>
-            <button onClick={onNext} className="flex items-center px-4 py-2 rounded-lg bg-gray-800 text-white">
+            
+            <button 
+                onClick={onNext} 
+                className={`flex items-center px-4 py-2 rounded-lg ${currentQuestion === totalQuestions ? 'bg-gray-600 text-gray-400 cursor-not-allowed' : 'bg-gray-800 text-white cursor-pointer'}`}
+                disabled={currentQuestion === totalQuestions} // Disable button when currentQuestion is the last one
+            >
                 Selanjutnya
             </button>
-            {currentQuestion === totalQuestions && (
-                <button onClick={onSubmit} className="flex items-center px-4 py-2 rounded-lg bg-teal-500 text-white">
-                    Submit
-                </button>
-            )}
         </div>
     );
 };
@@ -163,77 +169,127 @@ const exampleQuestions: Question[] = [
     // Add more questions as needed
 ];
 
+
 const App: React.FC = () => {
     const [currentQuestion, setCurrentQuestion] = useState(1);
     const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: string | null }>({});
-    const [isAnswered, setIsAnswered] = useState<boolean>(false);
     const [finalScore, setFinalScore] = useState<number | null>(null);
+    const [timeLeft, setTimeLeft] = useState(600); // 10 minutes = 600 seconds
+    const [isTimeUp, setIsTimeUp] = useState(false);
+    const [timerActive, setTimerActive] = useState(false); // Tracks whether the timer is active
     const totalQuestions = exampleQuestions.length;
-    const date = "09 Agt 2024 pukul 20:49:22"; 
     const message = "Selamat! Anda telah lulus dari ujian ini.";
 
+    useEffect(() => {
+        if (timerActive && timeLeft > 0) {
+            const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+            return () => clearTimeout(timer);
+        } else if (timeLeft === 0) {
+            setIsTimeUp(true);
+            handleSubmit();
+        }
+    }, [timerActive, timeLeft]);
+
+    const handleStart = () => {
+        setTimerActive(true);
+    };
+
     const handleAnswerClick = (label: string) => {
-        if (!isAnswered) {
+        if (timerActive && !isTimeUp) {
             setSelectedAnswers(prev => ({ ...prev, [currentQuestion]: label })); // Save answer
-            setIsAnswered(true);
         }
     };
 
     const handleNext = () => {
-        if (currentQuestion < totalQuestions) {
+        if (timerActive && currentQuestion < totalQuestions) {
             setCurrentQuestion(prev => prev + 1);
-            setIsAnswered(false); // Reset answer status
         }
     };
 
     const handlePrevious = () => {
-        if (currentQuestion > 1) {
+        if (timerActive && currentQuestion > 1) {
             setCurrentQuestion(prev => prev - 1);
         }
     };
 
     const handleSubmit = () => {
-        if (currentQuestion === totalQuestions) {
-            const calculateScore = () => {
-                let score = 0;
-                exampleQuestions.forEach((question, index) => {
-                    const userAnswer = selectedAnswers[index + 1];
-                    const correctAnswer = question.answers.find(answer => answer.isCorrect);
-                    if (userAnswer === correctAnswer?.label) {
-                        score += 10;
-                    }
-                });
-                return score;
-            };
+        const calculateScore = () => {
+            let score = 0;
+            exampleQuestions.forEach((question, index) => {
+                const userAnswer = selectedAnswers[index + 1];
+                const correctAnswer = question.answers.find(answer => answer.isCorrect);
+                if (userAnswer === correctAnswer?.label) {
+                    score += 10;
+                }
+            });
+            return score;
+        };
 
-            setFinalScore(calculateScore());
+        setFinalScore(calculateScore());
+        setIsTimeUp(true);
+        setTimerActive(false);
+        setTimeLeft(600); // Reset the timer to 10 minutes
+    };
+
+    const handleSelect = (questionNumber: number) => {
+        if (timerActive && !isTimeUp) {
+            setCurrentQuestion(questionNumber);
         }
+    };
+
+    const handleReset = () => {
+        setTimerActive(false);
+        setTimeLeft(600);
+        setCurrentQuestion(1);
+        setSelectedAnswers({});
+        setFinalScore(null);
+        setIsTimeUp(false);
     };
 
     const currentQuestionData = exampleQuestions[currentQuestion - 1];
 
     return (
         <div className="p-6 bg-gray-900 text-white rounded-lg shadow-lg">
-            <ResultSummary 
-                date={date} 
-                totalQuestions={totalQuestions} 
-                score={finalScore !== null ? finalScore : 0} 
-                message={message} 
+            <ResultSummary
+                examtitle={'UJIAN 1'}
+                currentQuestion={currentQuestion}
+                totalQuestions={totalQuestions}
+                score={finalScore !== null ? finalScore : 0}
+                message={message}
             />
-            <QuestionComponent 
-                category={currentQuestionData.category} 
-                questionText={currentQuestionData.questionText} 
-                answers={currentQuestionData.answers} 
-                selectedAnswer={selectedAnswers[currentQuestion] || null} // Pass the current selected answer
+            <div className="flex justify-between items-center mb-4">
+                <span>Waktu tersisa: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' : ''}{timeLeft % 60}</span>
+                {!timerActive && !isTimeUp && (
+                    <button onClick={handleStart} className="bg-teal-400 text-gray-900 px-4 py-2 rounded-lg">
+                        Mulai Ujian
+                    </button>
+                )}
+                {timerActive && (
+                    <button onClick={handleSubmit} className="bg-red-500 text-white px-4 py-2 rounded-lg">
+                        Selesai
+                    </button>
+                )}
+            </div>
+            <QuestionComponent
+                category={currentQuestionData.category}
+                questionText={currentQuestionData.questionText}
+                answers={currentQuestionData.answers}
+                selectedAnswer={selectedAnswers[currentQuestion] || null}
                 onAnswerClick={handleAnswerClick}
             />
-            <NavigationComponent 
-                currentQuestion={currentQuestion} 
-                totalQuestions={totalQuestions} 
-                onPrevious={handlePrevious} 
-                onNext={handleNext} 
+            <NavigationComponent
+                onSelect={handleSelect}
+                currentQuestion={currentQuestion}
+                totalQuestions={totalQuestions}
+                onPrevious={handlePrevious}
+                onNext={handleNext}
                 onSubmit={handleSubmit}
             />
+            {isTimeUp && (
+                <button onClick={handleReset} className="bg-teal-400 text-gray-900 px-4 py-2 rounded-lg mt-4">
+                    Ulangi Ujian
+                </button>
+            )}
         </div>
     );
 };

@@ -1,6 +1,6 @@
 import 'server-only';
 import { cache } from 'react';
-import { verifySession } from '@/lib/stateless-session';
+import { updateSession, verifySession } from '@/lib/stateless-session';
 import { Post, User, Game } from './models';
 import connecttoDB from './db';
 
@@ -12,7 +12,7 @@ export const getUser = cache(async () => {
     connecttoDB()
     const user = await User.findOne({
       _id: session.userId
-    });          
+    });
     return user;
   } catch (error) {
     console.log('Failed to fetch user');

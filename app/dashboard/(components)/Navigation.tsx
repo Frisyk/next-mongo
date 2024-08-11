@@ -37,7 +37,7 @@ export default function Navigation() {
                 className={clsx(
                   'flex items-center gap-3 rounded-lg px-3 py-2 text-[#E3DCEA] transition-all hover:text-purple-900',
                   {
-                    'bg-purple-100  text-[#2b274f] hover:text-purple-900': path === link.href, 
+                    'bg-purple-700  text-purple-50 hover:text-orange-200': path === link.href, 
                   },
                 )} 
                 href={link.href}
@@ -62,9 +62,9 @@ export default function Navigation() {
             <Link
               className={`${
                 path === link.href
-                  ? 'bg-purple-100 text-[#2b274f] hover:text-purple-900'
+                  ? 'bg-purple-700 text-purple-50 hover:text-purple-900'
                   : ''
-              } flex flex-col items-center gap-1 px-3 py-2 text-[#E3DCEA] transition-all hover:text-purple-900`}
+              } flex flex-col items-center gap-1 px-3 py-2 text-[#E3DCEA] transition-all hover:text-orange-300`}
               href={link.href}
               key={link.title}
             >
