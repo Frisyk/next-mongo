@@ -5,7 +5,7 @@ import { NavigationComponentProps, Question, QuestionComponentProps, ResultSumma
 import { ResultSummary } from './Summary';
 import { QuestionComponent } from './QuestionComp';
 import { NavigationComponent } from './Navigation';
-import { putUserScore } from '@/lib/auth';
+import { getUserAttempt, putUserScore } from '@/lib/auth';
 
 const exampleQuestions: Question[] = [
     {
@@ -70,7 +70,7 @@ export default function App ({user}: {user:string}) {
     const [isTimeUp, setIsTimeUp] = useState(false);
     const [timerActive, setTimerActive] = useState(false); // Tracks whether the timer is active
     const totalQuestions = exampleQuestions.length;
-    const message = "Selamat! Anda telah lulus dari ujian ini.";
+    // const message = "Selamat! Anda telah lulus dari ujian ini.";
     
 
     useEffect(() => {
@@ -84,6 +84,7 @@ export default function App ({user}: {user:string}) {
     }, [timerActive, timeLeft]);
 
     const handleStart = () => {
+        // setTimeLeft(600)
         setTimerActive(true);
     };
 
@@ -115,8 +116,10 @@ export default function App ({user}: {user:string}) {
                     score += 10;
                 }
             });
-            
-            const update = await putUserScore(user, "tes 1", score)
+            const attempt = await getUserAttempt(user)            
+            const testTitle = 'tes'
+            const testName = `${testTitle} ${attempt}`;
+            await putUserScore(user, testName, score)
             return score;
         };
 
@@ -146,14 +149,7 @@ export default function App ({user}: {user:string}) {
     const currentQuestionData = exampleQuestions[currentQuestion - 1];
 
     return (
-        <div className="p-6 bg-gray-900 text-white rounded-lg shadow-lg">
-            <ResultSummary
-                examtitle={'UJIAN 1'}
-                currentQuestion={currentQuestion}
-                totalQuestions={totalQuestions}
-                score={finalScore !== null ? finalScore : 0}
-                message={message}
-            />
+        <div className="p-4 bg-gray-900 text-white rounded-lg shadow-lg w-full md:w-1/2 mx-auto">
             <div className="flex justify-between items-center mb-4">
                 <span>Waktu tersisa: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' : ''}{timeLeft % 60}</span>
                 {!timerActive && !isTimeUp && (
@@ -167,6 +163,13 @@ export default function App ({user}: {user:string}) {
                     </button>
                 )}
             </div>
+            <ResultSummary
+                examtitle={'UJIAN 1'}
+                currentQuestion={currentQuestion}
+                totalQuestions={totalQuestions}
+                score={finalScore !== null ? finalScore : 0}
+                message={''}
+            />
             <QuestionComponent
                 category={currentQuestionData.category}
                 questionText={currentQuestionData.questionText}

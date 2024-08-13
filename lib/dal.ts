@@ -3,6 +3,7 @@ import { cache } from 'react';
 import { updateSession, verifySession } from '@/lib/stateless-session';
 import { Post, User, Game } from './models';
 import connecttoDB from './db';
+import { ScoreState } from './definitions';
 
 export const getUser = cache(async () => {
   const session = await verifySession();

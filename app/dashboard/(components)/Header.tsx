@@ -7,7 +7,7 @@ import { TbHexagonLetterBFilled } from "react-icons/tb";
 import { MdLightMode } from "react-icons/md";
 import { MdNightlightRound } from "react-icons/md";
 
-export default function Header({ username, point }: { username: string, point: number }) {
+export default function Header() {
   const path = usePathname().split('/').pop();
   const [dark,setDark] = useState(false)
 

@@ -14,8 +14,8 @@ export default async function Layout({
   return (
     <div className="flex min-h-screen w-full">
       <div className="flex w-full flex-col">
-        <Header username={user.username} point={user.point}/>
-        <main className="flex-1 p-6 pb-20 md:p-8 bg-gradient-to-br from-white to-purple-200">{children}</main>
+        <Header/>
+        <main className="flex-1 p-6 pb-20 md:p-8 bg-gradient-to-br from-white to-purple-200 dark:from-[#17153B] dark:to-purple-950">{children}</main>
       </div>
     </div>
   );

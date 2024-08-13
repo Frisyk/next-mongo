@@ -2,7 +2,7 @@
 
 import connecttoDB from "./db"
 import { User } from "./models"
-import { FormState, LoginFormSchema, SignupFormSchema } from '@/lib/definitions';
+import { FormState, LoginFormSchema, ScoreState, SignupFormSchema } from '@/lib/definitions';
 import { createSession, deleteSession } from '@/lib/stateless-session';
 import bcrypt from 'bcrypt';
 
@@ -83,3 +83,52 @@ export const logout = async () => {
         await deleteSession();
         return { message: 'Logout successful.' };
 }
+
+export const putUserScore = async (userId: string, testName: string, score: number) => {
+    try {
+        // 1. Connect to the database
+        await connecttoDB();
+
+        // 2. Dynamically construct the update object for the score
+        const update = { [`scores.${testName}`]: score };
+        const filter = { _id: userId };
+
+        // 3. Update the user's score for the specified test
+        const result = await User.findByIdAndUpdate(
+            filter,
+            { $set: update },  // Use $set to correctly update the nested field
+            { new: true }  // Return the updated document
+        );
+
+        if (!result) {
+            throw new Error(`User with ID ${userId} not found`);
+        }
+
+        return { message: 'Score updated successfully.' };
+    } catch (error) {
+        // 5. Handle errors
+        console.error('Error updating user score:', error);
+        return { message: 'Failed to update score.', error };
+    }
+};
+
+export const getUserAttempt = async (userId: string) => {
+    // Fetch the user from the database by ID
+    const user = await User.findById(userId);
+    
+    // Initialize attempt count if it doesn't exist
+    let attempt = user.attempts || 0;
+    // Increment the attempt count
+    attempt += 1;
+
+    // Update the attempt number in the database
+    user.attempts = attempt;
+    await user.save();
+
+    console.log(user, user.attempts);
+    
+
+    // Return the updated attempt count
+    return attempt;
+};
+

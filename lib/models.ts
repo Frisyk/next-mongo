@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { number } from "zod";
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -23,6 +24,10 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  scores: { type: Map, of: Number }, 
+  attempts: {
+    type: Number, // Maps test titles to the number of attempts
+  }, // Using a Map for dynamic keys like "tes1", "tes2"
   img: {
     type: String,
   },

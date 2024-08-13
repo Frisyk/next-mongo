@@ -33,6 +33,17 @@ export type FormState =
     }
   | undefined;
 
+  export type ScoreState =
+  | {
+      errors?: {
+        userId?: string[];
+        test?: string[];
+        score?: number[];
+      };
+      message?: string;
+    }
+  | undefined;
+
 export type SessionPayload = {
   userId: string | number;
   expiresAt: Date;

@@ -1,4 +1,4 @@
-const getDates = () => {
+const getDate = () => {
     const now = new Date();
 
     // Format day, date, month, and year

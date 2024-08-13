@@ -6,7 +6,6 @@ import { Label } from '@/components/ui/label';
 import { login } from '@/lib/auth';
 import Link from 'next/link';
 import { useFormState, useFormStatus } from 'react-dom';
-import ButtonLogin from './ButtonLogin';
 
 export function LoginForm() {
   const [state, action] = useFormState(login, undefined);

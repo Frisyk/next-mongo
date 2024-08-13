@@ -34,9 +34,9 @@ export default function Navigation() {
               {navLinks.map((link) => (
                 <Link
                 className={clsx(
-                  'flex items-center gap-3 rounded-lg px-3 py-2 text-[#E3DCEA] transition-all hover:text-purple-900 dark:hover:text-orange-300',
+                  'flex items-center gap-3 rounded-lg px-3 py-2 transition-all text-purple-900 dark:hover:text-orange-300',
                   {
-                    'bg-purple-700  text-purple-50 hover:text-orange-200': path === link.href, 
+                    'bg-purple-700  text-white hover:text-orange-200': path === link.href, 
                   },
                 )} 
                 href={link.href}
