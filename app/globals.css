@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer components {
+  .dark {
+    @apply bg-[#17153B] text-[#C8ACD6];
+  }
+}
+
+@layer components {
     .scroll-container {
       display: flex;
       white-space: nowrap;

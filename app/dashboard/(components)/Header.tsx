@@ -1,36 +1,44 @@
 'use client'
 import React from 'react'
-import Link from 'next/link'
-import { PackageIcon } from '@/components/ui/icons'
-import { Button } from '@/components/ui/button'
-import { usePathname } from 'next/navigation'
+import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { TbHexagonLetterBFilled } from "react-icons/tb";
+import { MdLightMode } from "react-icons/md";
+import { MdNightlightRound } from "react-icons/md";
 
-export default function Header({username, point}: {username: string, point: number}) {
-    const path = usePathname().split('/').pop()
+export default function Header({ username, point }: { username: string, point: number }) {
+  const path = usePathname().split('/').pop();
+  const [dark,setDark] = useState(false)
+
+  const toggleTheme = () => {
+    setDark(!dark)
+    document.body.classList.toggle('dark')
+  }
+
   return (
-    <header className="flex h-14 items-center border-b border-purple-100 px-4 md:gap-4">
-          <Link
-            className="flex items-center rounded-md bg-purple-100 px-2 py-2 lg:hidden"
-            href="#"
-          >
-            <PackageIcon className="h-6 w-6" />
-            <span className="sr-only">Batik</span>
-          </Link>
-          <h1 className="md:block hidden text-lg font-semibold capitalize">{path}</h1>
-          <div className="ml-auto flex items-center gap-2">
-            <h1>Halo, </h1><span className='uppercase font-semibold'>{username}!</span>
-            <Button className="rounded-full hidden md:block bg-purple-300" size="icon" variant="ghost">
-              <div
-                className="rounded-full "
-                style={{
-                  aspectRatio: '32/32',
-                  objectFit: 'cover',
-                }}
-              />
-              <span className="sr-only">View profile</span>
-            </Button>
-          <h1 className='font-bold p-2 hidden md:block rounded bg-purple-900 text-white'>{`${point}✨`}</h1>
-          </div>
-          </header>
+    <header className="flex h-14 items-center border-b dark:border-purple-900 px-4 md:gap-4 dark:text-white">
+      <Link
+        className="flex items-center rounded-md bg-purple-100 dark:bg-purple-700 px-2 py-2 lg:hidden"
+        href="#"
+      >
+        <TbHexagonLetterBFilled className="h-6 w-6 text-gray-900 " />
+        <span className="sr-only">Batik</span>
+      </Link>
+      <h1 className="md:block hidden text-lg font-semibold capitalize  ">
+        {path}
+      </h1>
+      <button
+        onClick={toggleTheme}
+        className="ml-auto flex items-center justify-center rounded-md p-2  "
+        aria-label="Toggle Dark Mode"
+      >
+        {!dark ? (
+          <MdNightlightRound className="w-6 h-6" />
+        ) : (
+          <MdLightMode className="w-6 h-6" />
+        )}
+      </button>
+    </header>
   )
 }
