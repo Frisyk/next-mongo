@@ -18,8 +18,6 @@ const text = `
 `;
 
 export default function Page({ params }: { params: any }) {
-  console.log(params);
-  
     return (
         <div className="p-6 dark:dark w-full md:w-1/2 mx-auto rounded-lg shadow-lg ">
             <div dangerouslySetInnerHTML={{ __html: text }} />

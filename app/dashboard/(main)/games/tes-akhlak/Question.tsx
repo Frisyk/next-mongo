@@ -5,7 +5,6 @@ import { NavigationComponentProps, Question, QuestionComponentProps, ResultSumma
 import { ResultSummary } from './Summary';
 import { QuestionComponent } from './QuestionComp';
 import { NavigationComponent } from './Navigation';
-import { putUserScore } from '@/lib/auth';
 
 const exampleQuestions: Question[] = [
     {
@@ -63,130 +62,8 @@ const exampleQuestions: Question[] = [
 
 
 export default function App ({user}: {user:string}) {
-    const [currentQuestion, setCurrentQuestion] = useState(1);
-    const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: string | null }>({});
-    const [finalScore, setFinalScore] = useState<number | null>(null);
-    const [timeLeft, setTimeLeft] = useState(600); // 10 minutes = 600 seconds
-    const [isTimeUp, setIsTimeUp] = useState(false);
-    const [timerActive, setTimerActive] = useState(false); // Tracks whether the timer is active
-    const totalQuestions = exampleQuestions.length;
-    const message = "Selamat! Anda telah lulus dari ujian ini.";
-    
-
-    useEffect(() => {
-        if (timerActive && timeLeft > 0) {
-            const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
-            return () => clearTimeout(timer);
-        } else if (timeLeft === 0) {
-            setIsTimeUp(true);
-            handleSubmit();
-        }
-    }, [timerActive, timeLeft]);
-
-    const handleStart = () => {
-        setTimerActive(true);
-    };
-
-    const handleAnswerClick = (label: string) => {
-        if (timerActive && !isTimeUp) {
-            setSelectedAnswers(prev => ({ ...prev, [currentQuestion]: label })); // Save answer
-        }
-    };
-
-    const handleNext = () => {
-        if (timerActive && currentQuestion < totalQuestions) {
-            setCurrentQuestion(prev => prev + 1);
-        }
-    };
-
-    const handlePrevious = () => {
-        if (timerActive && currentQuestion > 1) {
-            setCurrentQuestion(prev => prev - 1);
-        }
-    };
-
-    const handleSubmit = async() => {
-        const calculateScore = async() => {
-            let score = 0;
-            exampleQuestions.forEach((question, index) => {
-                const userAnswer = selectedAnswers[index + 1];
-                const correctAnswer = question.answers.find(answer => answer.isCorrect);
-                if (userAnswer === correctAnswer?.label) {
-                    score += 10;
-                }
-            });
-            
-            const update = await putUserScore(user, "tes 1", score)
-            return score;
-        };
-
-        const score = await calculateScore()
-        
-        setFinalScore(score);
-        setIsTimeUp(true);
-        setTimerActive(false);
-        setTimeLeft(600); // Reset the timer to 10 minutes
-    };
-
-    const handleSelect = (questionNumber: number) => {
-        if (timerActive && !isTimeUp) {
-            setCurrentQuestion(questionNumber);
-        }
-    };
-
-    const handleReset = () => {
-        setTimerActive(false);
-        setTimeLeft(600);
-        setCurrentQuestion(1);
-        setSelectedAnswers({});
-        setFinalScore(null);
-        setIsTimeUp(false);
-    };
-
-    const currentQuestionData = exampleQuestions[currentQuestion - 1];
-
+  
     return (
-        <div className="p-6 bg-gray-900 text-white rounded-lg shadow-lg">
-            <ResultSummary
-                examtitle={'UJIAN 1'}
-                currentQuestion={currentQuestion}
-                totalQuestions={totalQuestions}
-                score={finalScore !== null ? finalScore : 0}
-                message={message}
-            />
-            <div className="flex justify-between items-center mb-4">
-                <span>Waktu tersisa: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' : ''}{timeLeft % 60}</span>
-                {!timerActive && !isTimeUp && (
-                    <button onClick={handleStart} className="bg-teal-400 text-gray-900 px-4 py-2 rounded-lg">
-                        Mulai Ujian
-                    </button>
-                )}
-                {timerActive && (
-                    <button onClick={handleSubmit} className="bg-red-500 text-white px-4 py-2 rounded-lg">
-                        Selesai
-                    </button>
-                )}
-            </div>
-            <QuestionComponent
-                category={currentQuestionData.category}
-                questionText={currentQuestionData.questionText}
-                answers={currentQuestionData.answers}
-                selectedAnswer={selectedAnswers[currentQuestion] || null}
-                onAnswerClick={handleAnswerClick}
-            />
-            <NavigationComponent
-                onSelect={handleSelect}
-                currentQuestion={currentQuestion}
-                totalQuestions={totalQuestions}
-                onPrevious={handlePrevious}
-                onNext={handleNext}
-                onSubmit={handleSubmit}
-            />
-            {isTimeUp && (
-                <button onClick={handleReset} className="bg-teal-400 text-gray-900 px-4 py-2 rounded-lg mt-4">
-                    Ulangi Ujian
-                </button>
-            )}
-        </div>
+        <h1>OKee</h1>
     );
 };

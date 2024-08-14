@@ -90,7 +90,7 @@ export const putUserScore = async (userId: string, testName: string, score: numb
         await connecttoDB();
 
         // 2. Dynamically construct the update object for the score
-        const update = { [`scores.${testName}`]: score };
+        const update = { [`scores.${testName}`]: score };      
         const filter = { _id: userId };
 
         // 3. Update the user's score for the specified test
@@ -112,23 +112,17 @@ export const putUserScore = async (userId: string, testName: string, score: numb
     }
 };
 
-export const getUserAttempt = async (userId: string) => {
-    // Fetch the user from the database by ID
+
+export const getUserAttempt = async (userId: string, testTitle: string) => {
     const user = await User.findById(userId);
-    
-    // Initialize attempt count if it doesn't exist
-    let attempt = user.attempts || 0;
-    // Increment the attempt count
-    attempt += 1;
-
-    // Update the attempt number in the database
-    user.attempts = attempt;
-    await user.save();
-
-    console.log(user, user.attempts);
-    
-
-    // Return the updated attempt count
-    return attempt;
+    const attempt = user.attempts
+    const nextAttempt = attempt + 1;
+    const newTitle = `${testTitle} ${nextAttempt}`;
+    await User.findByIdAndUpdate(
+        {_id: userId},
+        { attempts: attempt+1}
+    )
+    // Return the new title for storing the score
+    return newTitle;
 };
 

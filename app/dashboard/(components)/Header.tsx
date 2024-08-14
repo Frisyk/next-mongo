@@ -9,17 +9,31 @@ import { MdNightlightRound } from "react-icons/md";
 
 export default function Header() {
   const path = usePathname().split('/').pop();
-  const [dark,setDark] = useState(false)
+  const [theme, setTheme] = useState<string>(() => {
+    // Check user's preference from localStorage or fallback to the default 'light' theme
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') || 'light';
+    }
+    return 'light';
+  });
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   const toggleTheme = () => {
-    setDark(!dark)
-    document.body.classList.toggle('dark')
-  }
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
 
   return (
     <header className="flex h-14 items-center border-b dark:border-purple-900 px-4 md:gap-4 dark:text-white">
       <Link
-        className="flex items-center rounded-md bg-purple-100 dark:bg-purple-700 px-2 py-2 lg:hidden"
+        className="flex items-center rounded-md bg-purple-100 px-2 py-2 lg:hidden"
         href="#"
       >
         <TbHexagonLetterBFilled className="h-6 w-6 text-gray-900 " />
@@ -33,7 +47,7 @@ export default function Header() {
         className="ml-auto flex items-center justify-center rounded-md p-2  "
         aria-label="Toggle Dark Mode"
       >
-        {!dark ? (
+        { theme === 'light'? (
           <MdNightlightRound className="w-6 h-6" />
         ) : (
           <MdLightMode className="w-6 h-6" />

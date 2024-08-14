@@ -61,6 +61,9 @@ const exampleQuestions: Question[] = [
     // Add more questions as needed
 ];
 
+import {ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import { confirmEndTest } from './Dialog';
 
 export default function App ({user}: {user:string}) {
     const [currentQuestion, setCurrentQuestion] = useState(1);
@@ -116,10 +119,11 @@ export default function App ({user}: {user:string}) {
                     score += 10;
                 }
             });
-            const attempt = await getUserAttempt(user)            
             const testTitle = 'tes'
-            const testName = `${testTitle} ${attempt}`;
-            await putUserScore(user, testName, score)
+            const title = await getUserAttempt(user, testTitle)
+                        
+            await putUserScore(user, title, score)
+            
             return score;
         };
 
@@ -149,47 +153,56 @@ export default function App ({user}: {user:string}) {
     const currentQuestionData = exampleQuestions[currentQuestion - 1];
 
     return (
-        <div className="p-4 bg-gray-900 text-white rounded-lg shadow-lg w-full md:w-1/2 mx-auto">
-            <div className="flex justify-between items-center mb-4">
-                <span>Waktu tersisa: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' : ''}{timeLeft % 60}</span>
-                {!timerActive && !isTimeUp && (
-                    <button onClick={handleStart} className="bg-teal-400 text-gray-900 px-4 py-2 rounded-lg">
-                        Mulai Ujian
-                    </button>
-                )}
-                {timerActive && (
-                    <button onClick={handleSubmit} className="bg-red-500 text-white px-4 py-2 rounded-lg">
-                        Selesai
-                    </button>
-                )}
-            </div>
-            <ResultSummary
-                examtitle={'UJIAN 1'}
-                currentQuestion={currentQuestion}
-                totalQuestions={totalQuestions}
-                score={finalScore !== null ? finalScore : 0}
-                message={''}
-            />
-            <QuestionComponent
-                category={currentQuestionData.category}
-                questionText={currentQuestionData.questionText}
-                answers={currentQuestionData.answers}
-                selectedAnswer={selectedAnswers[currentQuestion] || null}
-                onAnswerClick={handleAnswerClick}
-            />
-            <NavigationComponent
-                onSelect={handleSelect}
-                currentQuestion={currentQuestion}
-                totalQuestions={totalQuestions}
-                onPrevious={handlePrevious}
-                onNext={handleNext}
-                onSubmit={handleSubmit}
-            />
-            {isTimeUp && (
-                <button onClick={handleReset} className="bg-teal-400 text-gray-900 px-4 py-2 rounded-lg mt-4">
-                    Ulangi Ujian
-                </button>
-            )}
+        <div className="bg-gray-900 flex flex-col md:flex-row md:gap-10 md:p-10 p-4 text-white rounded-lg shadow-lg md:mx-32">
+            <section className='md:w-1/3 mx-auto'>
+                <div className="flex justify-between items-center mb-4">
+                    <span className='text-xl font-bold'>Waktu tersisa: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' : ''}{timeLeft % 60}</span>
+                    {isTimeUp && (
+                        <button onClick={handleReset} className="bg-orange-400 text-gray-900 px-4 py-2 rounded-lg mt-4">
+                            Ulangi Ujian
+                        </button>
+                    )}
+                    {!timerActive && !isTimeUp && (
+                        <button onClick={handleStart} className="bg-teal-400 text-gray-900 px-4 py-2 rounded-lg">
+                            Mulai Ujian
+                        </button>
+                    )}
+                    {timerActive && (
+                        <button
+                            onClick={()=>confirmEndTest(handleSubmit)}
+                            className="bg-red-500 text-white px-4 py-2 rounded-lg"
+                        >
+                            Selesai
+                        </button>
+                    )}
+                </div>
+                <ResultSummary
+                    examtitle={'UJIAN 1'}
+                    currentQuestion={currentQuestion}
+                    totalQuestions={totalQuestions}
+                    score={finalScore !== null ? finalScore : 0}
+                    message={''}
+                />
+            </section>
+            <ToastContainer closeButton={false}  />
+            <section className='mx-auto flex flex-col-reverse md:flex-col pb-10'>
+                <QuestionComponent
+                    category={currentQuestionData.category}
+                    questionText={currentQuestionData.questionText}
+                    answers={currentQuestionData.answers}
+                    selectedAnswer={selectedAnswers[currentQuestion] || null}
+                    onAnswerClick={handleAnswerClick}
+                />
+                <NavigationComponent
+                    onSelect={handleSelect}
+                    currentQuestion={currentQuestion}
+                    totalQuestions={totalQuestions}
+                    onPrevious={handlePrevious}
+                    onNext={handleNext}
+                    onSubmit={handleSubmit}
+                />
+            </section>
+
         </div>
     );
 };
