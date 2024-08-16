@@ -1,7 +1,8 @@
 'use server';
 
+import { Quizi } from "@/app/dashboard/(materi)/[belajar]/components/interface";
 import connecttoDB from "./db"
-import { User } from "./models"
+import { Quiz, Score, User } from "./models"
 import { FormState, LoginFormSchema, ScoreState, SignupFormSchema } from '@/lib/definitions';
 import { createSession, deleteSession } from '@/lib/stateless-session';
 import bcrypt from 'bcrypt';
@@ -34,7 +35,7 @@ export const signup = async (state: FormState, formData: FormData): Promise<Form
         
 
         // 4. Insert the user into the database
-        const user = await User.create({ username, email, point: 100, password: hashedPassword });
+        const user = await User.create({ username, email, point: 0, password: hashedPassword });
         if (!user) {
             return { message: 'An error occurred while creating your account.' };
         }
@@ -84,27 +85,20 @@ export const logout = async () => {
         return { message: 'Logout successful.' };
 }
 
-export const putUserScore = async (userId: string, testName: string, score: number) => {
+export const putUserScore = async (userId: string, quiztitle: string, score: number) => {
     try {
-        // 1. Connect to the database
         await connecttoDB();
-
-        // 2. Dynamically construct the update object for the score
-        const update = { [`scores.${testName}`]: score };      
-        const filter = { _id: userId };
-
         // 3. Update the user's score for the specified test
-        const result = await User.findByIdAndUpdate(
-            filter,
-            { $set: update },  // Use $set to correctly update the nested field
-            { new: true }  // Return the updated document
-        );
+        const result = await Score.create({userId, quiztitle, score})
+
 
         if (!result) {
             throw new Error(`User with ID ${userId} not found`);
         }
 
-        return { message: 'Score updated successfully.' };
+        console.log(result);
+        
+        return { message: 'Score added successfully.' };
     } catch (error) {
         // 5. Handle errors
         console.error('Error updating user score:', error);
@@ -112,17 +106,28 @@ export const putUserScore = async (userId: string, testName: string, score: numb
     }
 };
 
+export const seedQuiz = async (quiz : Quizi) => {
+    try {
+        // Create a new quiz document
+        connecttoDB()
+        const quizzes = new Quiz(quiz)
 
-export const getUserAttempt = async (userId: string, testTitle: string) => {
-    const user = await User.findById(userId);
-    const attempt = user.attempts
-    const nextAttempt = attempt + 1;
-    const newTitle = `${testTitle} ${nextAttempt}`;
-    await User.findByIdAndUpdate(
-        {_id: userId},
-        { attempts: attempt+1}
-    )
-    // Return the new title for storing the score
-    return newTitle;
+        // Save the quiz document to the database
+        await quizzes.save();
+        console.log('Quiz saved successfully!');
+    } catch (error) {
+        console.error('Error saving quiz:', error);
+    }
 };
 
+export const getQuiz = async (quizId: string) => {
+    try {
+        // Create a new quiz document
+        connecttoDB()
+        const quiz = await Quiz.findById(quizId)
+
+        return quiz
+    } catch (error) {
+        console.error('Error getting quiz:', error);
+    }
+};

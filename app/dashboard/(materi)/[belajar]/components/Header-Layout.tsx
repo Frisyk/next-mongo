@@ -3,11 +3,8 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { TbHexagonLetterBFilled } from "react-icons/tb";
 import { MdLightMode } from "react-icons/md";
 import { MdNightlightRound } from "react-icons/md";
-import { FaBackward } from 'react-icons/fa6';
-import { FaStepBackward } from 'react-icons/fa';
 import { ArrowLeft } from 'lucide-react';
 
 export default function Header({title, link}: {title?: string, link:string}) {
@@ -34,17 +31,16 @@ export default function Header({title, link}: {title?: string, link:string}) {
   };
 
   return (
-    <header className="flex h-14 items-center border-b dark:border-purple-900 px-4 md:gap-4 dark:text-white">
+    <header className="flex items-center border-b dark:border-purple-900 p-4 md:gap-4 ">
       <Link
-        className="flex items-center rounded-md bg-purple-100 px-2 py-2 lg:hidden"
-        href="#"
+        className="flex items-center rounded-md py-2"
+        href={link}
       >
-        <TbHexagonLetterBFilled className="h-6 w-6 text-gray-900 " />
-        <span className="sr-only">Batik</span>
-      </Link>
-      <h1 className="md:block hidden text-lg font-semibold capitalize  ">
-        {path}
+       <ArrowLeft className='w-6 h-6 mx-2'/>
+      <h1 className="text-lg font-semibold capitalize  ">
+        {title? title : path}
       </h1>
+      </Link>
       <button
         onClick={toggleTheme}
         className="ml-auto flex items-center justify-center rounded-md p-2  "

@@ -34,7 +34,7 @@ export default function Navigation() {
               {navLinks.map((link) => (
                 <Link
                 className={clsx(
-                  'flex items-center gap-3 rounded-lg px-3 py-2 transition-all text-purple-900 dark:hover:text-orange-300',
+                  'flex items-center gap-3 rounded-lg px-3 py-2 transition-all text-purple-300 dark:hover:text-orange-300',
                   {
                     'bg-purple-700  text-white hover:text-orange-200': path === link.href, 
                   },
@@ -55,13 +55,13 @@ export default function Navigation() {
       </div>
 
       {/* Responsive Navigation for Mobile */}
-      <div className="flex md:hidden fixed bottom-0 left-0 w-full dark border-t">
+      <div className="flex md:hidden fixed bottom-0 left-0 w-full border-t">
         <nav className="flex justify-around w-full py-2">
           {navLinks.map((link) => (
             <Link
               className={`${
                 path === link.href
-                  ? 'bg-purple-700 text-purple-50 hover:text-purple-900 dark:hover:text-orange-300'
+                  ? 'bg-purple-700 text-purple-50 hover:text-purple-300 dark:hover:text-orange-300'
                   : ''
               } flex flex-col items-center gap-1 px-3 py-2 transition-all hover:text-orange-300`}
               href={link.href}

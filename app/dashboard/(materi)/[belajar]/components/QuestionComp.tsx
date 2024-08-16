@@ -2,7 +2,7 @@ import { QuestionComponentProps } from "./interface";
 
 export const QuestionComponent: React.FC<QuestionComponentProps> = ({ category, questionText, answers, selectedAnswer, onAnswerClick }) => {
     return (
-        <div className="px-6 py-2 bg-gray-900 text-white rounded-lg shadow-lg mt-4">
+        <div className="px-6 pb-10 bg-gray-900 text-white rounded-lg shadow-lg mt-4">
             <h2 className="text-md py-3">Kategori: {category}</h2>
             <p className="pb-10 leading-relaxed font-semibold text-3xl">{questionText}</p>
             <div className="space-y-4">

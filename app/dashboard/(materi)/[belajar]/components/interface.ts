@@ -11,6 +11,11 @@ export interface Question {
     answers: AnswerOption[];
 }
 
+export interface Quizi {
+    title: string;
+    questions: Question[];
+  }
+
 export interface ResultSummaryProps {
     examtitle: string;
     currentQuestion: number;

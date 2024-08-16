@@ -49,7 +49,7 @@ const postSchema = new mongoose.Schema({
   img: {
     type: String,
   },
-  userId: {
+  quizId: {
     type: String,
     required: true,
   },
@@ -68,6 +68,21 @@ const sessionSchema = new mongoose.Schema({
   },
   expiresAt: {
     type: Date,
+    required: true,
+  }
+}, { timestamps: true });
+
+const scoreSchema = new mongoose.Schema({
+  userId: {
+    type: String,
+    required: true,
+  },
+  quiztitle: {
+    type: String,
+    required: true,
+  },
+  score: {
+    type: Number,
     required: true,
   }
 }, { timestamps: true });
@@ -95,8 +110,31 @@ const gameSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
+const AnswerSchema = new mongoose.Schema({
+  label: { type: String, required: true },
+  text: { type: String, required: true },
+  isCorrect: { type: Boolean, required: true },
+  isSelected: { type: Boolean, required: true },
+});
+
+// Define the Question schema
+const QuestionSchema = new mongoose.Schema({
+  category: { type: String, required: true },
+  questionText: { type: String, required: true },
+  answers: [AnswerSchema], // Embed the Answer schema
+});
+
+// Define the Quiz schema
+const quizSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  questions: [QuestionSchema], // Embed the Question schema
+}, {timestamps: true});
+
+
 export const User = mongoose.models.User || mongoose.model("User", userSchema);
 export const Post = mongoose.models.Post || mongoose.model("Post", postSchema);
 export const Session = mongoose.models.Session || mongoose.model("Session", sessionSchema);
 export const Game = mongoose.models.Game || mongoose.model("Game", gameSchema);
+export const Score = mongoose.models.Score || mongoose.model("Score", scoreSchema);
+export const Quiz = mongoose.models.Quiz || mongoose.model("Quiz", quizSchema);
 

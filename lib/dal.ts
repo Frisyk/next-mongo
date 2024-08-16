@@ -22,8 +22,6 @@ export const getUser = cache(async () => {
 });
 
 export const getMateri = cache(async () => {
-  const session = await verifySession();
-  if (!session) return alert('login dulu yaa!');
 
   try {
     connecttoDB()
@@ -35,9 +33,20 @@ export const getMateri = cache(async () => {
   }
 });
 
+export const getDetailsM = cache(async (id: string) => {
+
+  try {
+    connecttoDB()
+    const materi = await Post.findById(id);          
+    return materi;
+  } catch (error) {
+    console.log('Failed to fetch materi');
+    return null;
+  }
+});
+
+
 export const getGamesList = cache(async () => {
-  const session = await verifySession();
-  if (!session) return alert('login dulu yaa!');
 
   try {
     connecttoDB()

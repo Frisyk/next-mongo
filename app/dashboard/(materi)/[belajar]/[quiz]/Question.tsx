@@ -1,81 +1,27 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
-import { NavigationComponentProps, Question, QuestionComponentProps, ResultSummaryProps } from './interface';
-import { ResultSummary } from './Summary';
-import { QuestionComponent } from './QuestionComp';
-import { NavigationComponent } from './Navigation';
-import { getUserAttempt, putUserScore } from '@/lib/auth';
-
-const exampleQuestions: Question[] = [
-    {
-        category: 'Etika',
-        questionText: 'Apa prinsip utama dalam etika utilitarianisme?',
-        answers: [
-            { label: 'A', text: 'Mengutamakan hasil yang membawa kebahagiaan terbesar bagi jumlah terbesar', isCorrect: true, isSelected: false },
-            { label: 'B', text: 'Mengutamakan hak individu tanpa memperhatikan hasil akhir', isCorrect: false, isSelected: false },
-            { label: 'C', text: 'Mengutamakan kewajiban moral yang diterima secara universal', isCorrect: false, isSelected: false },
-            { label: 'D', text: 'Mengutamakan tindakan yang sesuai dengan norma budaya setempat', isCorrect: false, isSelected: false },
-        ],
-    },
-    {
-        category: 'Moralitas',
-        questionText: 'Menurut teori deontologi, apa yang harus diperhatikan dalam pengambilan keputusan etis?',
-        answers: [
-            { label: 'A', text: 'Konsekuensi dari tindakan tersebut', isCorrect: false, isSelected: false },
-            { label: 'B', text: 'Kepatuhan terhadap aturan dan kewajiban moral', isCorrect: true, isSelected: false },
-            { label: 'C', text: 'Apakah tindakan tersebut membuat lebih banyak orang bahagia', isCorrect: false, isSelected: false },
-            { label: 'D', text: 'Apakah tindakan tersebut diterima oleh mayoritas masyarakat', isCorrect: false, isSelected: false },
-        ],
-    },
-    {
-        category: 'Integritas',
-        questionText: 'Apa yang dimaksud dengan integritas dalam konteks etika profesional?',
-        answers: [
-            { label: 'A', text: 'Kemampuan untuk mematuhi kode etik dan berperilaku jujur dalam semua situasi', isCorrect: true, isSelected: false },
-            { label: 'B', text: 'Mengutamakan keuntungan pribadi di atas kepentingan umum', isCorrect: false, isSelected: false },
-            { label: 'C', text: 'Menyesuaikan perilaku dengan harapan orang lain', isCorrect: false, isSelected: false },
-            { label: 'D', text: 'Berperilaku sesuai dengan norma yang berlaku di tempat kerja', isCorrect: false, isSelected: false },
-        ],
-    },
-    {
-        category: 'Etika Sosial',
-        questionText: 'Apa prinsip dasar dari etika sosial dalam masyarakat?',
-        answers: [
-            { label: 'A', text: 'Mengutamakan kepentingan individu di atas kepentingan sosial', isCorrect: false, isSelected: false },
-            { label: 'B', text: 'Berperilaku adil dan mengutamakan kesejahteraan bersama', isCorrect: true, isSelected: false },
-            { label: 'C', text: 'Mematuhi norma-norma yang berlaku tanpa mempertimbangkan dampak sosial', isCorrect: false, isSelected: false },
-            { label: 'D', text: 'Mengejar kekuasaan dan status untuk meningkatkan pengaruh sosial', isCorrect: false, isSelected: false },
-        ],
-    },
-    {
-        category: 'Etika Bisnis',
-        questionText: 'Apa yang dimaksud dengan etika bisnis dalam konteks perusahaan?',
-        answers: [
-            { label: 'A', text: 'Prinsip moral yang diterapkan untuk meningkatkan profit tanpa memperhatikan dampak sosial', isCorrect: false, isSelected: false },
-            { label: 'B', text: 'Kepatuhan terhadap hukum dan peraturan perusahaan', isCorrect: false, isSelected: false },
-            { label: 'C', text: 'Prinsip moral yang mengatur bagaimana perusahaan harus berperilaku secara adil dan bertanggung jawab terhadap semua pihak yang terlibat', isCorrect: true, isSelected: false },
-            { label: 'D', text: 'Fokus pada strategi pemasaran untuk meningkatkan daya saing', isCorrect: false, isSelected: false },
-        ],
-    },
-    // Add more questions as needed
-];
-
+import { ResultSummary } from '../components/Summary';
+import { QuestionComponent } from '../components/QuestionComp';
+import { NavigationComponent } from '../components/Navigation';
+import { putUserScore } from '@/lib/action';
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import { confirmEndTest } from './Dialog';
+import { confirmEndTest } from '../components/Dialog';
+import { Question, Quizi } from '../components/interface';
+import Header from '../components/Header-Layout';
 
-export default function App ({user}: {user:string}) {
+export default function App ({user, quizM, link}: {user:string, quizM: string, link:string}) {
     const [currentQuestion, setCurrentQuestion] = useState(1);
     const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: string | null }>({});
     const [finalScore, setFinalScore] = useState<number | null>(null);
     const [timeLeft, setTimeLeft] = useState(600); // 10 minutes = 600 seconds
     const [isTimeUp, setIsTimeUp] = useState(false);
     const [timerActive, setTimerActive] = useState(false); // Tracks whether the timer is active
-    const totalQuestions = exampleQuestions.length;
     // const message = "Selamat! Anda telah lulus dari ujian ini.";
+    const quiz:Quizi = JSON.parse(quizM)
+    const totalQuestions = quiz.questions.length;
     
-
     useEffect(() => {
         if (timerActive && timeLeft > 0) {
             const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
@@ -112,18 +58,15 @@ export default function App ({user}: {user:string}) {
     const handleSubmit = async() => {
         const calculateScore = async() => {
             let score = 0;
-            exampleQuestions.forEach((question, index) => {
+            quiz.questions.forEach((question:Question, index:number) => {
                 const userAnswer = selectedAnswers[index + 1];
                 const correctAnswer = question.answers.find(answer => answer.isCorrect);
                 if (userAnswer === correctAnswer?.label) {
                     score += 10;
                 }
             });
-            const testTitle = 'tes'
-            const title = await getUserAttempt(user, testTitle)
-                        
-            await putUserScore(user, title, score)
-            
+            const title = quiz.title                
+            await putUserScore(user, title , score)
             return score;
         };
 
@@ -150,59 +93,70 @@ export default function App ({user}: {user:string}) {
         setIsTimeUp(false);
     };
 
-    const currentQuestionData = exampleQuestions[currentQuestion - 1];
+    const currentQuestionData = quiz.questions[currentQuestion - 1];
 
     return (
-        <div className="bg-gray-900 flex flex-col md:flex-row md:gap-10 md:p-10 p-4 text-white rounded-lg shadow-lg md:mx-32">
-            <section className='md:w-1/3 mx-auto'>
-                <div className="flex justify-between items-center mb-4">
-                    <span className='text-xl font-bold'>Waktu tersisa: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' : ''}{timeLeft % 60}</span>
-                    {isTimeUp && (
-                        <button onClick={handleReset} className="bg-orange-400 text-gray-900 px-4 py-2 rounded-lg mt-4">
-                            Ulangi Ujian
-                        </button>
-                    )}
-                    {!timerActive && !isTimeUp && (
-                        <button onClick={handleStart} className="bg-teal-400 text-gray-900 px-4 py-2 rounded-lg">
-                            Mulai Ujian
-                        </button>
-                    )}
-                    {timerActive && (
-                        <button
-                            onClick={()=>confirmEndTest(handleSubmit)}
-                            className="bg-red-500 text-white px-4 py-2 rounded-lg"
-                        >
-                            Selesai
-                        </button>
-                    )}
-                </div>
-                <ResultSummary
-                    examtitle={'UJIAN 1'}
-                    currentQuestion={currentQuestion}
-                    totalQuestions={totalQuestions}
-                    score={finalScore !== null ? finalScore : 0}
-                    message={''}
-                />
-            </section>
-            <ToastContainer closeButton={false}  />
-            <section className='mx-auto flex flex-col-reverse md:flex-col pb-10'>
-                <QuestionComponent
-                    category={currentQuestionData.category}
-                    questionText={currentQuestionData.questionText}
-                    answers={currentQuestionData.answers}
-                    selectedAnswer={selectedAnswers[currentQuestion] || null}
-                    onAnswerClick={handleAnswerClick}
-                />
-                <NavigationComponent
-                    onSelect={handleSelect}
-                    currentQuestion={currentQuestion}
-                    totalQuestions={totalQuestions}
-                    onPrevious={handlePrevious}
-                    onNext={handleNext}
-                    onSubmit={handleSubmit}
-                />
-            </section>
-
+        <div className="md:h-screen mx-auto">
+        <Header title={quiz.title} link={link} />
+        <div className=" p-4 text-white rounded-lg shadow-lg md:mx-32 mt-4 flex flex-col md:flex-row gap-4 md:gap-5">
+          <section className="md:w-1/3 w-full mx-auto">
+            <div className="flex justify-between items-center mb-10">
+              <span className="text-xl font-bold">
+                Waktu tersisa: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' : ''}{timeLeft % 60}
+              </span>
+              {isTimeUp ? (
+                <button onClick={handleReset} className="bg-orange-400 text-gray-900 px-4 py-2 rounded-lg">
+                  Ulangi Ujian
+                </button>
+              ) : !timerActive ? (
+                <button onClick={handleStart} className="bg-teal-400 text-gray-900 px-4 py-2 rounded-lg">
+                  Mulai Ujian
+                </button>
+              ) : (
+                <button onClick={() => confirmEndTest(handleSubmit)} className="bg-red-500 text-white px-4 py-2 rounded-lg">
+                  Selesai
+                </button>
+              )}
+            </div>
+            <ResultSummary
+              message=''
+                examtitle={quiz.title}
+                currentQuestion={currentQuestion}
+                totalQuestions={totalQuestions}
+                score={finalScore ?? 0}
+              />
+          </section>
+          <ToastContainer closeButton={false} />
+          <section className="mx-auto flex flex-1 flex-col-reverse md:flex-col">
+          <div className="md:flex mx-auto space-x-2 hidden">
+                {[...Array(totalQuestions)].map((_, i) => (
+                    <div 
+                        key={i} 
+                        onClick={() => handleSelect(i + 1)}
+                        className={`w-8 h-8 flex cursor-pointer items-center justify-center rounded-lg ${i + 1 === currentQuestion ? 'bg-teal-400 text-gray-900' : 'bg-gray-800 text-white'}`}
+                    >
+                        {i + 1}
+                    </div>
+                ))}
+            </div>
+            <QuestionComponent
+              category={currentQuestionData.category}
+              questionText={currentQuestionData.questionText}
+              answers={currentQuestionData.answers}
+              selectedAnswer={selectedAnswers[currentQuestion] || null}
+              onAnswerClick={handleAnswerClick}
+            />
+            <NavigationComponent
+              onSelect={handleSelect}
+              currentQuestion={currentQuestion}
+              totalQuestions={totalQuestions}
+              onPrevious={handlePrevious}
+              onNext={handleNext}
+              onSubmit={handleSubmit}
+            />
+          </section>
         </div>
+      </div>
+      
     );
 };

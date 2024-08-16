@@ -12,7 +12,7 @@ export const NavigationComponent: React.FC<NavigationComponentProps> = ({ curren
             >
                 <FaBackward className="w-6 h-6 mx-2" /><span className="hidden md:block">Sebelumnya</span>
             </button>
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 md:hidden">
                 {[...Array(totalQuestions)].map((_, i) => (
                     <div 
                         key={i} 
