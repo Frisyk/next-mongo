@@ -32,7 +32,7 @@ export default function Home() {
       </div>
   
         {/* Content Area */}
-        <div className="p-4 bg-blue-100 border flex-1 border-blue-400">
+        <div className="p-4 bg-blue-100 border w-full border-blue-400">
           <p className="text-black">{content}</p>
         </div>
       </div>

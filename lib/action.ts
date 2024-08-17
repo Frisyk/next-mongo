@@ -2,10 +2,13 @@
 
 import { Quizi } from "@/app/dashboard/(materi)/[belajar]/components/interface";
 import connecttoDB from "./db"
-import { Quiz, Score, User } from "./models"
+import { Post, Quiz, Score, User } from "./models"
 import { FormState, LoginFormSchema, ScoreState, SignupFormSchema } from '@/lib/definitions';
 import { createSession, deleteSession } from '@/lib/stateless-session';
 import bcrypt from 'bcrypt';
+import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 export const signup = async (state: FormState, formData: FormData): Promise<FormState> => {
         connecttoDB();
@@ -131,3 +134,80 @@ export const getQuiz = async (quizId: string) => {
         console.error('Error getting quiz:', error);
     }
 };
+
+// material CRUD
+
+export const addMaterial = async (state: any, formData: FormData) => {
+    try {
+      // Connect to the database
+      await connecttoDB();     
+        const title = formData.get('title')
+        const short=formData.get('shortStory')
+        const desc=formData.get('article')
+        const summary=formData.get('summary')
+        const img=formData.get('imagePath')
+        const quizId=formData.get('quizPath')
+        const slug=formData.get('slug')      
+      
+      // Create a new material in the database
+      const newMaterial = await Post.create({title, short, desc, summary, img, quizId, slug});
+      // If creation failed, return an error message
+      if (!newMaterial) {
+        return { message: 'An error occurred while adding the material.' };
+      }      // Return the created material
+      return {message: 'Add material succesfully'};
+  
+    } catch (error) {
+      console.error('Failed to add material:', error);
+      return null;
+    } finally {
+        redirect('/admin/material')
+    }
+  };
+
+export const deleteMaterial = async(id:string)=> {
+    try {
+        await connecttoDB()
+        await Post.findByIdAndDelete(id);
+        revalidatePath('/admin/material')
+
+    } catch (error) {
+        console.error('Failed to remove material:', error);
+    }
+}
+
+export const putMaterial = async (
+    state: any,
+    formData: FormData
+  ) => {
+    console.log(formData);
+    
+    try {
+      // Connect to the database
+      await connecttoDB();     
+        const id = formData.get('id')
+        const title = formData.get('title')
+        const short=formData.get('shortStory')
+        const desc=formData.get('article')
+        const summary=formData.get('summary')
+        const img=formData.get('imagePath')
+        const quizId=formData.get('quizPath')
+        const slug=formData.get('slug')      
+      
+      // Create a new material in the database
+      const newMaterial = await Post.findByIdAndUpdate(id, {title, short, desc, summary, img, quizId, slug});
+      // If creation failed, return an error message
+      if (!newMaterial) {
+        return { message: 'An error occurred while adding the material.' };
+      } 
+      console.log(newMaterial);
+           // Return the created material
+      return {message: 'Add material succesfully'};
+  
+    } catch (error) {
+      console.error('Failed to add material:', error);
+      return null;
+    } finally {
+        redirect('/admin/material')
+    }
+  };

@@ -1,6 +1,6 @@
 import 'server-only';
 
-import type { SessionPayload } from '@/lib/definitions';
+import type { SessionPayload } from './definitions';
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';

@@ -42,7 +42,15 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  short: {
+    type: String,
+    required: true,
+  },
   desc: {
+    type: String,
+    required: true,
+  },
+  summary: {
     type: String,
     required: true,
   },

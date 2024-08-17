@@ -1,9 +1,8 @@
 import 'server-only';
 import { cache } from 'react';
-import { updateSession, verifySession } from '@/lib/stateless-session';
+import { verifySession } from './stateless-session';
 import { Post, User, Game } from './models';
 import connecttoDB from './db';
-import { ScoreState } from './definitions';
 
 export const getUser = cache(async () => {
   const session = await verifySession();
@@ -44,6 +43,7 @@ export const getDetailsM = cache(async (id: string) => {
     return null;
   }
 });
+
 
 
 export const getGamesList = cache(async () => {
