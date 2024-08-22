@@ -24,7 +24,7 @@ function Navigation() {
       <div className="hidden md:block w-80 border-r dark:border-purple-900">
         <div className="flex h-screen flex-col gap-2">
           <div className="h-14  items-center border-b dark:border-purple-900 px-4 flex">
-            <Link className="flex items-center gap-2 font-semibold" href="#">
+            <Link prefetch={false} className="flex items-center gap-2 font-semibold" href="#">
               <PackageIcon className="h-6 w-6" />
               <span className="">Batik</span>
             </Link>
@@ -32,7 +32,7 @@ function Navigation() {
           <div className="flex-1 overflow-auto py-2">
             <nav className="flex flex-col gap-5 px-4 text-sm font-medium">
               {navLinks.map((link) => (
-                <Link
+                <Link prefetch={false}
                 className={clsx(
                   'flex items-center gap-3 rounded-lg px-3 py-2 transition-all text-purple-300 dark:hover:text-orange-300',
                   {
@@ -57,7 +57,7 @@ function Navigation() {
       <div className="flex md:hidden fixed bottom-0 left-0 w-full border-t">
         <nav className="flex justify-around w-full py-2">
           {navLinks.map((link) => (
-            <Link
+            <Link prefetch={false}
               className={`${
                 path === link.href
                   ? 'bg-purple-700 text-purple-50 hover:text-purple-300 dark:hover:text-orange-300'
@@ -76,9 +76,11 @@ function Navigation() {
   )
 }
 
-function DeleteButton({id}:{id:string}) {
+function DeleteButton({id, path}:{id:string, path:string}) {
   const handleDelete = async() => {
-    await deleteMaterial(id)
+    if(path === 'material'){
+      await deleteMaterial(id)
+    }
   }
 
   return (
@@ -88,10 +90,10 @@ function DeleteButton({id}:{id:string}) {
   )
 }
 
-function UpdateButton({id}:{id:string}) {
+function UpdateButton({id, path}:{id:string, path:string}) {
   return (
-    <Link href={{
-      pathname: '/admin/material/edit',
+    <Link prefetch={false} href={{
+      pathname: `/admin/${path}/edit`,
       query: {
         path: id,
       },

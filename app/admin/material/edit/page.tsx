@@ -7,7 +7,6 @@ export default async function Materials
 }) {
     const id = searchParams.path
     const materi = await getDetailsM(id)
-    console.log(searchParams);
     
     return (
         <Form m={JSON.stringify(materi)} />

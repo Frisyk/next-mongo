@@ -10,7 +10,7 @@ export default function Content({materi} : {materi: any}) {
           <div className="flex gap-4 flex-col md:flex-row flex-wrap">
             {materi?.map((m:any) => (
               <Card key={m.id} className='hover:bg-purple-900 hover:text-white flex-1'>
-                <Link href={`/dashboard/${m.id}`} className="flex items-center w-full gap-4">
+                <Link prefetch={false} href={`/dashboard/${m.slug}`} className="flex items-center w-full gap-4">
                     <Image
                       alt="Image"
                       className="rounded-md object-cover w-40"

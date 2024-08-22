@@ -35,7 +35,7 @@ export default function Header({title, link}: {title?: string, link:string}) {
 
   return (
     <header className="flex h-14 items-center border-b dark:border-purple-900 px-4 md:gap-4 dark:text-white">
-      <Link
+      <Link prefetch={false}
         className="flex items-center rounded-md bg-purple-100 px-2 py-2 lg:hidden"
         href="#"
       >

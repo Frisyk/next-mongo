@@ -1,6 +1,5 @@
 'use client'
 import { addMaterial } from '@/lib/action';
-// pages/admin/add-material.js
 import { useFormState } from 'react-dom';
 export default function AddMaterial() {
   const [state, action] = useFormState(addMaterial, undefined);
@@ -50,10 +49,10 @@ export default function AddMaterial() {
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">Image Path</label>
             <input
-              type="text"
+              type="file"
               name="imagePath"
               className="w-full p-2 border rounded-lg"
-              placeholder="Enter image path"
+              placeholder="Enter image"
               required
             />
           </div>

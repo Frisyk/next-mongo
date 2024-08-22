@@ -11,7 +11,7 @@ export interface Game {
 
 export default function Card({title, point, slug, img}: Game) {
   return (
-    <Link href={slug}
+    <Link prefetch={false} href={slug}
       className="m-2 group py-5 bg-white/10 rounded-lg flex flex-col items-center justify-center gap-2 relative after:absolute after:h-full after:bg-[#F99417] z-20 shadow-lg after:-z-20 after:w-full after:inset-0 after:rounded-lg transition-all duration-300 hover:transition-all hover:duration-300 after:transition-all after:duration-500 after:hover:transition-all after:hover:duration-500 overflow-hidden after:-translate-y-full after:hover:translate-y-0 [&_p]:delay-200 [&_p]:transition-all w-full md:w-1/3"
     >
         <Image

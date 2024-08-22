@@ -16,7 +16,7 @@ export default async function Materials() {
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
         <div className="p-4 flex justify-between items-center bg-blue-600 text-white">
           <h1 className="text-xl font-bold">Admin Material Table</h1>
-          <Link
+          <Link prefetch={false}
             href={'/admin/material/create'}
             className="bg-blue-500 hover:bg-blue-700 p-2 rounded flex items-center"
           >
@@ -65,8 +65,8 @@ export default async function Materials() {
                   </td>
                   <td className="py-3 px-6">
                     <div className="flex items-center space-x-4">
-                      <UpdateButton id={material.id} />
-                      <DeleteButton id={material.id} />
+                      <UpdateButton path='material' id={material.id} />
+                      <DeleteButton path='material' id={material.id} />
                     </div>
                   </td>
                 </tr>

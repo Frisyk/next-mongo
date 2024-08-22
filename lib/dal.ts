@@ -32,11 +32,11 @@ export const getMateri = cache(async () => {
   }
 });
 
-export const getDetailsM = cache(async (id: string) => {
+export const getDetailsM = cache(async (slug: string) => {
 
   try {
     connecttoDB()
-    const materi = await Post.findById(id);          
+    const materi = await Post.findOne({slug});          
     return materi;
   } catch (error) {
     console.log('Failed to fetch materi');

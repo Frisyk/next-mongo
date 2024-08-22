@@ -65,7 +65,7 @@ export function LoginForm() {
       <div className="px-8 py-4 bg-blue-200 dark:bg-zinc-800">
         <div className="text-sm text-blue-900 dark:text-blue-300 text-center">
           Dont have an account?
-          <Link className="font-medium underline" href="/signup">
+          <Link prefetch={false} className="font-medium underline" href="/signup">
             Sign up
           </Link>
         </div>
