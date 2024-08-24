@@ -23,10 +23,10 @@ export default async function Page({ params }: { params: any }) {
                  <hr className="w-full my-5" />
                 <h1 className="text-2xl font-bold mb-4">Rangkuman</h1>
                 <p className="mb-6">{materi.summary}</p>
-                <button  className="px-10 py-5 rounded text-center bg-green-400 hover:bg-green-500 text-black font-bold text-2xl w-full md:w-fit">
+                <button  className="px-10 py-5 rounded text-center bg-green-400 hover:bg-green-500 text-black font-bold text-lg w-full md:w-fit">
                     <Link prefetch={false} href={`/dashboard/${materi.title}/${materi.quizId}`} className="flex items-center gap-2 justify-center"
                     >
-                        <PiExam className="w-8 h-8" />
+                        <PiExam className="w-6 h-6" />
                         Uji Pemahamanmu!
                     </Link>
                 </button>

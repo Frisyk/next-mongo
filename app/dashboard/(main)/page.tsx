@@ -48,7 +48,7 @@ export default async function Page() {
       <header className='flex md:flex-row items-center gap-4'>
         <div className='rounded-2xl md:w-1/3 w-full h-40 p-6 bg-purple-200 shadow-lg dark:bg-green-700 flex gap-5 items-center'>
           {/* <UserImage user={user} /> */}
-          <h1 className='md:text-3xl text-2xl leading-relaxed'>
+          <h1 className='md:text-3xl text-xl leading-relaxed'>
             Selamat Datang, <br /> <span className='font-bold text-5xl'>{user?.username || 'User'}👋🏻</span>
           </h1>
         </div>
