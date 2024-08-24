@@ -125,7 +125,7 @@ export default function App({ user, quizM, title, link }: { user: string, quizM:
                     />
                 </section>
                 <ToastContainer closeButton={false} />
-                <section className="mx-auto flex flex-1 flex-col-reverse md:flex-col">
+                <section className="mx-auto w-full flex flex-1 flex-col-reverse md:flex-col">
                     <div className="md:flex mx-auto space-x-2 hidden">
                         {[...Array(totalQuestions)].map((_, i) => (
                             <div 

@@ -14,9 +14,9 @@ export default async function Layout({
     
   return (
     <div className="flex min-h-screen w-full">
-      <Navigation user={user}/>
+      <Navigation userI={JSON.stringify(user)}/>
       <div className="flex w-full flex-col">
-        <Header link='#'/>
+        <Header user={user? JSON.stringify(user.username) : null} link='#'/>
         <main className="flex-1 p-6 pb-20 md:p-8 bg-slate-100 dark:bg-slate-900">{children}</main>
       </div>
     </div>

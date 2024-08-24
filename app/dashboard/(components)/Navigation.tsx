@@ -6,10 +6,14 @@ import { FaNoteSticky } from "react-icons/fa6";
 import { FaUserCircle } from "react-icons/fa";
 import { usePathname } from 'next/navigation';
 import { PackageIcon } from '@/components/ui/icons';
-import LogoutButton from './logout-button';
+import LogoutButton, { LoginButton } from './logout-button';
 import clsx from 'clsx';
+import Image from 'next/image';
 
-export default function Navigation({user}: {user: any}) {
+
+
+export default function Navigation({userI}: {userI: any}) {
+  const user = JSON.parse(userI)
   const navLinks = [
     { title: 'Home', href: '/dashboard', badge: <GoHomeFill className='w-6 h-6'/> },
     { title: 'Games', href: '/dashboard/games', badge: <MdGames className='w-6 h-6'/> },
@@ -51,7 +55,9 @@ export default function Navigation({user}: {user: any}) {
           {
             user? (<div className="border-t dark:border-purple-900 p-4">
               <LogoutButton />
-            </div>) : ('')
+            </div>) : (<div className="border-t dark:border-purple-900 p-4">
+              <LoginButton />
+            </div>)
           }
           
         </div>

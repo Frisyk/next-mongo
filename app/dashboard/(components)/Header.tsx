@@ -4,8 +4,42 @@ import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
+const getInitials = (name: string) => {
+  if (!name) return 'US';
+  const initials = name
+    .split(' ')
+    .map(word => word[0])
+    .join('');
+  return initials.toUpperCase();
+};
 
-export default function Header({title, link}: {title?: string, link:string}) {
+interface UserImageProps {
+  user?: {
+    username?: string;
+    img?: string;
+  };
+}
+
+
+const UserImage = ({ user }: UserImageProps) => {
+  const initials = getInitials(user?.username || 'U');
+
+  return user?.img ? (
+    <Image
+      alt={`image ${user.username}`}
+      src={user.img}
+      width={400}
+      height={400}
+      className="rounded-full bg-orange-300 w-8 h-8"
+    />
+  ) : (
+    <div className="rounded-full bg-blue-800 w-8 h-8 flex items-center justify-center text-white font-bold text-lg">
+      {initials}
+    </div>
+  );
+};
+
+export default function Header({user, link}: {user?: any, link:string}) {
   const path = usePathname().split('/').pop();
   const [theme, setTheme] = useState<string>(() => {
     // Check user's preference from localStorage or fallback to the default 'light' theme
@@ -39,6 +73,8 @@ export default function Header({title, link}: {title?: string, link:string}) {
       <h1 className="md:block hidden text-lg font-semibold capitalize  ">
         {path}
       </h1>
+      <div className='flex gap-2 items-center'>
+
       <label className="switch flex items-center cursor-pointer">
       <input 
         type="checkbox" 
@@ -58,11 +94,14 @@ export default function Header({title, link}: {title?: string, link:string}) {
         </span>
       </span>
     </label>
+      <UserImage user={user} />
+      </div>
     </header>
   )
 }
 
 import { FaSun, FaMoon } from 'react-icons/fa';
+import Image from 'next/image';
 
 const getCurrentDateTime = () => {
   const now = new Date();
