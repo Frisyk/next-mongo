@@ -3,12 +3,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { TbHexagonLetterBFilled } from "react-icons/tb";
-import { MdLightMode } from "react-icons/md";
-import { MdNightlightRound } from "react-icons/md";
-import { FaBackward } from 'react-icons/fa6';
-import { FaStepBackward } from 'react-icons/fa';
-import { ArrowLeft } from 'lucide-react';
+
 
 export default function Header({title, link}: {title?: string, link:string}) {
   const path = usePathname().split('/').pop();
@@ -34,28 +29,79 @@ export default function Header({title, link}: {title?: string, link:string}) {
   };
 
   return (
-    <header className="flex h-14 items-center border-b dark:border-purple-900 px-4 md:gap-4 dark:text-white">
+    <header className="flex h-14 w-full justify-between items-center border-b dark:border-purple-900 px-4 md:gap-4 dark:text-white">
       <Link prefetch={false}
-        className="flex items-center rounded-md bg-purple-100 px-2 py-2 lg:hidden"
+        className="flex items-center rounded-md  px-2 py-2 lg:hidden"
         href="#"
       >
-        <TbHexagonLetterBFilled className="h-6 w-6 text-gray-900 " />
-        <span className="sr-only">Batik</span>
+        <span className="text-lg font-bold">Batik.</span>
       </Link>
       <h1 className="md:block hidden text-lg font-semibold capitalize  ">
         {path}
       </h1>
-      <button
-        onClick={toggleTheme}
-        className="ml-auto flex items-center justify-center rounded-md p-2  "
-        aria-label="Toggle Dark Mode"
-      >
-        { theme === 'light'? (
-          <MdNightlightRound className="w-6 h-6" />
-        ) : (
-          <MdLightMode className="w-6 h-6" />
-        )}
-      </button>
+      <label className="switch flex items-center cursor-pointer">
+      <input 
+        type="checkbox" 
+        className="input hidden" 
+        checked={theme === 'dark'} 
+        onChange={toggleTheme} 
+      />
+      <span className="slider relative w-20 h-8 bg-blue-400 rounded-full transition-colors duration-300 flex items-center">
+        <span className="sun absolute left-2 top-1/2 transform -translate-y-1/2 text-yellow-400">
+          <FaSun className="w-6 h-6" />
+        </span>
+        <span className="moon absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-700">
+          <FaMoon className="w-6 h-6" />
+        </span>
+        <span className="absolute w-10 h-7 bg-gray-200 rounded-full transform transition-transform duration-300 ease-in-out" 
+              style={{ transform: theme === 'light' ? 'translateX(100%)' : 'translateX(0)' }}>
+        </span>
+      </span>
+    </label>
     </header>
   )
 }
+
+import { FaSun, FaMoon } from 'react-icons/fa';
+
+const getCurrentDateTime = () => {
+  const now = new Date();
+  const dateOptions: Intl.DateTimeFormatOptions = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+  const timeOptions: Intl.DateTimeFormatOptions = {
+    hour: '2-digit',
+    minute: '2-digit',
+  };
+  
+  return {
+    date: now.toLocaleDateString('id-ID', dateOptions),
+    time: now.toLocaleTimeString('id-ID', timeOptions),
+    hour: now.getHours(), // Get the current hour
+  };
+};
+
+export function GetTime() {
+  const { date, time, hour } = getCurrentDateTime();
+
+  const isDayTime = hour >= 6 && hour < 18; // Daytime between 6 AM and 6 PM
+
+  return (
+    <section className='flex items-center text-left w-full md:w-1/3 gap-5 h-40 dark:bg-gray-800 bg-gray-100 p-6 rounded-2xl shadow-lg'>
+      {isDayTime ? (
+        <FaSun className="text-yellow-400 text-4xl" />
+      ) : (
+        <FaMoon className="text-blue-400 text-4xl" />
+      )}
+      <div className="flex flex-col gap-3">
+        <p className="text-5xl font-bold">{time}</p>
+        <p className="text-xl">{date}</p>
+      </div>
+    </section>
+  );
+}
+
+

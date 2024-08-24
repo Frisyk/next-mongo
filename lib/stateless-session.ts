@@ -46,11 +46,11 @@ export async function verifySession() {
   const cookie = cookies().get('session')?.value;
   const session = await decrypt(cookie);
  
-  if (!session?.userId) {
-    redirect('/login');
-  }
+  // if (!session?.userId && ) {
+  //   redirect('/');
+  // }
   
-  return { isAuth: true, userId: session.userId };
+  return { isAuth: true, userId: session?.userId };
 }
 
 export async function updateSession() {
@@ -73,5 +73,5 @@ export async function updateSession() {
 
 export function deleteSession() {
   cookies().delete('session');
-  redirect('/login');
+  redirect('/');
 }

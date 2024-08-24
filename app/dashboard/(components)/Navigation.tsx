@@ -9,18 +9,18 @@ import { PackageIcon } from '@/components/ui/icons';
 import LogoutButton from './logout-button';
 import clsx from 'clsx';
 
-export default function Navigation() {
+export default function Navigation({user}: {user: any}) {
   const navLinks = [
     { title: 'Home', href: '/dashboard', badge: <GoHomeFill className='w-6 h-6'/> },
     { title: 'Games', href: '/dashboard/games', badge: <MdGames className='w-6 h-6'/> },
-    { title: 'Notes', href: '/dashboard/notes', badge: <FaNoteSticky className='w-6 h-6'/> },
+    { title: 'Story', href: '/dashboard/stories', badge: <FaNoteSticky className='w-6 h-6'/> },
     { title: 'My Profile', href: '/dashboard/profile', badge: <FaUserCircle className='w-6 h-6'/> },
   ];
 
   const path = usePathname();
   
   return (
-    <div className=" h-screen sticky top-0 ">
+    <div className=" h-screen sticky z-20 top-0 ">
       <div className="hidden md:block w-80 border-r dark:border-purple-900">
         <div className="flex h-screen flex-col gap-2">
           <div className="h-14  items-center border-b dark:border-purple-900 px-4 flex">
@@ -34,7 +34,7 @@ export default function Navigation() {
               {navLinks.map((link) => (
                 <Link prefetch={false}
                 className={clsx(
-                  'flex items-center gap-3 rounded-lg px-3 py-2 transition-all text-purple-300 dark:hover:text-orange-300',
+                  'flex items-center gap-3 rounded-lg px-3 py-2 transition-all text-purple-500 dark:hover:text-orange-300',
                   {
                     'bg-purple-700  text-white hover:text-orange-200': path === link.href, 
                   },
@@ -48,14 +48,17 @@ export default function Navigation() {
               ))}
             </nav>
           </div>
-          <div className="border-t dark:border-purple-900 p-4">
-            <LogoutButton />
-          </div>
+          {
+            user? (<div className="border-t dark:border-purple-900 p-4">
+              <LogoutButton />
+            </div>) : ('')
+          }
+          
         </div>
       </div>
 
       {/* Responsive Navigation for Mobile */}
-      <div className="flex md:hidden fixed bottom-0 left-0 w-full border-t">
+      <div className="flex md:hidden bg-purple-200 dark:bg-slate-900 fixed bottom-0 left-0 w-full border-t">
         <nav className="flex justify-around w-full py-2">
           {navLinks.map((link) => (
             <Link prefetch={false}

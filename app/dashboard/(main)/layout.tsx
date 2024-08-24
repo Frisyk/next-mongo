@@ -14,10 +14,10 @@ export default async function Layout({
     
   return (
     <div className="flex min-h-screen w-full">
-      <Navigation/>
+      <Navigation user={user}/>
       <div className="flex w-full flex-col">
         <Header link='#'/>
-        <main className="flex-1 p-6 pb-20 md:p-8 bg-gradient-to-br from-white to-purple-200 dark:from-[#17153B] dark:to-purple-950">{children}</main>
+        <main className="flex-1 p-6 pb-20 md:p-8 bg-slate-100 dark:bg-slate-900">{children}</main>
       </div>
     </div>
   );

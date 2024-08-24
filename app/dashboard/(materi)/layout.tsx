@@ -5,6 +5,6 @@ export default async function Layout({
 }) {
     
   return (
-        <main className="w-full bg-gradient-to-br dark:from-[#0c0a27] dark:to-purple-950">{children}</main>
+        <main className="w-full pb-20">{children}</main>
   );
 }
