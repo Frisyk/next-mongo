@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const TextCard = ({ text }: { text: any }) => {
   return (
-    <div className="p-10 bg-gradient-to-br from-purple-800 via-blue-700 to-purple-400 min-h-40 text-white rounded-lg shadow-md flex-shrink-0">
+    <div className="p-10 bg-gradient-to-br from-slate-800 via-blue-700 to-slate-400 min-h-40 text-white rounded-lg shadow-md flex-shrink-0">
       <div className="flex items-center justify-between">
         <div
           className="text-3xl leading-relaxed font-bold"

@@ -2,20 +2,10 @@ import Link from 'next/link';
 import { SignupForm } from '@/app/(public)/signup/form';
 export default function Page() {
   return (
-    <div className="flex flex-col p-4 lg:w-1/3">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold">Create an account</h1>
-        <p className="text-purple-500">Enter your information to get started</p>
-      </div>
-      <div className="mt-6">
+    <div className="flex flex-col w-full h-screen justify-center items-center p-4">
+
         <SignupForm />
-      </div>
-      <div className="mt-6 text-center text-sm">
-        Already have an account?{' '}
-        <Link prefetch={false} className="underline" href="/login">
-          Login
-        </Link>
-      </div>
+      
     </div>
   );
 }

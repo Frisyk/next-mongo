@@ -63,7 +63,7 @@ export default function Header({user, link}: {user?: any, link:string}) {
   };
 
   return (
-    <header className="flex h-14 w-full justify-between items-center border-b dark:border-purple-900 px-4 md:gap-4 dark:text-white">
+    <header className="flex h-14 w-full justify-between items-center border-b dark:border-slate-800 px-4 md:gap-4 dark:text-white">
       <Link prefetch={false}
         className="flex items-center rounded-md  px-2 py-2 lg:hidden"
         href="#"
@@ -82,7 +82,7 @@ export default function Header({user, link}: {user?: any, link:string}) {
         checked={theme === 'dark'} 
         onChange={toggleTheme} 
       />
-      <span className="slider relative w-20 h-8 bg-blue-400 rounded-full transition-colors duration-300 flex items-center">
+      <span className="slider relative w-20 h-8 bg-slate-100 rounded-full transition-colors duration-300 flex items-center">
         <span className="sun absolute left-2 top-1/2 transform -translate-y-1/2 text-yellow-400">
           <FaSun className="w-6 h-6" />
         </span>
@@ -94,7 +94,7 @@ export default function Header({user, link}: {user?: any, link:string}) {
         </span>
       </span>
     </label>
-      <UserImage user={user} />
+      {/* <UserImage user={user} /> */}
       </div>
     </header>
   )

@@ -21,9 +21,9 @@ function Navigation() {
   
   return (
     <div className=" h-screen sticky top-0 ">
-      <div className="hidden md:block w-80 border-r dark:border-purple-900">
+      <div className="hidden md:block w-80 border-r dark:border-slate-900">
         <div className="flex h-screen flex-col gap-2">
-          <div className="h-14  items-center border-b dark:border-purple-900 px-4 flex">
+          <div className="h-14  items-center border-b dark:border-slate-900 px-4 flex">
             <Link prefetch={false} className="flex items-center gap-2 font-semibold" href="#">
               <PackageIcon className="h-6 w-6" />
               <span className="">Batik</span>
@@ -34,9 +34,9 @@ function Navigation() {
               {navLinks.map((link) => (
                 <Link prefetch={false}
                 className={clsx(
-                  'flex items-center gap-3 rounded-lg px-3 py-2 transition-all text-purple-300 dark:hover:text-orange-300',
+                  'flex items-center gap-3 rounded-lg px-3 py-2 transition-all text-slate-300 dark:hover:text-orange-300',
                   {
-                    'bg-purple-700  text-white hover:text-orange-200': path === link.href, 
+                    'bg-slate-700  text-white hover:text-orange-200': path === link.href, 
                   },
                 )} 
                 href={link.href}
@@ -48,7 +48,7 @@ function Navigation() {
               ))}
             </nav>
           </div>
-          <div className="border-t dark:border-purple-900 p-4">
+          <div className="border-t dark:border-slate-900 p-4">
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@ function Navigation() {
             <Link prefetch={false}
               className={`${
                 path === link.href
-                  ? 'bg-purple-700 text-purple-50 hover:text-purple-300 dark:hover:text-orange-300'
+                  ? 'bg-slate-700 text-slate-50 hover:text-slate-300 dark:hover:text-orange-300'
                   : ''
               } flex flex-col items-center gap-1 px-3 py-2 transition-all hover:text-orange-300`}
               href={link.href}

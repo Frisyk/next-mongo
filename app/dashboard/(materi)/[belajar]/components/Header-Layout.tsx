@@ -31,7 +31,7 @@ export default function Header({title, link}: {title?: string, link:string}) {
   };
 
   return (
-    <header className="flex items-center border-b dark:border-purple-900 p-4 md:gap-4 ">
+    <header className="flex items-center border-b dark:border-slate-900 p-4 md:gap-4 ">
       <Link prefetch={false}
         className="flex items-center rounded-md py-2"
         href={link}
@@ -46,7 +46,7 @@ export default function Header({title, link}: {title?: string, link:string}) {
         className="ml-auto flex items-center justify-center rounded-md p-2  "
         aria-label="Toggle Dark Mode"
       >
-        { theme === 'light'? (
+        { theme != 'light'? (
           <MdNightlightRound className="w-6 h-6" />
         ) : (
           <MdLightMode className="w-6 h-6" />

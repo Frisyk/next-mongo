@@ -4,7 +4,7 @@
 
 @layer components {
   .dark {
-    @apply bg-[#17153B] text-[#f8eaff];
+    @apply bg-slate-900 text-slate-50;
   }
 }
 

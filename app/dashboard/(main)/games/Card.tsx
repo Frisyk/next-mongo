@@ -22,10 +22,10 @@ export default function Card({title, point, slug, img}: Game) {
             alt='image'
         />
         <div className='flex w-full items-center justify-between px-4'>
-            <p className="font-semibold text-purple-600 group-hover:text-white text-2xl">
+            <p className="font-semibold text-slate-600 group-hover:text-white text-2xl">
                 {title}
             </p>
-            <p className="font-semibold text-purple-600 group-hover:bg-white p-2 rounded text-2xl">
+            <p className="font-semibold text-slate-600 group-hover:bg-white p-2 rounded text-2xl">
                 {point}✨
             </p>
         </div>
