@@ -1,3 +1,4 @@
+import { getUser } from "@/lib/dal";
 import { Navigation } from "./components/Navigation";
 
 export default async function Layout({
@@ -6,10 +7,12 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
     
+  const user = await getUser();
+
   return (
-        <main className="w-full bg-gradient-to-br flex dark:from-[#0c0a27] dark:to-slate-950">
-        <Navigation />
-          {children}
+        <main className="w-full bg-gradient-to-br flex ">
+        <Navigation userI={JSON.stringify(user)}/>
+        {children}
         </main>
   );
 }

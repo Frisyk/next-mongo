@@ -1,10 +1,12 @@
 'use client';
-import { putMaterial } from '@/lib/action';
+import { putMaterial } from '@/lib/admin/materials';
 import { useFormState } from 'react-dom';
 
 export default function Form({ m }: { m: string }) {
   const [state, putAction] = useFormState(putMaterial, undefined);
   const materi = JSON.parse(m);
+  console.log(materi);
+  
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();

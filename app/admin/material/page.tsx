@@ -12,8 +12,8 @@ export default async function Materials() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gray-100 p-6">
-      <div className="bg-white shadow-md rounded-lg overflow-hidden">
+    <div className="min-h-screen w-full p-6">
+      <div className=" shadow-md rounded-lg overflow-hidden">
         <div className="p-4 flex justify-between items-center bg-blue-600 text-white">
           <h1 className="text-xl font-bold">Admin Material Table</h1>
           <Link prefetch={false}
@@ -65,7 +65,7 @@ export default async function Materials() {
                   </td>
                   <td className="py-3 px-6">
                     <div className="flex items-center space-x-4">
-                      <UpdateButton path='material' id={material.id} />
+                      <UpdateButton path='material' slug={material.slug} />
                       <DeleteButton path='material' id={material.id} />
                     </div>
                   </td>

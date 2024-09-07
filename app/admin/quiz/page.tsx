@@ -1,4 +1,4 @@
-import { getAllQuizzes } from '@/lib/action';
+import { getAllQuizzes } from '@/lib/admin/quizzes';
 import Link from 'next/link';
 import { FaPlus } from 'react-icons/fa';
 import { DeleteButton, UpdateButton } from '../components/Navigation';
@@ -7,8 +7,8 @@ export default async function Materials() {
   const quizzes = await getAllQuizzes();
 
   return (
-    <div className="min-h-screen w-full bg-gray-100 p-6">
-      <div className="bg-white shadow-md rounded-lg overflow-hidden">
+    <div className="min-h-screen w-full p-6">
+      <div className="shadow-md rounded-lg overflow-hidden">
         <div className="p-4 flex justify-between items-center bg-blue-600 text-white">
           <h1 className="text-xl font-bold">Admin Material Table</h1>
           <Link

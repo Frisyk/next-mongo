@@ -1,5 +1,5 @@
 'use client';
-import { putQuiz } from '@/lib/action';
+import { putQuiz } from '@/lib/admin/quizzes';
 import { useFormState } from 'react-dom';
 
 export default function EditQuizForm({ m }: { m: string }) {

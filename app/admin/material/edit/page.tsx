@@ -5,9 +5,9 @@ import Form from './Form';
 export default async function Materials
 ({ searchParams }: {searchParams: { [key: string]: string }
 }) {
-    const id = searchParams.path
-    const materi = await getDetailsM(id)
-    
+    const slug = searchParams.path
+    const materi = await getDetailsM(slug)
+        
     return (
         <Form m={JSON.stringify(materi)} />
     )

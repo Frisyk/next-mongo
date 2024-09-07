@@ -1,5 +1,5 @@
 'use client'
-import { addMaterial } from '@/lib/action';
+import { addMaterial } from '@/lib/admin/materials';
 import { useFormState } from 'react-dom';
 export default function AddMaterial() {
   const [state, action] = useFormState(addMaterial, undefined);

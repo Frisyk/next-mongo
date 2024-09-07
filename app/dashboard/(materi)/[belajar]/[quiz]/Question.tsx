@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { ResultSummary } from '../components/Summary';
 import { QuestionComponent } from '../components/QuestionComp';
 import { NavigationComponent } from '../components/Navigation';
-import { putUserScore } from '@/lib/action';
+import { putUserScore } from '@/lib/admin/students';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { confirmEndTest } from '../components/Dialog';

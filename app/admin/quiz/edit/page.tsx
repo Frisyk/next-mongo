@@ -1,5 +1,5 @@
 import Form from './Form';
-import { getQuiz } from '@/lib/action';
+import { getQuiz } from '@/lib/admin/quizzes';
 
 export default async function Quiz
 ({ searchParams }: {searchParams: { [key: string]: string }
