@@ -8,18 +8,18 @@ export default async function Page({ params }: { params: any }) {
     const materi = await getDetailsM(params.belajar)
     
     return (
-        <div className="w-full min-h-screen">
+        <div className="w-full  min-h-screen">
             <Header link={'/dashboard'} title={materi.title} />
             <Image
                 alt="Image"
-                className="mx-auto rounded-xl object-cover my-5"
+                className="mx-auto md:w-1/2 md:h-[200px] rounded-xl object-cover my-5"
                 height="400"
                 src={materi.img}
                 width="400"
             />
-            <div className="w-full md:w-1/2 mx-auto rounded-lg px-10">
-                <h1 className="font-bold text-2xl mb-4">{materi.title}</h1>
-                <div dangerouslySetInnerHTML={{ __html: materi.desc }} />
+            <div className="w-full md:w-1/2  mx-auto rounded-lg px-10 md:px-0 ">
+                <h1 className="font-bold text-2xl md:text-4xl my-4 md:my-10 md:text-center">{materi.title}</h1>
+                <div className="text-justify" dangerouslySetInnerHTML={{ __html: materi.desc }} />
                  <hr className="w-full my-5" />
                 <h1 className="text-2xl font-bold mb-4">Rangkuman</h1>
                 <p className="mb-6">{materi.summary}</p>

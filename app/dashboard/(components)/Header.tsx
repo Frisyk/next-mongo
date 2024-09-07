@@ -1,6 +1,8 @@
 'use client'
 import React from 'react'
 import { useState, useEffect } from 'react';
+import { MdLightMode } from "react-icons/md";
+import { MdNightlightRound } from "react-icons/md";
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
@@ -75,25 +77,17 @@ export default function Header({user, link}: {user?: any, link:string}) {
       </h1>
       <div className='flex gap-2 items-center'>
 
-      <label className="switch flex items-center cursor-pointer">
-      <input 
-        type="checkbox" 
-        className="input hidden" 
-        checked={theme === 'dark'} 
-        onChange={toggleTheme} 
-      />
-      <span className="slider relative w-20 h-8 bg-slate-100 rounded-full transition-colors duration-300 flex items-center">
-        <span className="sun absolute left-2 top-1/2 transform -translate-y-1/2 text-yellow-400">
-          <FaSun className="w-6 h-6" />
-        </span>
-        <span className="moon absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-700">
-          <FaMoon className="w-6 h-6" />
-        </span>
-        <span className="absolute w-10 h-7 bg-gray-200 rounded-full transform transition-transform duration-300 ease-in-out" 
-              style={{ transform: theme === 'light' ? 'translateX(100%)' : 'translateX(0)' }}>
-        </span>
-      </span>
-    </label>
+      <button
+        onClick={toggleTheme}
+        className="ml-auto flex items-center ring-slate-900 dark:ring-white ring-1 rounded-full justify-center p-2  "
+        aria-label="Toggle Dark Mode"
+      >
+        { theme != 'light'? (
+          <MdNightlightRound className="w-6 h-6 " />
+        ) : (
+          <MdLightMode className="w-6 h-6" />
+        )}
+      </button>
       {/* <UserImage user={user} /> */}
       </div>
     </header>
