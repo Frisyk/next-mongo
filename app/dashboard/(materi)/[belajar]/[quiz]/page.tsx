@@ -1,7 +1,7 @@
 import React from 'react'
 import App from './Question'
 import { getUser } from '@/lib/dal'
-import { getQuizzesByTag } from '@/lib/action';
+import { getQuizzesByTag } from '@/lib/admin/quizzes';
 
 export default async function Page({ params }: { params: any }) {
   

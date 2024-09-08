@@ -27,7 +27,7 @@ export default async function Materials() {
         <div className="overflow-x-auto">
           <table className="min-w-full">
             <thead>
-              <tr className="bg-gray-200 text-left text-gray-600 uppercase text-sm">
+              <tr className=" text-left uppercase text-sm">
                 <th className="py-3 px-6">No</th>
                 <th className="py-3 px-6">Title</th>
                 <th className="py-3 px-6">Short</th>
@@ -38,11 +38,11 @@ export default async function Materials() {
                 <th className="py-3 px-6">Actions</th>
               </tr>
             </thead>
-            <tbody className="text-gray-700 text-sm">
+            <tbody className=" text-sm">
               {materials?.map((material, index) => (
                 <tr
                   key={index}
-                  className="border-b border-gray-200 hover:bg-gray-100"
+                  className="border-b border-gray-200 hover:bg-gray-500"
                 >
                   <td className="py-3 px-6">{index + 1}</td>
                   <td className="py-3 px-6">

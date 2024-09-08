@@ -26,7 +26,7 @@ export default function Content({materi} : {materi: any}) {
             src={m.img}
             width="400"
           />
-          <h3 className="md:text-3xl text-xl font-bold text-slate-900 dark:text-orange-300 ">
+          <h3 className="md:text-3xl capitalize text-xl font-bold text-slate-900 dark:text-orange-300 ">
             {m.title}
           </h3>
         </div>        

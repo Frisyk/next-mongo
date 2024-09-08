@@ -46,7 +46,7 @@ export default async function Materials() {
                   <td className="py-3 px-6">{quiz.answers[3]?.text || ''}</td>
                   <td className="py-3 px-6">
                     <div className="flex items-center space-x-4">
-                      <UpdateButton path='quiz' id={quiz.id} />
+                      <UpdateButton path='quiz' slug={quiz.id} />
                       <DeleteButton path='quiz' id={quiz.id} />
                     </div>
                   </td>
