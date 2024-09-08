@@ -11,7 +11,7 @@ export default function Content({materi} : {materi: any}) {
   {materi?.map((m: any, index: number) => (
     <div
       key={m.id}
-      className="mx-5 md:mx-0 md:w-[22rem] h-40 md:h-96 bg-white dark:bg-slate-800 rounded-2xl shadow-md overflow-hidden transform transition duration-300 hover:scale-105"
+      className=" md:w-[20rem] h-40 md:h-96 bg-white dark:bg-slate-800 rounded-2xl shadow-md overflow-hidden transform transition duration-300 hover:scale-105"
     >
       <Link prefetch={false} href={`/dashboard/${m.slug}`} className=" w-full h-full flex">
 

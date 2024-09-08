@@ -11,7 +11,7 @@ export default function Home() {
 
 function HomeComponent() {
   return (
-    <main className="relative w-full justify-between min-h-screen flex flex-col md:gap-20 bg-gradient-to-bl from-slate-900 via-slate-950 to-slate-900">
+    <main className="relative w-full justify-between h-screen flex flex-col md:gap-20 bg-gradient-to-bl from-slate-900 via-slate-950 to-slate-900">
       <section className="flex justify-between items-center mr-5">
         <h1 className="text-2xl p-5 font-bold text-white">Batik.</h1>
         <Link href="/login" className="flex gap-2 items-center px-3 py-3 max-w-xs text-center text-md font-semibold text-white bg-slate-900 rounded-xl ring-1 shadow-lg hover:bg-slate-800 transition-colors">
@@ -19,8 +19,8 @@ function HomeComponent() {
         </Link>
       </section>
       <section className="relative z-20 mx-auto flex flex-col md:w-4/5 items-center md:text-center p-8 md:p-12 gap-5">
-        <h1 className="text-3xl md:text-6xl uppercase font-bold text-white leading-normal md:leading-relaxed">
-          Belajar Akhlak📑 <br /> dengan Asik dan Menyenangkan🎯
+        <h1 className="text-4xl md:text-6xl uppercase font-bold text-white leading-normal md:leading-relaxed">
+          Belajar Akhlak📑  dengan Asik dan Menyenangkan🎯
         </h1>
         <h1 className="text-sm md:text-lg md:w-4/5 text-slate-400">&quot;Tidak sesuatu yang lebih berat dalam timbangan seorang mukmin kelak pada hari kiamat daripada akhlak yang baik. Sesungguhnya Allah amatlah murka terhadap seorang yang keji lagi jahat.&quot;<br /> HR. Tirmidzi</h1>
         <div className="flex flex-col md:flex-row gap-2 md:gap-5 w-full items-center justify-center">
