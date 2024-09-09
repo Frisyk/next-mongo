@@ -4,6 +4,11 @@ import hero from "../public/assets/hero.png";
 import { HomeIcon } from "@/components/ui/icons";
 import { LogIn } from "lucide-react";
 import HomeNav from "@/components/HomeNav";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Home'
+};
 
 export default function Home() {
   return <HomeComponent />;

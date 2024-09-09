@@ -42,7 +42,7 @@ export default async function Materials() {
               {materials?.map((material, index) => (
                 <tr
                   key={index}
-                  className="border-b border-gray-200 hover:bg-gray-500"
+                  className="border-b border-gray-200 hover:bg-slate-200 dark:hover:bg-slate-500"
                 >
                   <td className="py-3 px-6">{index + 1}</td>
                   <td className="py-3 px-6">

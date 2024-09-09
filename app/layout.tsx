@@ -10,6 +10,12 @@ export const metadata: Metadata = {
     default: 'On-Boarding', // a default is required when creating a template
   },
   description: "Batik Belajar Etika",
+  generator: 'Next.js',
+  applicationName: 'Batik Belajar Etika',
+  referrer: 'origin-when-cross-origin',
+  keywords: ['Next.js', 'Belajar etika', 'batik', 'pendidikan agama islam','PAI', 'Edukasi', 'akhlak', 'islam'],
+  authors: [{ name: 'Frisnadi' }, { name: 'Batik', url: 'https://frisyk.vercel.app' }],
+  creator: 'Frisnadi Nurul Huda',
 };
 
 export default function RootLayout({
