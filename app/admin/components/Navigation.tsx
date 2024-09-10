@@ -13,6 +13,7 @@ import { useState, useEffect } from 'react';
 import { MdLightMode } from "react-icons/md";
 import { MdNightlightRound } from "react-icons/md";
 import LogoutButton, { LoginButton } from '@/app/dashboard/(components)/logout-button';
+import { deleteQuiz } from '@/lib/admin/quizzes';
 
 
 function Navigation({ userI }: { userI: any }) {
@@ -123,6 +124,8 @@ function DeleteButton({id, path}:{id:string, path:string}) {
   const handleDelete = async() => {
     if(path === 'material'){
       await deleteMaterial(id)
+    } else {
+      await deleteQuiz(id)
     }
   }
 

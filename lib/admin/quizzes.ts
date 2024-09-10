@@ -1,5 +1,6 @@
 'use server';
 
+import { revalidatePath } from "next/cache";
 import connecttoDB from "../db"
 import { Quizi } from "../models"
 import { redirect } from "next/navigation";
@@ -8,13 +9,24 @@ export const getQuiz = async (quizId: string) => {
     try {
         // Create a new quiz document
         connecttoDB()
-        const quiz = await Quizi.find({quizId})
+        const quiz = await Quizi.findById(quizId)      
 
         return quiz
     } catch (error) {
         console.error('Error getting quiz:', error);
     }
 };
+
+export const deleteQuiz = async(id:string)=> {
+  try {
+      await connecttoDB()
+      await Quizi.findByIdAndDelete(id);
+      revalidatePath('/admin/quiz')
+
+  } catch (error) {
+      console.error('Failed to remove material:', error);
+  }
+}
 
 export const getQuizzesByTag = async (tag: string) => {
   try {
