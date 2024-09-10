@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 const getInitials = (name: string) => {
-  if (!name) return 'US';
   const initials = name
     .split(' ')
     .map(word => word[0])
@@ -15,16 +14,12 @@ const getInitials = (name: string) => {
   return initials.toUpperCase();
 };
 
-interface UserImageProps {
-  user?: {
-    username?: string;
-    img?: string;
-  };
-}
 
 
-const UserImage = ({ user }: UserImageProps) => {
-  const initials = getInitials(user?.username || 'U');
+
+export const UserImage = ({ userI }: {userI: string}) => {
+  const user = JSON.parse(userI)
+  const initials = user == null? 'U' : getInitials(user.username);
 
   return user?.img ? (
     <Image
@@ -35,7 +30,7 @@ const UserImage = ({ user }: UserImageProps) => {
       className="rounded-full bg-orange-300 w-8 h-8"
     />
   ) : (
-    <div className="rounded-full bg-blue-800 w-8 h-8 flex items-center justify-center text-white font-bold text-lg">
+    <div className="rounded-full bg-blue-800 p-6 w-20 md:w-32 h-20 md:h-32 flex items-center justify-center text-white font-bold text-3xl">
       {initials}
     </div>
   );

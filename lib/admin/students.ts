@@ -21,3 +21,20 @@ export const putUserScore = async (userId: string, quiztitle: string, score: num
         return { message: 'Failed to update score.', error };
     }
 };
+
+export const getUserScore = async (userId: string) => {
+    try {
+        await connecttoDB();
+        // 3. Update the user's score for the specified test
+        const result = await Score.find({userId: userId})
+        if (!result) {
+            throw new Error(`User with ID ${userId} not found`);
+        }
+        
+        return result;
+    } catch (error) {
+        // 5. Handle errors
+        console.error('Error updating user score:', error);
+        return { message: 'Failed to update score.', error };
+    }
+}
