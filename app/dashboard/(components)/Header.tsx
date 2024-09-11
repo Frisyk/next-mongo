@@ -1,8 +1,5 @@
 'use client'
 import React from 'react'
-import { useState, useEffect } from 'react';
-import { MdLightMode } from "react-icons/md";
-import { MdNightlightRound } from "react-icons/md";
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
@@ -38,26 +35,7 @@ export const UserImage = ({ userI }: {userI: string}) => {
 
 export default function Header({user, link}: {user?: any, link:string}) {
   const path = usePathname().split('/').pop();
-  const [theme, setTheme] = useState<string>(() => {
-    // Check user's preference from localStorage or fallback to the default 'light' theme
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') || 'light';
-    }
-    return 'light';
-  });
-
-  useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
+  
 
   return (
     <header className="flex h-14 w-full justify-between items-center border-b dark:border-slate-800 px-4 md:gap-4 dark:text-white">
@@ -72,17 +50,7 @@ export default function Header({user, link}: {user?: any, link:string}) {
       </h1>
       <div className='flex gap-2 items-center'>
 
-      <button
-        onClick={toggleTheme}
-        className="ml-auto flex items-center ring-slate-900 dark:ring-white ring-1 rounded-full justify-center p-2  "
-        aria-label="Toggle Dark Mode"
-      >
-        { theme != 'light'? (
-          <MdNightlightRound className="w-6 h-6 " />
-        ) : (
-          <MdLightMode className="w-6 h-6" />
-        )}
-      </button>
+      
       {/* <UserImage user={user} /> */}
       </div>
     </header>

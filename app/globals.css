@@ -2,13 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  scroll-behavior: smooth;
+}
+
+ul {
+  list-style-type: disc;
+}
+
 @layer components {
   .dark {
     @apply bg-slate-900 text-slate-50;
   }
-}
-
-@layer components {
     .scroll-container {
       display: flex;
       white-space: nowrap;
