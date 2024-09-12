@@ -132,6 +132,28 @@ const quizSchema = new mongoose.Schema({
   answers: [AnswerSchema], // Embed the Answer schema
 }, {timestamps: true});
 
+const storySchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  keypoints: {
+    type: String,
+    required: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+  img: {
+    type: String,
+  },
+  slug: {
+    type: String,
+    required: true,
+    unique: true
+  }
+}, { timestamps: true });
 
 export const User = mongoose.models.User || mongoose.model("User", userSchema);
 export const Post = mongoose.models.Post || mongoose.model("Post", postSchema);
@@ -139,4 +161,5 @@ export const Session = mongoose.models.Session || mongoose.model("Session", sess
 export const Game = mongoose.models.Game || mongoose.model("Game", gameSchema);
 export const Score = mongoose.models.Score || mongoose.model("Score", scoreSchema);
 export const Quizi = mongoose.models.Quizi || mongoose.model("Quizi", quizSchema);
+export const Story = mongoose.models.Story || mongoose.model("Story", storySchema);
 
