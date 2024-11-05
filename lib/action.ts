@@ -2,7 +2,7 @@
 
 import connecttoDB from "./db"
 import { User } from "./models"
-import { FormState, LoginFormSchema, ScoreState, SignupFormSchema } from '@/lib/definitions';
+import { FormState, LoginFormSchema, SignupFormSchema } from '@/lib/definitions';
 import { createSession, deleteSession } from '@/lib/stateless-session';
 import bcrypt from 'bcrypt';
 

@@ -24,7 +24,7 @@ function HomeComponent() {
         </Link>
       </section>
       <section className="relative z-20 mx-auto flex flex-col md:w-4/5 items-center md:text-center p-8 md:p-12 gap-5">
-        <h1 className="text-4xl md:text-6xl uppercase font-bold text-white leading-normal md:leading-relaxed">
+        <h1 className="text-3xl md:text-6xl uppercase font-bold text-white leading-normal md:leading-relaxed">
           Belajar Akhlak📑  dengan Asik dan Menyenangkan🎯
         </h1>
         <h1 className="text-sm md:text-lg md:w-4/5 text-slate-400">&quot;Tidak sesuatu yang lebih berat dalam timbangan seorang mukmin kelak pada hari kiamat daripada akhlak yang baik. Sesungguhnya Allah amatlah murka terhadap seorang yang keji lagi jahat.&quot;<br /> HR. Tirmidzi</h1>

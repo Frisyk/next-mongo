@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
@@ -36,6 +36,26 @@ export const UserImage = ({ userI }: {userI: string}) => {
 export default function Header({user, link}: {user?: any, link:string}) {
   const path = usePathname().split('/').pop();
   
+  const [theme, setTheme] = useState<string>(() => {
+    // Check user's preference from localStorage or fallback to the default 'light' theme
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') || 'light';
+    }
+    return 'light';
+  });
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
 
   return (
     <header className="flex h-14 w-full justify-between items-center border-b dark:border-slate-800 px-4 md:gap-4 dark:text-white">
@@ -48,10 +68,18 @@ export default function Header({user, link}: {user?: any, link:string}) {
       <h1 className="md:block hidden text-lg font-semibold capitalize  ">
         {path}
       </h1>
-      <div className='flex gap-2 items-center'>
-
-      
-      {/* <UserImage user={user} /> */}
+      <div className='flex gap-2 items-center md:hidden'>
+            <button
+              onClick={toggleTheme}
+              className="ml-auto flex items-center  rounded-full justify-center p-2  "
+              aria-label="Toggle Dark Mode"
+            >
+              { theme != 'light'? (
+                <MdNightlightRound className="w-6 h-6 " />
+              ) : (
+                <MdLightMode className="w-6 h-6" />
+              )}
+            </button>
       </div>
     </header>
   )
@@ -59,6 +87,7 @@ export default function Header({user, link}: {user?: any, link:string}) {
 
 import { FaSun, FaMoon } from 'react-icons/fa';
 import Image from 'next/image';
+import { MdLightMode, MdNightlightRound } from 'react-icons/md';
 
 const getCurrentDateTime = () => {
   const now = new Date();
@@ -93,7 +122,7 @@ export function GetTime() {
         <FaMoon className="text-blue-400 text-4xl" />
       )}
       <div className="flex flex-col gap-3">
-        <p className="text-5xl font-bold">{time}</p>
+        <p className="text-4xl font-bold">{time}</p>
         <p className="text-xl">{date}</p>
       </div>
     </section>

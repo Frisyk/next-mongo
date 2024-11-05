@@ -32,6 +32,7 @@ export default function Navigation({ userI }: { userI: any }) {
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
+  
   const user = JSON.parse(userI);
   const navLinks = [
     { title: 'Home', href: '/dashboard', badge: <GoHomeFill className='w-6 h-6'/> },

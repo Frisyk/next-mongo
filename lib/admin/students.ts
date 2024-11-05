@@ -22,7 +22,7 @@ export const putUserScore = async (userId: string, quiztitle: string, score: num
     }
 };
 
-export const getUserScore = async (userId: string) => {
+export const getUserScore = async (userId?: string) => {
     try {
         await connecttoDB();
         // 3. Update the user's score for the specified test

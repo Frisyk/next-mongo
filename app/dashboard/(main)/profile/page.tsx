@@ -22,7 +22,10 @@ export default async function Profile() {
           <p className='p-2 px-5 text-md w-fit rounded-full bg-blue-100 dark:bg-blue-800'>kelas 10 Mipa</p>
         </div>
       </div>
-      <ScoreBoard id={user.id} />
+      {
+        user && <ScoreBoard id={user? user.id : null} />
+      }
+      
     </main>
   )
 }

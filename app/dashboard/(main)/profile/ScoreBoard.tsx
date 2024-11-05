@@ -11,7 +11,7 @@ interface Score {
     __v: number;
   }
   
-  export default async function ScoreBoard({ id }: { id: string }) {
+  export default async function ScoreBoard({ id }: { id?: string }) {
     const scores = await getUserScore(id);
   
     if (!Array.isArray(scores)) {
