@@ -3,6 +3,7 @@ import React from 'react'
 import { UserImage } from '../../(components)/Header'
 import { getUser } from '@/lib/dal'
 import ScoreBoard from './ScoreBoard'
+import LogoutButton, { LoginButton } from '../../(components)/logout-button'
 
 export const metadata: Metadata = {
   title: 'My Profile'
@@ -15,11 +16,17 @@ export default async function Profile() {
   
   return (
     <main>
-      <div className='flex gap-6 mb-2 items-center justify-center md:justify-start'>
+      
+      <div className='flex gap-6 mb-2  md:justify-start'>
         <UserImage userI={JSON.stringify(user)} />
         <div className="flex flex-col gap-2 md:gap-4">
-          <h1 className='text-4xl font-bold'>Hi, {user==null? 'User' : user.username}😎</h1>
-          <p className='p-2 px-5 text-md w-fit rounded-full bg-blue-100 dark:bg-blue-800'>kelas 10 Mipa</p>
+          <h1 className='text-3xl font-bold'>Hi, {user==null? 'User' : user.username}😎</h1>
+          <section className='flex gap-2'>
+            <p className='p-2 md:px-5 text-xs md:text-lg rounded-full bg-blue-100 dark:bg-blue-800'>kelas 10B</p>
+            {
+              user == null? <LoginButton/> : <LogoutButton/>
+            }
+          </section>
         </div>
       </div>
       {

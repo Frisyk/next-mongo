@@ -12,13 +12,15 @@ import { Question } from '../components/interface';
 import Header from '../components/Header-Layout';
 
 export default function App({ user, quizM, title, link }: { user: string, quizM: string, title: string, link: string }) {
+    const DURATION = 300
     const [currentQuestion, setCurrentQuestion] = useState(1);
     const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: string | null }>({});
     const [finalScore, setFinalScore] = useState<number | null>(null);
-    const [timeLeft, setTimeLeft] = useState(600); // 10 minutes = 600 seconds
+    const [timeLeft, setTimeLeft] = useState(DURATION); // 10 minutes = 600 seconds
     const [isTimeUp, setIsTimeUp] = useState(false);
     const [timerActive, setTimerActive] = useState(false); // Tracks whether the timer is active
     
+
     const quiz: Question[] = JSON.parse(quizM);
     const totalQuestions = quiz.length;
 
@@ -43,13 +45,13 @@ export default function App({ user, quizM, title, link }: { user: string, quizM:
     };
 
     const handleNext = () => {
-        if (timerActive && currentQuestion < totalQuestions) {
+        if (currentQuestion < totalQuestions) {
             setCurrentQuestion(prev => prev + 1);
         }
     };
 
     const handlePrevious = () => {
-        if (timerActive && currentQuestion > 1) {
+        if (currentQuestion > 1) {
             setCurrentQuestion(prev => prev - 1);
         }
     };
@@ -73,7 +75,7 @@ export default function App({ user, quizM, title, link }: { user: string, quizM:
         setFinalScore(score);
         setIsTimeUp(true);
         setTimerActive(false);
-        setTimeLeft(600); // Reset the timer to 10 minutes
+        setTimeLeft(DURATION); // Reset the timer to 10 minutes
     };
 
     const handleSelect = (questionNumber: number) => {
@@ -84,7 +86,7 @@ export default function App({ user, quizM, title, link }: { user: string, quizM:
 
     const handleReset = () => {
         setTimerActive(false);
-        setTimeLeft(600);
+        setTimeLeft(DURATION);
         setCurrentQuestion(1);
         setSelectedAnswers({});
         setFinalScore(null);
@@ -96,7 +98,7 @@ export default function App({ user, quizM, title, link }: { user: string, quizM:
     return (
         <div className="md:h-screen mx-auto">
             <Header title={title} link={link} />
-            <div className="p-4 rounded-lg shadow-lg md:mx-32 mt-4 flex flex-col md:flex-row gap-4 md:gap-5">
+            <div className="p-4 rounded-lg md:shadow-lg md:mx-32 mt-4 flex flex-col md:flex-row gap-4 md:gap-5">
                 <section className="md:w-1/3 w-full mx-auto">
                     <div className="flex justify-between items-center mb-10">
                         <span className="text-xl font-bold">
@@ -121,7 +123,7 @@ export default function App({ user, quizM, title, link }: { user: string, quizM:
                         examtitle={title}
                         currentQuestion={currentQuestion}
                         totalQuestions={totalQuestions}
-                        score={finalScore ?? 0}
+                        score={finalScore}
                     />
                 </section>
                 <ToastContainer closeButton={false} />

@@ -43,7 +43,7 @@ export default function Header({title, link}: {title?: string, link:string}) {
       </Link>
       <button
         onClick={toggleTheme}
-        className="ml-auto flex items-center ring-slate-900 dark:ring-white ring-1 rounded-full justify-center p-2  "
+        className="ml-auto flex items-center rounded-full justify-center p-2  "
         aria-label="Toggle Dark Mode"
       >
         { theme != 'light'? (

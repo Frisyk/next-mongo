@@ -27,7 +27,7 @@ export const UserImage = ({ userI }: {userI: string}) => {
       className="rounded-full bg-orange-300 w-8 h-8"
     />
   ) : (
-    <div className="rounded-full bg-blue-800 p-6 w-20 md:w-32 h-20 md:h-32 flex items-center justify-center text-white font-bold text-3xl">
+    <div className="rounded-full bg-blue-800 p-6 w-20 md:w-28 h-20 md:h-28 flex items-center justify-center text-white font-bold text-3xl">
       {initials}
     </div>
   );

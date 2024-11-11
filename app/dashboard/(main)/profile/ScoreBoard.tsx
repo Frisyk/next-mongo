@@ -19,10 +19,10 @@ interface Score {
     }
   
     return (
-      <div className="shadow-lg bg-slate-50 dark:bg-slate-900 rounded-lg p-2 w-full md:w-1/2 text-center">
+      <div className="shadow-lg bg-slate-50 dark:bg-slate-900 rounded-lg p-2 w-full text-center md:w-4/5">
         <h1 className='my-5 text-2xl font-bold text-left'>Riwayat Kuis</h1>
 
-        <table className="min-w-full border border-slate-300">
+        <table className="min-w-full border text-sm border-slate-300">
           <thead className="">
             <tr>
               <th className=" py-3 px-4 border">Nama Kuis</th>
@@ -32,16 +32,25 @@ interface Score {
           </thead>
           <tbody>
             {scores.map((score: Score) => (
-              <tr key={score._id}>
-                <td className="py-3 px-4 border w-1/3">{score.quiztitle}</td>
-                <td className="py-3 px-4 border w-1/3">{score.score}</td>
-                <td className="py-3 px-4 border w-1/3">
-                  {new Date(score.createdAt).toLocaleDateString()}
+              <tr key={score._id} className="w-full">
+                <td className="py-4 px-6 border border-gray-300 font-semibold">
+                  {score.quiztitle}
                 </td>
-                
+                <td className="py-4 px-6 border border-gray-300 text-center">
+                  {score.score}
+                </td>
+                <td className="py-4 px-6 border border-gray-300">
+                  {new Date(score.createdAt).toLocaleDateString("id-ID", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                  })}
+                </td>
               </tr>
             ))}
           </tbody>
+
         </table>
       </div>
     );

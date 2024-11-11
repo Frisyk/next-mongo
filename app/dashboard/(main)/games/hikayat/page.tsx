@@ -112,7 +112,7 @@ const story: Scene[] = [
 ];
 
 const SceneComponent: React.FC<{ scene: Scene; onOptionClick: (nextScene: number) => void }> = ({ scene, onOptionClick }) => (
-  <div className="p-6 bg-white shadow-md rounded-md max-w-md mx-auto">
+  <div className="p-6 shadow-md rounded-md max-w-md mx-auto">
     <h2 className="text-2xl font-bold mb-4">{scene.title}</h2>
     <p className="mb-4">{scene.text}</p>
     <ul className="space-y-2">

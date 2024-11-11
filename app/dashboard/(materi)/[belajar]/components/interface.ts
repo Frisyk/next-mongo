@@ -15,7 +15,7 @@ export interface ResultSummaryProps {
     examtitle: string;
     currentQuestion: number;
     totalQuestions: number;
-    score: number;
+    score: number|null;
     message: string;
 }
 

@@ -49,7 +49,7 @@ export default function Navigation({ userI }: { userI: any }) {
         <div className="flex h-screen flex-col gap-2 bg-white dark:bg-slate-900">
           <div className="h-14 items-center border-b border-slate-300 dark:border-slate-800 px-4 flex">
             <Link prefetch={false} className="flex items-center gap-2 font-semibold text-slate-900 dark:text-white" href="/">
-              <span className="text-2xl font-bold">Batik</span>
+              <span className="text-2xl font-bold">Batik.</span>
             </Link>
             <button
               onClick={toggleTheme}
@@ -69,7 +69,7 @@ export default function Navigation({ userI }: { userI: any }) {
                 <Link
                   prefetch={false}
                   className={clsx(
-                    'flex items-center gap-3 rounded-lg px-3 py-2 transition-all text-slate-300 hover:text-white hover:bg-slate-600 dark:text-slate-50 dark:hover:bg-slate-800',
+                    'flex items-center gap-3 rounded-lg px-3 py-2 transition-all text-slate-500 hover:text-white hover:bg-slate-600 dark:text-slate-50 dark:hover:bg-slate-800',
                     {
                       'bg-slate-700 text-white': path === link.href,
                     },
