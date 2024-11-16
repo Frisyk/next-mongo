@@ -5,6 +5,7 @@ export const SignupFormSchema = z.object({
     .string()
     .min(2, { message: 'Name must be at least 2 characters long.' })
     .trim(),
+  uclass: z.string({ message: 'Please select your right class.' }).trim(),
   email: z.string().email({ message: 'Please enter a valid email.' }).trim(),
   password: z
     .string()

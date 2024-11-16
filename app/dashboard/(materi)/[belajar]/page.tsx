@@ -17,12 +17,12 @@ export default async function Page({ params }: { params: any }) {
             <Header link={'/dashboard'} title={materi.title} />
             <Image
                 alt="Image"
-                className="mx-auto md:w-1/2 md:h-[400px] rounded-xl object-contain my-5"
+                className="mx-auto md:w-1/2 md:h-[400px] rounded-xl p-3 object-contain my-5"
                 height="1000"
                 src={materi.img}
                 width="1000"
             />
-            <div className="w-full md:w-1/2  mx-auto rounded-lg px-10 md:px-0 ">
+            <div className="w-full md:w-1/2  mx-auto rounded-lg px-5 md:px-0 ">
                 <h1 className="font-bold text-2xl md:text-4xl my-4 md:my-10 md:text-center">{materi.title}</h1>
                 <div className="text-justify" dangerouslySetInnerHTML={{ __html: materi.desc }} />
                  <hr className="w-full my-5" />

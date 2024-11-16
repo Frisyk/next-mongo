@@ -16,7 +16,7 @@ export const getUser = cache(async () => {
     return user;
   } catch (error) {
     console.log('Failed to fetch user');
-    return null;
+    return error;
   }
 });
 
@@ -72,10 +72,10 @@ export const getGamesList = cache(async () => {
 
   try {
     connecttoDB()
-    const materi = await Game.find();          
-    return materi;
+    const game = await Game.find();          
+    return game;
   } catch (error) {
-    console.log('Failed to fetch materi');
+    console.log('Failed to fetch game');
     return null;
   }
 });

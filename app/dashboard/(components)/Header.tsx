@@ -11,9 +11,6 @@ const getInitials = (name: string) => {
   return initials.toUpperCase();
 };
 
-
-
-
 export const UserImage = ({ userI }: {userI: string}) => {
   const user = JSON.parse(userI)
   const initials = user == null? 'U' : getInitials(user.username);
@@ -60,7 +57,7 @@ export default function Header({user, link}: {user?: any, link:string}) {
   return (
     <header className="flex h-14 w-full justify-between items-center border-b dark:border-slate-800 px-4 md:gap-4 dark:text-white">
       <Link prefetch={false}
-        className="flex items-center rounded-md  px-2 py-2 lg:hidden"
+        className="flex items-center rounded-md md:hidden px-2 py-2"
         href="#"
       >
         <span className="text-lg font-bold">Batik.</span>
@@ -80,6 +77,10 @@ export default function Header({user, link}: {user?: any, link:string}) {
                 <MdLightMode className="w-6 h-6" />
               )}
             </button>
+            {
+              !user? <LoginButton/> : <LogoutButton/>
+            }
+            
       </div>
     </header>
   )
@@ -88,6 +89,7 @@ export default function Header({user, link}: {user?: any, link:string}) {
 import { FaSun, FaMoon } from 'react-icons/fa';
 import Image from 'next/image';
 import { MdLightMode, MdNightlightRound } from 'react-icons/md';
+import LogoutButton, { LoginButton } from './logout-button';
 
 const getCurrentDateTime = () => {
   const now = new Date();

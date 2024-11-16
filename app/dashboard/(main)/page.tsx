@@ -21,8 +21,11 @@ export default async function Page() {
         </div>
         <GetTime />
       </header>
-      {/* <Carousel /> */}
-      <Content materi={materi} />
+      {
+        materi ? <Content materi={materi} /> 
+        : <h1>{materi}</h1> 
+      }
+      
     </div>
   );
 }

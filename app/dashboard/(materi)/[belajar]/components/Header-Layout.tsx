@@ -31,7 +31,7 @@ export default function Header({title, link}: {title?: string, link:string}) {
   };
 
   return (
-    <header className="flex items-center border-b dark:border-slate-900 p-4 md:gap-4 ">
+    <header className="flex items-center border-b sticky top-0 bg-slate-50 dark:bg-slate-900 dark:border-slate-900 p-4 md:gap-4 ">
       <Link prefetch={false}
         className="flex items-center rounded-md py-2"
         href={link}

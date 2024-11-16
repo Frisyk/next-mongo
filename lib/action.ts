@@ -9,9 +9,9 @@ import bcrypt from 'bcrypt';
 export const signup = async (state: FormState, formData: FormData): Promise<FormState> => {
         connecttoDB();
 
-        // 1. Validate form fields
         const validatedFields = SignupFormSchema.safeParse({
             username: formData.get('name'),
+            uclass: formData.get('class'),
             email: formData.get('email'),
             password: formData.get('password'),
         });
@@ -20,7 +20,7 @@ export const signup = async (state: FormState, formData: FormData): Promise<Form
             return { errors: validatedFields.error.flatten().fieldErrors };
         }
 
-        const { username, email, password } = validatedFields.data;
+        const { username, uclass, email, password } = validatedFields.data;
 
         // 2. Check if the user's email already exists
         const existingUser = await User.findOne({ email });
@@ -34,7 +34,9 @@ export const signup = async (state: FormState, formData: FormData): Promise<Form
         
 
         // 4. Insert the user into the database
-        const user = await User.create({ username, email, point: 0, password: hashedPassword });
+        
+        const user = await User.create({ username, uclass, email, point: 0, password: hashedPassword });
+        console.log(user);
         if (!user) {
             return { message: 'An error occurred while creating your account.' };
         }

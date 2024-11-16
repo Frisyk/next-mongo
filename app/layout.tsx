@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: {
     template: '%s | Batik',
-    default: 'On-Boarding', // a default is required when creating a template
+    default: 'Batik (Belajar etika)',
   },
   description: "Batik Belajar Etika",
   generator: 'Next.js',

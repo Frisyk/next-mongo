@@ -90,7 +90,7 @@ export default function Navigation({ userI }: { userI: any }) {
       </div>
 
       {/* Responsive Navigation for Mobile */}
-      <div className="flex md:hidden bg-slate-200 dark:bg-slate-900 fixed bottom-0 left-0 w-full border-t border-slate-300 dark:border-slate-800">
+      <div className="flex md:hidden bg-slate-200 dark:bg-slate-900 z-20 fixed bottom-0 left-0 w-full border-t border-slate-300 dark:border-slate-800">
         <nav className="flex justify-around w-full py-2">
           {navLinks.map((link) => (
             <Link

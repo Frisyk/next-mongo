@@ -31,7 +31,7 @@ export function SignupForm() {
               htmlFor="name"
               className="block mb-3 text-sm font-medium text-zinc-600 dark:text-zinc-200"
             >
-              Name
+              Nama
             </Label>
             <Input
               id="name"
@@ -43,6 +43,33 @@ export function SignupForm() {
               <p className="text-sm text-red-500">{state.errors.name}</p>
             )}
           </div>
+          <div className="relative">
+            <Label
+              htmlFor="class"
+              className="block my-3 text-sm font-medium text-zinc-600 dark:text-zinc-200"
+            >
+              Kelas
+            </Label>
+            <select
+              id="class"
+              name="class"
+              className="block w-full px-4 py-3 mt-2 text-zinc-800 bg-white border-2 rounded-lg dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200 focus:border-slate-500 dark:focus:border-slate-400 focus:ring-opacity-50 focus:outline-none focus:ring focus:ring-slate-400"
+            >
+              <option value="" disabled selected>
+                Pilih kelas
+              </option>
+              <option value="XA">XA</option>
+              <option value="XB">XB</option>
+              <option value="XC">XC</option>
+              <option value="XD">XD</option>
+              <option value="XE">XE</option>
+              <option value="XF">XF</option>
+            </select>
+            {state?.errors?.name && (
+              <p className="text-sm text-red-500">{state.errors.name}</p>
+            )}
+          </div>
+
           <div className="mt-6">
             <Label
               htmlFor="email"
