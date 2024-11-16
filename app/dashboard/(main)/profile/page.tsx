@@ -22,7 +22,7 @@ export default async function Profile() {
         <div className="flex flex-col gap-2 md:gap-4">
           <h1 className='text-3xl font-bold'>Hi, {user==null? 'User' : user.username}😎</h1>
           <section className='flex gap-2'>
-            <p className='p-2 md:px-5 text-xs md:text-lg rounded-full bg-blue-100 dark:bg-blue-800'>kelas {user.uclass}</p>
+            <p className='p-2 md:px-5 text-xs md:text-lg rounded-full bg-blue-100 dark:bg-blue-800'>kelas {user==null? 'X' : user.uclass}</p>
           </section>
         </div>
       </div>
