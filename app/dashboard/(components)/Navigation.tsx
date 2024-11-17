@@ -45,7 +45,7 @@ export default function Navigation({ userI }: { userI: any }) {
 
   return (
     <div className="h-screen sticky z-20 top-0">
-      <div className="hidden md:block w-80 border-r border-slate-300 dark:border-slate-800">
+      <div className="hidden md:block md:w-52 lg:w-80 border-r border-slate-300 dark:border-slate-800">
         <div className="flex h-screen flex-col gap-2 bg-white dark:bg-slate-900">
           <div className="h-14 items-center border-b border-slate-300 dark:border-slate-800 px-4 flex">
             <Link prefetch={false} className="flex items-center gap-2 font-semibold text-slate-900 dark:text-white" href="/">
