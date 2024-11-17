@@ -36,13 +36,12 @@ export const signup = async (state: FormState, formData: FormData): Promise<Form
         // 4. Insert the user into the database
         
         const user = await User.create({ username, uclass, email, point: 0, password: hashedPassword });
-        console.log(user);
         if (!user) {
             return { message: 'An error occurred while creating your account.' };
         }
 
         // 5. Create a session for the user
-        await createSession(user._id.toString());
+        await createSession(user._id.toString(), user.isAdmin);
         return { message: 'Account created successfully.' };
     
 }
@@ -76,7 +75,7 @@ export const login = async (state: FormState, formData: FormData): Promise<FormS
         }
 
         // 4. If login successful, create a session for the user
-        await createSession(user._id.toString());
+        await createSession(user._id.toString(), user.isAdmin);
         return { message: 'Login successful.' };
     
 }

@@ -1,3 +1,4 @@
+import { JWTPayload } from 'jose';
 import { z } from 'zod';
 
 export const SignupFormSchema = z.object({
@@ -45,7 +46,8 @@ export type FormState =
     }
   | undefined;
 
-export type SessionPayload = {
-  userId: string | number;
-  expiresAt: Date;
-};
+  export interface SessionPayload extends JWTPayload {
+    userId: string;
+    isAdmin: boolean;
+    expiresAt: Date;
+  }

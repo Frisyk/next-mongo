@@ -40,16 +40,16 @@ export const createSession = async (id: number) => {
     const session = await Session.create({ userId: id, expiresAt });
 
     // Encrypt the session ID
-    const token = await encrypt({ userId: id, expiresAt });
+    // const token = await encrypt({ userId: id.toString, expiresAt });
 
     // Store the session in cookies for optimistic auth checks
-    cookies().set('session', token, {
-      httpOnly: true,
-      secure: true,
-      expires: expiresAt,
-      sameSite: 'lax',
-      path: '/',
-    });
+    // cookies().set('session', token, {
+    //   httpOnly: true,
+    //   secure: true,
+    //   expires: expiresAt,
+    //   sameSite: 'lax',
+    //   path: '/',
+    // });
 
     return session;
   

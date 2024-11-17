@@ -21,16 +21,17 @@ export async function decrypt(session: string | undefined = '') {
     const { payload } = await jwtVerify(session, key, {
       algorithms: ['HS256'],
     });
-    return payload;
-  } catch (error) {  
+    return payload as SessionPayload;
+  } catch (error) {
     return null;
   }
 }
 
-export async function createSession(userId: string) {
-  const expiresAt = new Date(Date.now() +  7 * 24 * 60 * 60 * 1000);
-  const session = await encrypt({ userId, expiresAt });
 
+export async function createSession(userId: string, isAdmin: boolean) {
+  const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 1 week
+  const session = await encrypt({ userId, isAdmin, expiresAt });
+  
   cookies().set('session', session, {
     httpOnly: true,
     secure: true,
@@ -42,10 +43,12 @@ export async function createSession(userId: string) {
   await redirect('/dashboard');
 }
 
+
 export async function verifySession() {
   const cookie = cookies().get('session')?.value;
-  const session = await decrypt(cookie);
- 
+  const session = await decrypt(cookie);  
+  console.log(session);
+  
   // if (!session?.userId && ) {
   //   redirect('/');
   // }

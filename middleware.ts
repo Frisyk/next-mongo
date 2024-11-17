@@ -2,32 +2,38 @@ import { NextRequest, NextResponse } from 'next/server';
 import { decrypt } from '@/lib/stateless-session';
 import { cookies } from 'next/headers';
 
-// 1. Specify protected and public routes with patterns
-const protectedRoutePattern = /^\/dashboard\/[^\/]+\/[^\/]+$/; // Protects only /dashboard/[belajar]/[quiz]
+// Define protected patterns for admin and normal routes
+const protectedRoutePattern = /^\/dashboard\/[^\/]+\/[^\/]+$/; // Protects /dashboard/[belajar]/[quiz]
+const adminRoutePattern = /^\/admin/; // Protects any /admin routes
 const publicRoutes = ['/login', '/signup', '/'];
 
 export default async function middleware(req: NextRequest) {
-  // 2. Get the current path
   const path = req.nextUrl.pathname;
-  
-  // 3. Check if the current route matches the protected pattern
+
+  // Check if the route is protected or admin-only
   const isProtectedRoute = protectedRoutePattern.test(path);
+  const isAdminRoute = adminRoutePattern.test(path);
   const isPublicRoute = publicRoutes.includes(path);
 
-  // 4. Decrypt the session from the cookie
+  // Decrypt the session from the cookie
   const cookie = cookies().get('session')?.value;
   const session = await decrypt(cookie);
 
-  // 5. Redirect logic
+  // Redirect logic for protected routes
   if (isProtectedRoute && !session?.userId) {
     return NextResponse.redirect(new URL('/redirect', req.nextUrl));
   }
 
-  if (
-    isPublicRoute &&
-    session?.userId &&
-    !req.nextUrl.pathname.startsWith('/dashboard')
-  ) {
+  // Redirect logic for admin routes
+  if (isAdminRoute) {
+    if (!session?.userId || !session?.isAdmin) {
+      // console.log(session);
+      return NextResponse.redirect(new URL('/', req.nextUrl)); // Redirect unauthorized users to login
+    }
+  }
+
+  // Redirect logic for public routes
+  if (isPublicRoute && session?.userId && !path.startsWith('/dashboard')) {
     return NextResponse.redirect(new URL('/dashboard', req.nextUrl));
   }
 
