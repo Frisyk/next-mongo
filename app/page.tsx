@@ -17,13 +17,13 @@ export default function Home() {
 function HomeComponent() {
   return (
     <main className="relative w-full justify-between h-screen flex flex-col md:gap-20 bg-gradient-to-bl from-slate-900 via-slate-950 to-slate-900">
-      <section className="flex justify-between items-center mr-5">
+      <section className="flex justify-between items-center mr-5 animate-fadeIn">
         <h1 className="text-2xl p-5 font-bold text-white">Batik.</h1>
         <Link href="/login" className="flex gap-2 items-center px-3 py-3 max-w-xs text-center text-md font-semibold text-white bg-slate-900 rounded-xl ring-1 shadow-lg hover:bg-slate-800 transition-colors">
           <LogIn className="w-4 h-4"/> Login
         </Link>
       </section>
-      <section className="relative z-20 mx-auto flex flex-col md:w-4/5 items-center md:text-center p-8 md:p-12 gap-5">
+      <section className="relative z-20 mx-auto flex flex-col md:w-4/5 items-center md:text-center p-8 md:p-12 gap-5 animate-fadeIn">
         <h1 className="text-3xl md:text-6xl uppercase font-bold text-white leading-normal md:leading-relaxed">
           Belajar Akhlak📑  dengan Asik dan Menyenangkan🎯
         </h1>
@@ -38,7 +38,7 @@ function HomeComponent() {
 
         </div>
       </section>
-      <section className="w-full bg-slate-800 h-2"></section>
+      <section className="w-full bg-slate-800 h-2 animate-fadeIn"></section>
     </main>
   );
 }

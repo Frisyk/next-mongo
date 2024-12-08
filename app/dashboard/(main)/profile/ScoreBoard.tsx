@@ -19,7 +19,7 @@ interface Score {
     }
   
     return (
-      <div className="shadow-lg bg-slate-50 dark:bg-slate-900 rounded-lg p-2 w-full text-center md:w-4/5">
+      <div className="shadow-lg bg-slate-50 dark:bg-slate-900 rounded-lg p-2 w-full text-center md:w-4/5 mx-auto">
         <h1 className='my-5 text-2xl font-bold text-left'>Riwayat Kuis</h1>
 
         <table className="min-w-full border text-sm border-slate-300">

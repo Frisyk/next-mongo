@@ -19,11 +19,16 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       animation: {
+        fadeIn: 'fadeIn 0.8s ease-out',
         text: "text 3.5s ease both infinite",
         loading: "loading 3.5s ease both infinite",
         loading2: "loading2 3.5s ease both infinite",
       },
       keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
         text: {
           "0%": { letterSpacing: "1px", transform: "translateX(0px)" },
           "40%": { letterSpacing: "2px", transform: "translateX(26px)" },

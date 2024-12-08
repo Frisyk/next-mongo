@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import perahu from '@/public/images/1725866509688-22871218_6705806.jpg'
 
 const getInitials = (name: string) => {
   const initials = name

@@ -1,7 +1,7 @@
 'use server';
 
 import connecttoDB from "../db"
-import { Post } from "../models"
+import { Materi } from "../models"
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import fs from 'fs';
@@ -41,7 +41,7 @@ export const addMaterial = async (state: any, formData: FormData) => {
     const imagePath = `/images/${fileName}`;
 
     // Create a new material in the database
-    const newMaterial = await Post.create({
+    const newMaterial = await Materi.create({
       title,
       short,
       desc,
@@ -84,7 +84,7 @@ export const putMaterial = async (state: any, formData: FormData) => {
     const slug = formData.get('slug');
 
     // Fetch the existing material from the database
-    const existingMaterial = await Post.findById(id);
+    const existingMaterial = await Materi.findById(id);
 
     if (!existingMaterial) {
       return { message: 'Material not found.' };
@@ -115,7 +115,7 @@ export const putMaterial = async (state: any, formData: FormData) => {
     }
 
     // Update the material in the database
-    const updatedMaterial = await Post.findByIdAndUpdate(id, {
+    const updatedMaterial = await Materi.findByIdAndUpdate(id, {
       title,
       short,
       desc,
@@ -146,7 +146,7 @@ export const putMaterial = async (state: any, formData: FormData) => {
 export const deleteMaterial = async(id:string)=> {
     try {
         await connecttoDB()
-        await Post.findByIdAndDelete(id);
+        await Materi.findByIdAndDelete(id);
         revalidatePath('/admin/material')
 
     } catch (error) {

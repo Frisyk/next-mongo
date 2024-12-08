@@ -40,14 +40,16 @@ export async function createSession(userId: string, isAdmin: boolean) {
     path: '/',
   });
 
-  await redirect('/dashboard');
-}
+  if (isAdmin) {
+    await redirect('/admin');
+  } else {
+    await redirect('/dashboard');
+  }}
 
 
 export async function verifySession() {
   const cookie = cookies().get('session')?.value;
   const session = await decrypt(cookie);  
-  console.log(session);
   
   // if (!session?.userId && ) {
   //   redirect('/');

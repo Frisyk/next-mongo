@@ -1,7 +1,7 @@
 'use server';
 
 import connecttoDB from "../db"
-import { Story, Post } from "../models"
+import { Story, Materi } from "../models"
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import fs from 'fs';
@@ -39,7 +39,7 @@ export const addStory = async (state: any, formData: FormData) => {
     const imagePath = `/story/${fileName}`;
 
     // Create a new material in the database
-    const newStory = await Post.create({
+    const newStory = await Materi.create({
         title,
         keypoints,
         content,
@@ -109,7 +109,7 @@ export const putStory = async (state: any, formData: FormData) => {
     }
 
     // Update the material in the database
-    const updatedStory = await Post.findByIdAndUpdate(id, {
+    const updatedStory = await Materi.findByIdAndUpdate(id, {
       title,
       keypoints,
       content,

@@ -28,10 +28,9 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  scores: { type: Map, of: Number }, 
   attempts: {
     type: Number, // Maps test titles to the number of attempts
-  }, // Using a Map for dynamic keys like "tes1", "tes2"
+  },
   img: {
     type: String,
   },
@@ -41,7 +40,43 @@ const userSchema = new mongoose.Schema({
   },
 }, { timestamps: true });
 
-const postSchema = new mongoose.Schema({
+const evaluationSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Referencing the User model
+    required: true,
+  },
+  month: {
+    type: String,
+    required: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+}, { timestamps: true });
+
+const testScoreSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Referencing the User model
+    required: true,
+  },
+  testName: {
+    type: String,
+    required: true,
+  },
+  score: {
+    type: Number,
+    required: true,
+  },
+  testTime: {
+    type: Date,
+    required: true,
+  },
+}, { timestamps: true });
+
+const materiSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -129,7 +164,6 @@ const AnswerSchema = new mongoose.Schema({
   isSelected: { type: Boolean, required: true },
 });
 
-// Define the Question schema
 const quizSchema = new mongoose.Schema({
   tag: { type: String, required: true },
   questionText: { type: String, required: true },
@@ -160,10 +194,12 @@ const storySchema = new mongoose.Schema({
 }, { timestamps: true });
 
 export const User = mongoose.models.User || mongoose.model("User", userSchema);
-export const Post = mongoose.models.Post || mongoose.model("Post", postSchema);
+export const Materi = mongoose.models.Materi || mongoose.model("Materi", materiSchema);
 export const Session = mongoose.models.Session || mongoose.model("Session", sessionSchema);
 export const Game = mongoose.models.Game || mongoose.model("Game", gameSchema);
 export const Score = mongoose.models.Score || mongoose.model("Score", scoreSchema);
 export const Quizi = mongoose.models.Quizi || mongoose.model("Quizi", quizSchema);
 export const Story = mongoose.models.Story || mongoose.model("Story", storySchema);
+export const TestScore = mongoose.models.TestScore || mongoose.model("TestScore", testScoreSchema);
+export const Evaluation = mongoose.models.Evaluation || mongoose.model("Evaluation", evaluationSchema);
 

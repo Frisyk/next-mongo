@@ -30,11 +30,18 @@ export default async function middleware(req: NextRequest) {
       // console.log(session);
       return NextResponse.redirect(new URL('/', req.nextUrl)); // Redirect unauthorized users to login
     }
+    
   }
 
   // Redirect logic for public routes
-  if (isPublicRoute && session?.userId && !path.startsWith('/dashboard')) {
-    return NextResponse.redirect(new URL('/dashboard', req.nextUrl));
+  if (isPublicRoute && session?.userId) {
+    if (session?.isAdmin) {
+      // Redirect admin users to /admin
+      return NextResponse.redirect(new URL('/admin', req.nextUrl));
+    } else {
+      // Redirect normal users to /dashboard
+      return NextResponse.redirect(new URL('/dashboard', req.nextUrl));
+    }
   }
 
   return NextResponse.next();

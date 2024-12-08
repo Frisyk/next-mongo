@@ -1,7 +1,7 @@
 import 'server-only';
 import { cache } from 'react';
 import { verifySession } from './stateless-session';
-import { Post, User, Game, Story } from './models';
+import { Materi, User, Game, Story } from './models';
 import connecttoDB from './db';
 
 export const getUser = cache(async () => {
@@ -24,7 +24,7 @@ export const getMateri = cache(async () => {
 
   try {
     connecttoDB()
-    const materi = await Post.find();          
+    const materi = await Materi.find();          
     return materi;
   } catch (error) {
     console.log('Failed to fetch materi');
@@ -36,13 +36,14 @@ export const getDetailsM = cache(async (slug: string) => {
 
   try {
     connecttoDB()
-    const materi = await Post.findOne({slug});          
+    const materi = await Materi.findOne({slug});          
     return materi;
   } catch (error) {
     console.log('Failed to fetch materi');
     return null;
   }
 });
+
 export const getStory = cache(async () => {
   
   try {

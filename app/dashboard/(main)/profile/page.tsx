@@ -9,8 +9,6 @@ export const metadata: Metadata = {
   title: 'My Profile'
 }
 
-
-
 export default async function Profile() {
   const user = await getUser()
   
