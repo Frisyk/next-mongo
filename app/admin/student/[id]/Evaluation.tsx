@@ -1,35 +1,77 @@
-'use client'
-import { updateEvaluation } from '@/lib/admin/students';
+// components/EvaluationTable.tsx
+'use client';
+import { updateEvaluation, addEvaluation } from '@/lib/admin/students'; // Ensure the path is correct
 import React, { useState } from 'react';
 import EvaluationPopup from './EvaluationPopUp';
 
-export default function EvaluationTable({ userId, Ievaluations }: { userId: string; Ievaluations: any }) {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [selectedEvaluation, setSelectedEvaluation] = useState<any>(null);
-  const evaluations = JSON.parse(Ievaluations)
+interface Evaluation {
+  _id: string;
+  month: string;
+  content: string;
+}
 
-  const openPopup = (evaluation: any = null) => {
+interface EvaluationTableProps {
+  userId: string;
+  Ievaluations: string; // JSON string of evaluations
+}
+
+const EvaluationTable: React.FC<EvaluationTableProps> = ({ userId, Ievaluations }) => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedEvaluation, setSelectedEvaluation] = useState<Evaluation | null>(null);
+  const [evaluations, setEvaluations] = useState<Evaluation[]>(JSON.parse(Ievaluations));
+
+  const openPopup = (evaluation: Evaluation | null = null) => {
     setSelectedEvaluation(evaluation);
     setIsPopupOpen(true);
   };
 
   const closePopup = () => {
     setIsPopupOpen(false);
-    setSelectedEvaluation(null); // Reset selected evaluation
+    setSelectedEvaluation(null);
   };
 
   const handleUpdateEvaluation = async (evaluationId: string, month: string, content: string) => {
-    const result = await updateEvaluation(evaluationId, month, content);
-    if (result.success) {
-      // Update the evaluations array with the updated evaluation
-      const updatedEvaluations = evaluations.map((evalItem: any) =>
-        evalItem._id === evaluationId ? result.data : evalItem
-      );
-      // Optionally update the state or re-fetch the evaluations from the server
-    } else {
-      console.log('Failed to update evaluation');
+    try {
+      const result = await updateEvaluation(evaluationId, month, content);
+  
+      if (result.success) {
+        // Update evaluasi di state (evaluations)
+        const updatedEvaluations = evaluations.map((evalItem: any) =>
+          evalItem._id === evaluationId ? result.data : evalItem
+        );
+        // Perbarui state evaluations
+        setEvaluations(updatedEvaluations);
+  
+        return { success: true, data: result.data };
+      } else {
+        console.error('Failed to update evaluation');
+        return { success: false };
+      }
+    } catch (error) {
+      console.error('Error updating evaluation:', error);
+      return { success: false };
+    }
+  };  
+
+  const handleAddEvaluation = async (month: string, content: string) => {
+    try {
+      const result = await addEvaluation(userId, month, content);
+  
+      if (result.success) {
+        // Tambahkan evaluasi baru ke state
+        setEvaluations([...evaluations, result.data]);
+  
+        return { success: true, data: result.data };
+      } else {
+        console.error('Failed to add evaluation');
+        return { success: false };
+      }
+    } catch (error) {
+      console.error('Error adding evaluation:', error);
+      return { success: false };
     }
   };
+  
 
   return (
     <div className="shadow-lg bg-slate-50 dark:bg-slate-900 rounded-lg p-2 w-full text-center md:w-4/5 mx-auto">
@@ -46,6 +88,7 @@ export default function EvaluationTable({ userId, Ievaluations }: { userId: stri
         onClose={closePopup}
         evaluationData={selectedEvaluation}
         onUpdateEvaluation={handleUpdateEvaluation}
+        onAddEvaluation={handleAddEvaluation}
       />
 
       <table className="min-w-full border text-sm border-slate-300">
@@ -58,7 +101,7 @@ export default function EvaluationTable({ userId, Ievaluations }: { userId: stri
           </tr>
         </thead>
         <tbody>
-          {evaluations.map((item: any, index: number) => (
+          {evaluations.map((item, index) => (
             <tr key={item._id} className="w-full">
               <td className="py-4 px-6 border border-gray-300 text-center">{index + 1}</td>
               <td className="py-4 px-6 border border-gray-300 font-semibold">{item.content}</td>
@@ -77,4 +120,6 @@ export default function EvaluationTable({ userId, Ievaluations }: { userId: stri
       </table>
     </div>
   );
-}
+};
+
+export default EvaluationTable;

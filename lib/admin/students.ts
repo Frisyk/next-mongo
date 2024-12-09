@@ -69,24 +69,24 @@ export const getAllStudents = cache(async (): Promise<Student[]> => {
   });
   
 
-export const addEvaluation = async (userId: string, month: string, content: string) => {
-  try {
-    // Create a new evaluation
-    const evaluation = new Evaluation({
-      user: userId,
-      month: month,
-      content: content,
-    });
-
-    // Save the evaluation to the database
-    await evaluation.save();
-
-    return { success: true, message: 'Evaluation added successfully!' };
-  } catch (error) {
-    console.log('Error adding evaluation:', error);
-    return { success: false, message: 'Failed to add evaluation' };
-  }
-};
+  export const addEvaluation = async (userId: string, month: string, content: string): Promise<{ success: boolean; data?: any; message?: string }> => {
+    try {
+      await connecttoDB();
+      const evaluation = new Evaluation({
+        user: userId,
+        month,
+        content,
+      });
+      await evaluation.save();
+  
+      const savedEvaluation = await Evaluation.findById(evaluation._id).lean().exec();
+  
+      return { success: true, data: savedEvaluation };
+    } catch (error) {
+      console.log('Error adding evaluation:', error);
+      return { success: false, message: 'Failed to add evaluation' };
+    }
+  };
 
 export const updateEvaluation = async (evaluationId: string, month: string, content: string) => {
   try {

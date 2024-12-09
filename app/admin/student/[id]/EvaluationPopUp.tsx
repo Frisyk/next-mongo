@@ -1,19 +1,34 @@
+// components/EvaluationPopup.tsx
+'use client';
 import React, { useState, useEffect } from 'react';
 
-const EvaluationPopup = ({
+interface EvaluationPopupProps {
+  isOpen: boolean;
+  onClose: () => void;
+  userId: string;
+  evaluationData?: any;
+  onUpdateEvaluation: (evaluationId: string, month: string, content: string) => Promise<{ success: boolean; data?: any }>;
+  onAddEvaluation: (month: string, content: string) => Promise<{ success: boolean; data?: any }>;
+}
+
+const EvaluationPopup: React.FC<EvaluationPopupProps> = ({
   isOpen,
   onClose,
+  userId,
   evaluationData,
-  onUpdateEvaluation
-}: any) => {
+  onUpdateEvaluation,
+  onAddEvaluation
+}) => {
   const [month, setMonth] = useState('');
   const [content, setContent] = useState('');
 
-  // If the popup is open and we are updating, fill the fields with the current evaluation data
   useEffect(() => {
     if (evaluationData) {
       setMonth(evaluationData.month);
       setContent(evaluationData.content);
+    } else {
+      setMonth('');
+      setContent('');
     }
   }, [evaluationData, isOpen]);
 
@@ -21,9 +36,20 @@ const EvaluationPopup = ({
     e.preventDefault();
     if (evaluationData) {
       // Update existing evaluation
-      await onUpdateEvaluation(evaluationData._id, month, content);
+      const result = await onUpdateEvaluation(evaluationData._id, month, content);
+      if (result.success) {
+        alert('Evaluasi berhasil diupdate!');
+      } else {
+        alert('Gagal mengupdate evaluasi');
+      }
     } else {
-      // Add new evaluation logic here (this part can be extended based on your code)
+      // Add new evaluation
+      const result = await onAddEvaluation(month, content);
+      if (result.success) {
+        alert('Evaluasi berhasil ditambahkan!');
+      } else {
+        alert('Gagal menambahkan evaluasi');
+      }
     }
     onClose();
   };
