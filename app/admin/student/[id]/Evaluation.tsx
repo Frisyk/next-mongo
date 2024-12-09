@@ -1,6 +1,6 @@
 // components/EvaluationTable.tsx
 'use client';
-import { updateEvaluation, addEvaluation } from '@/lib/admin/students'; // Ensure the path is correct
+import { updateEvaluation, addEvaluation, deleteEvaluation } from '@/lib/admin/students'; // Ensure the path is correct
 import React, { useState } from 'react';
 import EvaluationPopup from './EvaluationPopUp';
 
@@ -72,6 +72,25 @@ const EvaluationTable: React.FC<EvaluationTableProps> = ({ userId, Ievaluations 
     }
   };
   
+  const handleDeleteEvaluation = async (evaluationId: string) => {
+    try {
+      const result = await deleteEvaluation(evaluationId);
+  
+      if (result.success) {
+        // Hapus evaluasi dari state
+        const updatedEvaluations = evaluations.filter((evals) => evals._id !== evaluationId);
+        setEvaluations(updatedEvaluations);
+  
+        alert(result.message);
+      } else {
+        alert(result.message);
+      }
+    } catch (error) {
+      console.error('Error deleting evaluation:', error);
+      alert('An error occurred while deleting evaluation.');
+    }
+  };
+  
 
   return (
     <div className="shadow-lg bg-slate-50 dark:bg-slate-900 rounded-lg p-2 w-full text-center md:w-4/5 mx-auto">
@@ -112,6 +131,12 @@ const EvaluationTable: React.FC<EvaluationTableProps> = ({ userId, Ievaluations 
                   className="text-blue-600 hover:text-blue-800"
                 >
                   Edit
+                </button>
+                <button
+                  onClick={() => handleDeleteEvaluation(item._id)}
+                  className="text-red-600 ml-2 hover:text-red-800"
+                >
+                  Delete
                 </button>
               </td>
             </tr>

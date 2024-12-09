@@ -56,26 +56,6 @@ const evaluationSchema = new mongoose.Schema({
   },
 }, { timestamps: true });
 
-const testScoreSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // Referencing the User model
-    required: true,
-  },
-  testName: {
-    type: String,
-    required: true,
-  },
-  score: {
-    type: Number,
-    required: true,
-  },
-  testTime: {
-    type: Date,
-    required: true,
-  },
-}, { timestamps: true });
-
 const materiSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -200,6 +180,5 @@ export const Game = mongoose.models.Game || mongoose.model("Game", gameSchema);
 export const Score = mongoose.models.Score || mongoose.model("Score", scoreSchema);
 export const Quizi = mongoose.models.Quizi || mongoose.model("Quizi", quizSchema);
 export const Story = mongoose.models.Story || mongoose.model("Story", storySchema);
-export const TestScore = mongoose.models.TestScore || mongoose.model("TestScore", testScoreSchema);
 export const Evaluation = mongoose.models.Evaluation || mongoose.model("Evaluation", evaluationSchema);
 

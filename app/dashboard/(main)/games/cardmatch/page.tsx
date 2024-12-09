@@ -1,14 +1,8 @@
 'use client'
-import { redirect } from "next/navigation";
 import LevelList from "./Games/ListLevel";
 
 
 export default function CardSortPage() {
-
-  if (status === "unauthenticated") {
-    const rec = redirect('/redirect')    
-    return rec
-  }
 
   const levels = ["Gerakan Shalat", "Bacaan Shalat", "Waktu Shalat"];
 

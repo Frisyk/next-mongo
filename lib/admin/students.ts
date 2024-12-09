@@ -2,7 +2,7 @@
 
 import { cache } from "react";
 import connecttoDB from "../db"
-import { Evaluation, Score, TestScore, User } from "../models"
+import { Evaluation, Score, User } from "../models"
 import { Student } from "@/app/admin/student/page";
 
 export const putUserScore = async (userId: string, quiztitle: string, score: number) => {
@@ -101,26 +101,16 @@ export const updateEvaluation = async (evaluationId: string, month: string, cont
     return { success: false, message: 'Failed to update evaluation' };
   }
 };
-
-export const saveTestScore = async (userId: string, testName: string, score: number, testTime: Date) => {
+export const deleteEvaluation = async (evaluationId: string) => {
   try {
-    // Create a new test score
-    const testScore = new TestScore({
-      user: userId,
-      testName: testName,
-      score: score,
-      testTime: testTime,
-    });
-
-    // Save the test score to the database
-    await testScore.save();
-
-    return { success: true, message: 'Test score saved successfully!' };
+    await Evaluation.findByIdAndDelete(evaluationId);
+    return { success: true, message: 'Successfully deleted evaluation' };
   } catch (error) {
-    console.log('Error saving test score:', error);
-    return { success: false, message: 'Failed to save test score' };
+    console.error('Error deleting evaluation:', error);
+    return { success: false, message: 'Failed to delete evaluation' };
   }
 };
+
 
 export const getEvaluationsForUser = async (userId: string) => {
   try {
@@ -134,14 +124,3 @@ export const getEvaluationsForUser = async (userId: string) => {
   }
 };
 
-export const getTestScoresForUser = async (userId: string) => {
-  try {
-    // Retrieve all test scores for the user
-    const testScores = await TestScore.find({ user: userId }).exec();
-
-    return { success: true, data: testScores };
-  } catch (error) {
-    console.log('Error fetching test scores:', error);
-    return { success: false, message: 'Failed to fetch test scores' };
-  }
-};
