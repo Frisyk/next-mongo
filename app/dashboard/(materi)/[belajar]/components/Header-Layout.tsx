@@ -37,7 +37,7 @@ export default function Header({title, link}: {title?: string, link:string}) {
         href={link}
       >
        <ArrowLeft className='w-6 h-6 mx-2'/>
-      <h1 className="text-lg font-semibold capitalize  ">
+      <h1 className="text-lg hidden md:block font-semibold capitalize  ">
         {title? title : path}
       </h1>
       </Link>

@@ -20,27 +20,63 @@ export default function AddMaterial() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2">Short Story</label>
+            <label className="block text-sm font-bold mb-2">Pengertian</label>
             <textarea
-              name="shortStory"
+              name="understanding"
               className="w-full p-2 border dark:bg-slate-800 rounded-lg"
               placeholder="Enter short story"
               required
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2">Article</label>
+            <label className="block text-sm font-bold mb-2">Dalil Naqli</label>
             <textarea
-              name="article"
+              name="arguments"
               className="w-full p-2 border dark:bg-slate-800 rounded-lg"
               placeholder="Enter article"
               required
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2">Summary</label>
+            <label className="block text-sm font-bold mb-2">Ciri-Ciri</label>
             <textarea
-              name="summary"
+              name="traits"
+              className="w-full p-2 border dark:bg-slate-800 rounded-lg"
+              placeholder="Enter summary"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-bold mb-2">Bentuk/Sebab</label>
+            <textarea
+              name="forms"
+              className="w-full p-2 border dark:bg-slate-800 rounded-lg"
+              placeholder="Enter summary"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-bold mb-2">Contoh</label>
+            <textarea
+              name="examples"
+              className="w-full p-2 border dark:bg-slate-800 rounded-lg"
+              placeholder="Enter summary"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-bold mb-2">Nilai-nilai</label>
+            <textarea
+              name="values"
+              className="w-full p-2 border dark:bg-slate-800 rounded-lg"
+              placeholder="Enter summary"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-bold mb-2">Cara Menghindari</label>
+            <textarea
+              name="prevents"
               className="w-full p-2 border dark:bg-slate-800 rounded-lg"
               placeholder="Enter summary"
               required

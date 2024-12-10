@@ -13,7 +13,7 @@ interface ModalComponentProps {
           <button className="px-4 py-2 text-xl font-bold bg-blue-500 text-white rounded outline hover:bg-blue-600 mr-2" onClick={nextGame}>
             Lanjut⏭️
           </button>
-          <Link className="px-4 py-2 text-xl flex items-center font-bold bg-transparent text-blue-800 rounded outline" href={'/dashboard/quest/cardmatch'}>
+          <Link className="px-4 py-2 text-xl flex items-center font-bold bg-transparent text-blue-800 rounded outline" href={'/dashboard/games/cardmatch'}>
             Kembali
           </Link>
         </div>

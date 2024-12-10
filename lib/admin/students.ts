@@ -4,6 +4,7 @@ import { cache } from "react";
 import connecttoDB from "../db"
 import { Evaluation, Score, User } from "../models"
 import { Student } from "@/app/admin/student/page";
+import { revalidatePath } from "next/cache";
 
 export const putUserScore = async (userId: string, quiztitle: string, score: number) => {
     try {
@@ -104,6 +105,7 @@ export const updateEvaluation = async (evaluationId: string, month: string, cont
 export const deleteEvaluation = async (evaluationId: string) => {
   try {
     await Evaluation.findByIdAndDelete(evaluationId);
+    revalidatePath('/admin/student')
     return { success: true, message: 'Successfully deleted evaluation' };
   } catch (error) {
     console.error('Error deleting evaluation:', error);

@@ -18,12 +18,12 @@ export default function Form({ m }: { m: string }) {
   };
 
   return (
-    <div className="min-h-screen  p-6 flex items-center w-full justify-center">
-      <div className=" shadow-md rounded-lg p-6 w-full">
+    <div className="min-h-screen p-6 flex items-center w-full justify-center">
+      <div className="shadow-md rounded-lg p-6 w-full">
         <h1 className="text-2xl font-bold mb-6 text-blue-600">Edit Material</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block  text-sm font-bold mb-2">Title</label>
+            <label className="block text-sm font-bold mb-2">Title</label>
             <input
               type="text"
               name="title"
@@ -32,55 +32,88 @@ export default function Form({ m }: { m: string }) {
               defaultValue={materi.title}
               required
             />
-            <h1>{state?.message}</h1>
           </div>
-          <input
-            type="hidden"
-            name="id"
-            defaultValue={materi._id}
-          />
           <div className="mb-4">
-            <label className="block  text-sm font-bold mb-2">Short Story</label>
+            <label className="block text-sm font-bold mb-2">Pengertian</label>
             <textarea
-              name="shortStory"
+              name="understanding"
               className="w-full p-2 border dark:bg-slate-800 rounded-lg"
               placeholder="Enter short story"
-              defaultValue={materi.short}
+              defaultValue={materi.understanding}
               required
             />
           </div>
           <div className="mb-4">
-            <label className="block  text-sm font-bold mb-2">Article</label>
+            <label className="block text-sm font-bold mb-2">Dalil Naqli</label>
             <textarea
-              name="article"
+              name="arguments"
               className="w-full p-2 border dark:bg-slate-800 rounded-lg"
-              placeholder="Enter article"
-              defaultValue={materi.desc}
+              placeholder="Enter Dalil Naqli"
+              defaultValue={materi.arguments}
               required
             />
           </div>
           <div className="mb-4">
-            <label className="block  text-sm font-bold mb-2">Summary</label>
+            <label className="block text-sm font-bold mb-2">Bentuk/Sebab</label>
             <textarea
-              name="summary"
+              name="forms"
               className="w-full p-2 border dark:bg-slate-800 rounded-lg"
-              placeholder="Enter summary"
-              defaultValue={materi.summary}
+              placeholder="Enter Bentuk/Sebab"
+              defaultValue={materi.forms}
               required
             />
           </div>
           <div className="mb-4">
-            <label className="block  text-sm font-bold mb-2">Image Path</label>
+            <label className="block text-sm font-bold mb-2">Ciri-Ciri</label>
+            <textarea
+              name="trait"
+              className="w-full p-2 border dark:bg-slate-800 rounded-lg"
+              placeholder="Enter Ciri-Ciri"
+              defaultValue={materi.trait}
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-bold mb-2">Contoh</label>
+            <textarea
+              name="examples"
+              className="w-full p-2 border dark:bg-slate-800 rounded-lg"
+              placeholder="Enter Contoh"
+              defaultValue={materi.examples}
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-bold mb-2">Nilai-Nilai</label>
+            <textarea
+              name="values"
+              className="w-full p-2 border dark:bg-slate-800 rounded-lg"
+              placeholder="Enter Nilai-Nilai"
+              defaultValue={materi.values}
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-bold mb-2">Cara Menghindari</label>
+            <textarea
+              name="prevents"
+              className="w-full p-2 border dark:bg-slate-800 rounded-lg"
+              placeholder="Enter Cara Menghindari"
+              defaultValue={materi.prevents}
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-bold mb-2">Image Path</label>
             <input
               type="file"
               name="imagePath"
               className="w-full p-2 border dark:bg-slate-800 rounded-lg"
               placeholder="Enter image path"
-              required
             />
           </div>
           <div className="mb-6">
-            <label className="block  text-sm font-bold mb-2">Quiz Path</label>
+            <label className="block text-sm font-bold mb-2">Quiz Path</label>
             <input
               type="text"
               name="quizPath"
@@ -91,7 +124,7 @@ export default function Form({ m }: { m: string }) {
             />
           </div>
           <div className="mb-6">
-            <label className="block  text-sm font-bold mb-2">Slug</label>
+            <label className="block text-sm font-bold mb-2">Slug</label>
             <input
               type="text"
               name="slug"
@@ -113,4 +146,5 @@ export default function Form({ m }: { m: string }) {
       </div>
     </div>
   );
+  
 }

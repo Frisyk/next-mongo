@@ -98,7 +98,7 @@ function GamesCard({ level, back }: { level: string | undefined, back: string })
     const nextIndex = (currentIndex + 1) % GameResources.length;  // Loop back to the first level if at the end
     const nextLevel = GameResources[nextIndex].level;
 
-    router.push(`/dashboard/quest/cardmatch/${nextLevel}`)
+    router.push(`/dashboard/games/cardmatch/${nextLevel}`)
   }
 
   useEffect(() => {

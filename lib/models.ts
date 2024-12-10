@@ -61,15 +61,31 @@ const materiSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  short: {
+  understanding: {
     type: String,
     required: true,
   },
-  desc: {
+  arguments: {
     type: String,
     required: true,
   },
-  summary: {
+  forms: {
+    type: String,
+    required: true,
+  },
+  values: {
+    type: String,
+    required: true,
+  },
+  prevents: {
+    type: String,
+    required: true,
+  },
+  traits: {
+    type: String,
+    required: true,
+  },
+  examples: {
     type: String,
     required: true,
   },
