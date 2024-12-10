@@ -12,13 +12,26 @@ export const metadata: Metadata = {
 
 export default async function Profile() {
   const user = await getUser();
-  const evaluations = await getEvaluationsForUser(user.id);
-
-  // Ambil evaluasi terbaru jika ada
-  const latestEvaluation =
-    evaluations && evaluations.data && evaluations.data.length > 0
-      ? evaluations.data[0]
-      : null;
+  const getLatestEvaluation = async () => {
+    try {
+            
+      if (!user) {
+        return null; // Early return if no user found
+      }
+      
+      const evaluations = await getEvaluationsForUser(user.id);
+      
+      // Return the latest evaluation if available
+      return evaluations?.data?.[0] || null;
+    } catch (error) {
+      console.error('Error fetching user evaluations:', error);
+      return null; // Return null in case of an error
+    }
+  };
+  
+  // Usage
+  const latestEvaluation = await getLatestEvaluation();
+  
 
   return (
     <main>
@@ -41,7 +54,7 @@ export default async function Profile() {
           {/* Section Evaluasi Terbaru */}
           <section className="my-8 p-4 mx-auto md:w-4/5 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
             <h2 className="text-xl font-semibold mb-4">Evaluasi dari Guru</h2>
-            {latestEvaluation ? (
+            {user && latestEvaluation ? (
               <div className="flex flex-col gap-2">
                 <p className="text-lg font-medium text-blue-600 dark:text-blue-300">
                   {latestEvaluation.content}
