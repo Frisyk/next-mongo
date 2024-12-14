@@ -25,7 +25,7 @@ export const UserImage = ({ userI }: {userI: string}) => {
       className="rounded-full bg-orange-300 w-8 h-8"
     />
   ) : (
-    <div className="rounded-full bg-blue-800 p-6 w-20 md:w-28 h-20 md:h-28 flex items-center justify-center text-white font-bold text-3xl">
+    <div className="rounded-full bg-slate-800 p-6 w-20 md:w-28 h-20 md:h-28 flex items-center justify-center text-white font-bold text-3xl">
       {initials}
     </div>
   );
@@ -122,7 +122,7 @@ export function GetTime() {
       {isDayTime ? (
         <FaSun className="text-yellow-400 text-4xl" />
       ) : (
-        <FaMoon className="text-blue-400 text-4xl" />
+        <FaMoon className="text-slate-400 text-4xl" />
       )}
       <div className="flex flex-col gap-3">
         <p className="text-4xl font-bold">{time}</p>

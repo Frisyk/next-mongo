@@ -11,8 +11,8 @@ export default async function Layout({
 
   return (
         <main className="w-full bg-gradient-to-br flex ">
-        <Navigation userI={JSON.stringify(user)}/>
-        {children}
+          <Navigation userI={JSON.stringify(user)}/>
+          {children}
         </main>
   );
 }

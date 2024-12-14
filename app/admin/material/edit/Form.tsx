@@ -22,6 +22,11 @@ export default function Form({ m }: { m: string }) {
       <div className="shadow-md rounded-lg p-6 w-full">
         <h1 className="text-2xl font-bold mb-6 text-blue-600">Edit Material</h1>
         <form onSubmit={handleSubmit}>
+        <input
+            type="hidden"
+            name="id"
+            defaultValue={materi._id}
+          />
           <div className="mb-4">
             <label className="block text-sm font-bold mb-2">Title</label>
             <input
@@ -69,7 +74,7 @@ export default function Form({ m }: { m: string }) {
               name="trait"
               className="w-full p-2 border dark:bg-slate-800 rounded-lg"
               placeholder="Enter Ciri-Ciri"
-              defaultValue={materi.trait}
+              defaultValue={materi.traits}
               required
             />
           </div>

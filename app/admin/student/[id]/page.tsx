@@ -22,7 +22,7 @@ export default async function Page({ params }: { params: any }) {
             {student ? student.username : 'Student'}
           </h1>
           <section className="flex justify-center md:justify-start gap-2">
-            <p className="p-2 md:px-5 text-xs md:text-lg rounded-full bg-blue-100 dark:bg-blue-800">
+            <p className="p-2 md:px-5 text-xs md:text-lg rounded-full bg-slate-100 dark:bg-slate-800">
               {student ? `Kelas ${student.uclass}` : 'Kelas X'}
             </p>
           </section>

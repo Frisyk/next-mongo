@@ -16,7 +16,7 @@ export default async function Students() {
   return (
     <div className="min-h-screen w-full p-6">
       <div className="shadow-md rounded-lg overflow-hidden">
-        <div className="p-4 flex justify-between items-center bg-blue-600 text-white">
+        <div className="p-4 flex justify-between items-center bg-slate-600 text-white">
           <h1 className="text-xl font-bold">Student List</h1>
         </div>
         <div className="overflow-x-auto">

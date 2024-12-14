@@ -1,11 +1,9 @@
 'use client';
 import Link from 'next/link';
 import { GoHomeFill } from "react-icons/go";
-import { MdGames } from "react-icons/md";
-import { FaNoteSticky } from "react-icons/fa6";
-import { FaEdit, FaTrashAlt, FaUserCircle } from "react-icons/fa";
+import { MdAssignment } from "react-icons/md";
+import { FaBook, FaEdit, FaTrashAlt } from "react-icons/fa";
 import { usePathname } from 'next/navigation';
-import { PackageIcon } from '@/components/ui/icons';
 import clsx from 'clsx';
 import { deleteMaterial } from '@/lib/admin/materials';
 import React from 'react'
@@ -14,14 +12,15 @@ import { MdLightMode } from "react-icons/md";
 import { MdNightlightRound } from "react-icons/md";
 import LogoutButton, { LoginButton } from '@/app/dashboard/(components)/logout-button';
 import { deleteQuiz } from '@/lib/admin/quizzes';
+import { PiStudentFill } from 'react-icons/pi';
 
 
 function Navigation({ userI }: { userI: any }) {
   const navLinks = [
     { title: 'Dashboard', href: '/admin', badge: <GoHomeFill className='w-6 h-6'/> },
-    { title: 'Student', href: '/admin/student', badge: <MdGames className='w-6 h-6'/> },
-    { title: 'Material', href: '/admin/material', badge: <FaNoteSticky className='w-6 h-6'/> },
-    { title: 'Quiz', href: '/admin/quiz', badge: <FaUserCircle className='w-6 h-6'/> },
+    { title: 'Student', href: '/admin/student', badge: <PiStudentFill className='w-6 h-6'/> },
+    { title: 'Material', href: '/admin/material', badge: <FaBook className='w-6 h-6'/> },
+    { title: 'Quiz', href: '/admin/quiz', badge: <MdAssignment className='w-6 h-6'/> },
   ];
   const [theme, setTheme] = useState<string>(() => {
     // Check user's preference from localStorage or fallback to the default 'light' theme

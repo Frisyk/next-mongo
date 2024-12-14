@@ -1,6 +1,6 @@
 // components/EvaluationTable.tsx
 'use client';
-import { updateEvaluation, addEvaluation, deleteEvaluation } from '@/lib/admin/students'; // Ensure the path is correct
+import { updateEvaluation, addEvaluation, deleteEvaluation } from '@/lib/admin/students'; 
 import React, { useState } from 'react';
 import EvaluationPopup from './EvaluationPopUp';
 
@@ -96,7 +96,7 @@ const EvaluationTable: React.FC<EvaluationTableProps> = ({ userId, Ievaluations 
     <div className="shadow-lg bg-slate-50 dark:bg-slate-900 rounded-lg p-2 w-full text-center md:w-4/5 mx-auto">
       <div className="flex justify-between items-center my-5">
         <h1 className="text-2xl font-bold text-left">Evaluasi Siswa</h1>
-        <button onClick={() => openPopup()} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button onClick={() => openPopup()} className="bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded">
           Add Evaluation
         </button>
       </div>
@@ -128,7 +128,7 @@ const EvaluationTable: React.FC<EvaluationTableProps> = ({ userId, Ievaluations 
               <td className="py-4 px-6 border border-gray-300 text-center">
                 <button
                   onClick={() => openPopup(item)}
-                  className="text-blue-600 hover:text-blue-800"
+                  className="text-slate-600 hover:text-slate-800"
                 >
                   Edit
                 </button>

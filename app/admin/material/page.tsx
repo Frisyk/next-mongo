@@ -13,14 +13,14 @@ export default async function Materials() {
   };
 
   return (
-    <div className="min-h-screen w-full p-6">
+    <main className="min-h-screen w-full p-6 overflow-x-scroll">
       <div className="shadow-md rounded-lg overflow-hidden">
-        <div className="p-4 flex justify-between items-center bg-blue-600 text-white">
+        <div className="p-4 flex justify-between items-center bg-slate-600 text-white">
           <h1 className="text-xl font-bold">Admin Material Table</h1>
           <Link
             prefetch={false}
             href={'/admin/material/create'}
-            className="bg-blue-500 hover:bg-blue-700 p-2 rounded flex items-center"
+            className="bg-slate-500 hover:bg-slate-700 p-2 rounded flex items-center"
           >
             <FaPlus className="mr-2" />
             Create New
@@ -69,6 +69,6 @@ export default async function Materials() {
           </table>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -232,7 +232,7 @@ export const putMaterial = async (state: any, formData: FormData) => {
     const examples = formData.get('examples') as string;
     const image = formData.get('imagePath') as File | null; // File can be null
     const quizId = formData.get('quizPath') as string;
-    const slug = formData.get('slug') as string;
+    const slug = formData.get('slug') as string;    
 
     // Fetch the existing material from the database
     const existingMaterial = await Materi.findById(id);
