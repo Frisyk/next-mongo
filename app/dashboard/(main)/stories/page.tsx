@@ -1,15 +1,10 @@
 import { Card } from './Card';
 
-export default function Example() {
+export default function Page() {
   return (
-    <div className="p-8">
-      <Card
-        title="Judul Artikel"
-        description="Ini adalah deskripsi singkat dari artikel yang menjelaskan konten secara ringkas."
-        date="01 September 2024"
-        imageUrl="/path/to/image.jpg"
-      />
-    </div>
+    <main>
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScyUPHnACvK3XZr5fVEqyUFtpTNQ-EpKDAXhD1SyzT-9Ez-Vg/viewform?embedded=true" className='w-full min-h-screen'>Memuat…</iframe>
+    </main>
   );
 }
 
