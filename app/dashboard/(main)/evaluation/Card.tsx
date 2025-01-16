@@ -1,31 +1,30 @@
-import Image from 'next/image';
+import React from 'react';
+import Image, { StaticImageData } from 'next/image';
+import Link from 'next/link';
 
-interface CardProps {
-  title: string;
+interface ListItemProps {
+  name: string;
+  link: string;
+  iconUrl: StaticImageData;
   description: string;
-  date: string;
-  imageUrl: string;
 }
 
-export function Card({ title, description, date, imageUrl }: CardProps) {
+export function ListItem({ name, link, iconUrl, description }: ListItemProps) {
   return (
-    <div className="bg-white dark:bg-slate-800 md:w-1/2 rounded-lg shadow-md overflow-hidden">
-      <div className="relative">
+    <Link href={link} className="flex items-center p-10 gap-5 w-full lg:w-fit bg-white dark:bg-slate-800 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+      <div className="">
         <Image
-          src={imageUrl}
-          alt={title}
-          width={400}
-          height={250}
-          className="object-cover w-full h-48"
+          src={iconUrl}
+          alt={name}
+          width={60}
+          height={60}
+          className="rounded"
         />
-        <div className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white text-sm p-2">
-          {date}
-        </div>
       </div>
-      <div className="p-4">
-        <h3 className="text-xl font-semibold text-slate-900 dark:text-white">{title}</h3>
-        <p className="text-slate-700 dark:text-slate-400 mt-2">{description}</p>
+      <div>
+        <h3 className="text-lg font-medium text-slate-900 dark:text-white">{name}</h3>
+        <p className="text-slate-700 dark:text-slate-400 text-sm mt-1">{description}</p>
       </div>
-    </div>
+    </Link>
   );
 }

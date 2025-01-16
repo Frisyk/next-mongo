@@ -35,10 +35,10 @@ export default function Navigation({ userI }: { userI: any }) {
   
   const user = JSON.parse(userI);
   const navLinks = [
-    { title: 'Home', href: '/dashboard', badge: <GoHomeFill className='w-6 h-6'/> },
+    { title: 'Belajar', href: '/dashboard', badge: <GoHomeFill className='w-6 h-6'/> },
     { title: 'Games', href: '/dashboard/games', badge: <MdGames className='w-6 h-6'/> },
     { title: 'Evaluasi', href: '/dashboard/evaluation', badge: <FaNoteSticky className='w-6 h-6 text-yellow-300 bg-slate-950 rounded-md'/> },
-    { title: 'My Profile', href: '/dashboard/profile', badge: <FaUserCircle className='w-6 h-6'/> },
+    { title: 'Profil', href: '/dashboard/profile', badge: <FaUserCircle className='w-6 h-6'/> },
   ];
 
   const path = usePathname();
