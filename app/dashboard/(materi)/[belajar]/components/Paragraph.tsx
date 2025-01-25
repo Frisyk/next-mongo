@@ -1,5 +1,7 @@
+"use client"
 import { marked } from 'marked';
 import Link from 'next/link';
+import { useState } from 'react';
 import { PiExam } from 'react-icons/pi';
 
 export const MarkdownToHtml = ({ markdown }: { markdown: string }) => {
@@ -15,7 +17,6 @@ export const MarkdownToHtml = ({ markdown }: { markdown: string }) => {
   );
 };
 
-
 export default function SideNav({
   activeSection,
   onNavigate,
@@ -23,8 +24,10 @@ export default function SideNav({
 }: {
   activeSection: string;
   onNavigate: (sectionId: string) => void;
-  materi: any
+  materi: any;
 }) {
+  const [isOpen, setIsOpen] = useState(true); // State to toggle the menu visibility
+
   const content = {
     1: "Pengertian",
     2: "Dalil Naqli",
@@ -32,8 +35,59 @@ export default function SideNav({
     4: "Keutamaan",
   };
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen); // Toggle the visibility of the sidebar
+  };
+
   return (
-    <aside className="md:m-10 p-5 md:fixed md:top-10" aria-labelledby="side-nav-heading">
+    <>
+     <button onClick={toggleMenu} className="flex z-40 items-center md:hidden fixed bottom-0 left-0 gap-3 p-4 bg-green-500 rounded-lg m-4">
+        {/* Menu icon for mobile */}
+        <h2 id="side-nav-heading" className="text-2xl font-bold">{isOpen? "close" : "Menu"}</h2>
+      </button>
+    <aside
+      className={`md:m-10 p-5 fixed w-full h-screen top-14 z-30 bg-white dark:bg-slate-900 md:block md:w-[300px] transition-all ${!isOpen? 'hidden' : 'block'}`}
+      aria-labelledby="side-nav-heading"
+    >      
+
+      <h2 id="side-nav-heading" className="text-2xl font-bold mb-6">Navigasi</h2>
+      <nav aria-label="Side navigation links">
+        <ul className='ml-6'>
+          {Object.entries(content).map(([key, value]) => {
+            const sectionId = `section-${key}`;
+            return (
+              <li key={key} className="mb-4">
+                <button
+                  className={`text-lg ${
+                    activeSection === sectionId ? "text-green-500 font-bold" : "hover:text-green-500"
+                  }`}
+                  aria-label={`Go to section: ${value}`}
+                  onClick={() => {
+                    setIsOpen(false)
+                    onNavigate(sectionId)
+                  }
+                  }
+                >
+                  {value}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+        <Link
+          prefetch={false}
+          href={`/dashboard/${materi.title}/${materi.quizId}`}
+          className="flex items-center gap-2 mt-3 justify-center p-3 rounded text-center bg-green-400 hover:bg-green-500 text-black font-bold text-lg w-full md:w-fit"
+          aria-label={`Start quiz for ${materi.title}`}
+        >
+          <PiExam className="w-6 h-6" aria-hidden="true" />
+          Uji Pemahamanmu!
+        </Link>
+      </nav>
+    </aside>
+
+    {/* desktop */}
+    <aside className="md:m-10 p-5 md:fixed md:top-10 hidden md:block" aria-labelledby="side-nav-heading">
       <h2 id="side-nav-heading" className="text-2xl font-bold mb-6">Navigasi</h2>
       <nav aria-label="Side navigation links">
         <ul>
@@ -65,6 +119,7 @@ export default function SideNav({
         </Link>
       </nav>
     </aside>
+    </>
   );
 }
 

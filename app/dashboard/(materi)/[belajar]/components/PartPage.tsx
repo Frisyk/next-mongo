@@ -18,7 +18,7 @@ export default function MainPage({ imateri }: { imateri: any }) {
     };
   
     return (
-      <main className="w-full flex">
+      <main className="w-full md:flex">
         {/* Navigasi di sisi kiri */}
         <SideNav materi={materi} activeSection={activeSection} onNavigate={handleNavigation} />
         {/* Konten hanya untuk bagian aktif */}
