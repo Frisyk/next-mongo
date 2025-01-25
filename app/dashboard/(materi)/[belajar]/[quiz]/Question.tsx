@@ -96,9 +96,9 @@ export default function App({ user, quizM, title, link }: { user: string, quizM:
     const currentQuestionData = quiz[currentQuestion - 1];
 
     return (
-        <div className="md:h-screen mx-auto">
+        <div className="mx-auto">
             <Header title={title} link={link} />
-            <div className="p-4 rounded-lg md:shadow-lg md:mx-32 mt-4 flex flex-col md:flex-row gap-4 md:gap-5">
+            <div className="p-4 md:mx-32 mt-4 flex flex-col md:flex-row gap-4 md:gap-5">
                 <section className="md:w-1/3 w-full mx-auto">
                     <div className="flex justify-between items-center mb-10">
                         <span className="text-xl font-bold">
@@ -118,27 +118,32 @@ export default function App({ user, quizM, title, link }: { user: string, quizM:
                             </button>
                         )}
                     </div>
-                    <ResultSummary
-                        message=''
-                        examtitle={title}
-                        currentQuestion={currentQuestion}
-                        totalQuestions={totalQuestions}
-                        score={finalScore}
-                    />
-                </section>
-                <ToastContainer closeButton={false} />
-                <section className="mx-auto w-full flex flex-1 flex-col-reverse md:flex-col">
-                    <div className="md:flex mx-auto space-x-2 hidden">
+                    {
+                        finalScore && 
+                        <ResultSummary
+                            message=''
+                            examtitle={title}
+                            currentQuestion={currentQuestion}
+                            totalQuestions={totalQuestions}
+                            score={finalScore}
+                        />
+                    }
+                    
+                    <div className="md:flex mx-auto gap-2 mt-5 hidden">
                         {[...Array(totalQuestions)].map((_, i) => (
                             <div 
                                 key={i} 
                                 onClick={() => handleSelect(i + 1)}
-                                className={`w-8 h-8 flex cursor-pointer items-center justify-center rounded-lg ${i + 1 === currentQuestion ? 'bg-teal-400 text-gray-900' : 'bg-gray-800 text-white'}`}
+                                className={`w-16 h-16 flex cursor-pointer items-center justify-center rounded-lg ${i + 1 === currentQuestion ? 'bg-teal-400 text-gray-900' : 'bg-gray-800 text-white'}`}
                             >
                                 {i + 1}
                             </div>
                         ))}
                     </div>
+                </section>
+                <ToastContainer closeButton={false} />
+                <section className="mx-auto w-full flex flex-1 flex-col-reverse md:flex-col">
+                    
                     <QuestionComponent
                         category={currentQuestionData.category}
                         questionText={currentQuestionData.questionText}

@@ -56,7 +56,7 @@ export default function Header({user, link}: {user?: any, link:string}) {
   };
 
   return (
-    <header className="flex h-14 w-full justify-between items-center border-b dark:border-slate-800 px-4 md:gap-4 dark:text-white">
+    <header className="flex h-14 sticky top-0 z-30 bg-white dark:bg-slate-900 w-full justify-between items-center border-b dark:border-slate-800 px-4 md:gap-4 dark:text-white">
       <Link prefetch={false}
         className="flex items-center rounded-md md:hidden px-2 py-2"
         href="#"
@@ -118,7 +118,7 @@ export function GetTime() {
   const isDayTime = hour >= 6 && hour < 18; // Daytime between 6 AM and 6 PM
 
   return (
-    <section className='flex items-center text-left w-full md:w-1/3 gap-5 h-40 dark:bg-gray-800 bg-gray-100 p-6 rounded-2xl shadow-lg'>
+    <section className='flex items-center text-left w-full md:w-1/3 gap-5 h-40 dark:bg-gray-800 bg-white p-6 rounded-2xl shadow-lg'>
       {isDayTime ? (
         <FaSun className="text-yellow-400 text-4xl" />
       ) : (
@@ -128,6 +128,7 @@ export function GetTime() {
         <p className="text-4xl font-bold">{time}</p>
         <p className="text-xl">{date}</p>
       </div>
+      
     </section>
   );
 }

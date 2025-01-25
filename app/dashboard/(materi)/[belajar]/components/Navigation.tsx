@@ -4,7 +4,7 @@ import { NavigationComponentProps } from "./interface";
 
 export const NavigationComponent: React.FC<NavigationComponentProps> = ({ currentQuestion, totalQuestions, onPrevious, onNext, onSubmit, onSelect }) => {
     return (
-        <div className="flex justify-between items-center mt-6">
+        <div className="flex justify-between items-center m-3">
             <button 
                 onClick={onPrevious} 
                 className={`flex items-center px-4 py-2 rounded-lg ${currentQuestion === 1 ? 'bg-gray-600 text-gray-400 cursor-not-allowed' : 'bg-gray-800 text-white cursor-pointer'}`}
