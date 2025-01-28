@@ -2,6 +2,7 @@
 import { marked } from 'marked';
 import Link from 'next/link';
 import { useState } from 'react';
+import { MdClose, MdMenuOpen } from 'react-icons/md';
 import { PiExam } from 'react-icons/pi';
 
 export const MarkdownToHtml = ({ markdown }: { markdown: string }) => {
@@ -26,7 +27,7 @@ export default function SideNav({
   onNavigate: (sectionId: string) => void;
   materi: any;
 }) {
-  const [isOpen, setIsOpen] = useState(true); // State to toggle the menu visibility
+  const [isOpen, setIsOpen] = useState(false); // State to toggle the menu visibility
 
   const content = {
     1: "Pengertian",
@@ -41,16 +42,24 @@ export default function SideNav({
 
   return (
     <>
-     <button onClick={toggleMenu} className="flex z-40 items-center md:hidden fixed bottom-0 left-0 gap-3 p-4 bg-green-500 rounded-lg m-4">
-        {/* Menu icon for mobile */}
-        <h2 id="side-nav-heading" className="text-2xl font-bold">{isOpen? "close" : "Menu"}</h2>
-      </button>
+     <button
+        onClick={toggleMenu}
+        className={`fixed bottom-4 left-4 z-50 flex items-center gap-3 p-3 text-white rounded-lg shadow-lg transition-all md:hidden ${
+          isOpen ? "bg-red-500" : "bg-green-500"
+        }`}
+        aria-label={isOpen ? "Tutup menu" : "Buka menu"}
+        aria-expanded={isOpen}
+      >
+        <h2 id="side-nav-heading" className="text-3xl font-bold">
+          {isOpen ? <MdClose className="size-10" /> : <MdMenuOpen className="size-10" />}
+        </h2>
+    </button>
     <aside
       className={`md:m-10 p-5 fixed w-full h-screen top-14 z-30 bg-white dark:bg-slate-900 md:block md:w-[300px] transition-all ${!isOpen? 'hidden' : 'block'}`}
       aria-labelledby="side-nav-heading"
     >      
 
-      <h2 id="side-nav-heading" className="text-2xl font-bold mb-6">Navigasi</h2>
+      <h2 id="side-nav-heading" className="text-2xl font-bold mb-6">{materi.title}</h2>
       <nav aria-label="Side navigation links">
         <ul className='ml-6'>
           {Object.entries(content).map(([key, value]) => {
@@ -76,7 +85,7 @@ export default function SideNav({
         </ul>
         <Link
           prefetch={false}
-          href={`/dashboard/${materi.title}/${materi.quizId}`}
+          href={`/dashboard/${materi.slug}/${materi.quizId}`}
           className="flex items-center gap-2 mt-3 justify-center p-3 rounded text-center bg-green-400 hover:bg-green-500 text-black font-bold text-lg w-full md:w-fit"
           aria-label={`Start quiz for ${materi.title}`}
         >

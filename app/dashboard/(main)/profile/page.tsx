@@ -34,7 +34,7 @@ export default async function Profile() {
   
 
   return (
-    <main>
+    <main className='pb-10'>
       <div className="flex gap-6 mb-2 mx-auto md:w-4/5 md:justify-start">
         <UserImage userI={JSON.stringify(user)} />
         <div className="flex flex-col gap-2 md:gap-4">

@@ -6,23 +6,26 @@ import testing from '@/public/icons/ab-testing.png'
 export default function ListExample() {
   const items = [
     {
+      name: "Kuisoner Evaluasi Aplikasi",
+      iconUrl: testing,
+      description: "Kasih rating mu untuk aplikasi ni yaa!.",
+      link: "",
+      isDisable: false
+    },
+    {
       name: "Pre-Test",
       iconUrl: pretest,
       description: "Ayo liat seberapa jago kamu sebelum belajar.",
-      link: ""
+      link: "",
+      isDisable: true
     },
     {
       name: "Post-Test",
       iconUrl: posttest,
       description: "Uji pemahaman-mu lagi yuk setelah belajar.",
-      link: ""
+      link: "",
+      isDisable: true
     },
-    {
-      name: "Kuisoner Evaluasi Aplikasi",
-      iconUrl: testing,
-      description: "Kasih rating mu untuk aplikasi ni yaa!.",
-      link: ""
-    }
   ];
 
   return (
@@ -34,6 +37,7 @@ export default function ListExample() {
           iconUrl={item.iconUrl}
           description={item.description}
           link={item.link}
+          isDisable={item.isDisable}
         />
       ))}
     </div>

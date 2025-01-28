@@ -28,17 +28,17 @@ export default function Header({title, link}: {title?: string, link:string}) {
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
-  };
+  };  
 
   return (
     <header className="flex items-center border-b sticky top-0 bg-slate-50 dark:bg-slate-900 dark:border-slate-900 p-4 md:gap-4 ">
       <Link prefetch={false}
         className="flex items-center rounded-md py-2"
-        href={link}
-      >
+        href={`/dashboard/${link}`}
+        >
        <ArrowLeft className='w-6 h-6 mx-2'/>
       <h1 className="text-lg hidden md:block font-semibold capitalize  ">
-        {title? title : path}
+        Kembali
       </h1>
       </Link>
       <button

@@ -26,7 +26,7 @@ export const putUserScore = async (userId: string, quiztitle: string, score: num
 export const getUserScore = async (userId?: string) => {
     try {
         await connecttoDB();
-        const result = await Score.find({userId: userId})
+        const result = await Score.find({userId: userId}).sort({ createdAt: -1 })
         if (!result) {
             throw new Error(`User with ID ${userId} not found`);
         }
