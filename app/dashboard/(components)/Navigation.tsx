@@ -7,32 +7,8 @@ import { FaUserCircle } from "react-icons/fa";
 import { usePathname } from 'next/navigation';
 import LogoutButton, { LoginButton } from './logout-button';
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
-import { MdLightMode } from "react-icons/md";
-import { MdNightlightRound } from "react-icons/md";
 
-export default function Navigation({ userI }: { userI: any }) {
-  const [theme, setTheme] = useState<string>(() => {
-    // Check user's preference from localStorage or fallback to the default 'light' theme
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') || 'light';
-    }
-    return 'light';
-  });
-
-  useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
-  
+export default function Navigation({ userI }: { userI: any }) {  
   const user = JSON.parse(userI);
   const navLinks = [
     { title: 'Belajar', href: '/dashboard', badge: <GoHomeFill className='w-6 h-6'/> },
@@ -51,17 +27,6 @@ export default function Navigation({ userI }: { userI: any }) {
             <Link prefetch={false} className="flex items-center gap-2 font-semibold text-slate-900 dark:text-white" href="/">
               <span className="text-2xl font-bold">Batik.</span>
             </Link>
-            <button
-              onClick={toggleTheme}
-              className="ml-auto flex items-center  rounded-full justify-center p-2  "
-              aria-label="Toggle Dark Mode"
-            >
-              { theme != 'light'? (
-                <MdNightlightRound className="w-6 h-6 " />
-              ) : (
-                <MdLightMode className="w-6 h-6" />
-              )}
-            </button>
           </div>
           <div className="flex-1 overflow-auto py-2">
             <nav className="flex flex-col gap-5 px-4 text-sm font-medium">

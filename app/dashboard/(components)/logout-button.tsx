@@ -36,7 +36,7 @@ export default function LogoutButton() {
         onMouseLeave={handleMouseLeave}
       >
         <LogOutIcon className="h-4 w-4" />
-        <span className="hidden md:block">Logout</span>
+        <span className="">Logout</span>
       </button>
       {showTooltip && (
         <div
@@ -79,7 +79,7 @@ export function LoginButton() {
         onMouseLeave={handleMouseLeave}
       >
         <LogInIcon className="h-4 w-4" />
-        <span className="hidden md:block">Login</span>
+        <span >Login</span>
       </Link>
       {showTooltip && (
         <div

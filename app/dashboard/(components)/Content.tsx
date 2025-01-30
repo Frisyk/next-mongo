@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function Content({ materi }: { materi: any }) {
   return (
-    <div>
+    <div className='w-full'>
       <h1 className="text-2xl md:text-4xl font-bold my-5 md:mb-10 text-center md:text-left">
         Yuk Belajar Lagi Hari Ini 🚀
       </h1>
@@ -12,7 +12,7 @@ export default function Content({ materi }: { materi: any }) {
         {materi?.map((m: any, index: number) => (
           <div
             key={m.id}
-            className="w-full sm:w-[20rem] md:w-[18rem] lg:w-[22rem] bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl"
+            className="w-full sm:w-[20rem] grow md:w-[18rem] lg:w-[22rem] bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl"
           >
             <Link prefetch={false} href={`/dashboard/${m.slug}`}>
               <div className="flex flex-col h-full">

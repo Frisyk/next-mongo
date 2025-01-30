@@ -55,41 +55,79 @@ export default function Header({user, link}: {user?: any, link:string}) {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
   return (
     <header className="flex h-14 sticky top-0 z-30 bg-white dark:bg-slate-900 w-full justify-between items-center border-b dark:border-slate-800 px-4 md:gap-4 dark:text-white">
-      <Link prefetch={false}
-        className="flex items-center rounded-md md:hidden px-2 py-2"
-        href="#"
-      >
+      {/* Logo */}
+      <Link prefetch={false} className="flex items-center rounded-md md:hidden px-2 py-2" href="#">
         <span className="text-lg font-bold">Batik.</span>
       </Link>
-      <h1 className="md:block hidden text-lg font-semibold capitalize  ">
-        {path}
-      </h1>
-      <div className='flex gap-2 items-center md:hidden'>
-            <button
+
+      {/* Judul Halaman */}
+      <h1 className="md:block hidden text-lg font-semibold capitalize">{path}</h1>
+      <button
               onClick={toggleTheme}
-              className="ml-auto flex items-center  rounded-full justify-center p-2  "
-              aria-label="Toggle Dark Mode"
+              className="md:flex items-center gap-2 p-2 hidden rounded-md hover:bg-gray-100 dark:hover:bg-slate-800 transition"
             >
-              { theme != 'light'? (
-                <MdNightlightRound className="w-6 h-6 " />
+              {theme !== "light" ? (
+                <>
+                  <MdNightlightRound className="w-5 h-5" />
+                  <span>Dark Mode</span>
+                </>
               ) : (
-                <MdLightMode className="w-6 h-6" />
+                <>
+                  <MdLightMode className="w-5 h-5" />
+                  <span>Light Mode</span>
+                </>
               )}
             </button>
-            {
-              !user? <LoginButton/> : <LogoutButton/>
-            }
-            
+      {/* Tombol Menu */}
+      <div className="relative flex gap-2 items-center md:hidden">
+        {/* Button Menu */}
+        <button
+          onClick={() => setMenuOpen(!isMenuOpen)}
+          className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-slate-800 transition"
+          aria-label="Open Menu"
+        >
+          <MdMoreVert className="w-6 h-6" />
+        </button>
+        
+        {/* Dropdown Menu */}
+        {isMenuOpen && (
+          <div className="absolute top-12 right-0 bg-white dark:bg-slate-900 shadow-md rounded-lg w-40 p-2">
+            <button
+              onClick={toggleTheme}
+              className="flex items-center gap-2 p-2 w-full rounded-md hover:bg-gray-100 dark:hover:bg-slate-800 transition"
+            >
+              {theme !== "light" ? (
+                <>
+                  <MdNightlightRound className="w-5 h-5" />
+                  <span>Dark Mode</span>
+                </>
+              ) : (
+                <>
+                  <MdLightMode className="w-5 h-5" />
+                  <span>Light Mode</span>
+                </>
+              )}
+            </button>
+            <hr className="border-gray-300 dark:border-slate-700 my-2" />
+            {user ? (
+              <LogoutButton />
+            ) : (
+              <LoginButton />
+            )}
+          </div>
+        )}
       </div>
     </header>
-  )
+  );
 }
 
 import { FaSun, FaMoon } from 'react-icons/fa';
 import Image from 'next/image';
-import { MdLightMode, MdNightlightRound } from 'react-icons/md';
+import { MdLightMode, MdMoreVert, MdNightlightRound } from 'react-icons/md';
 import LogoutButton, { LoginButton } from './logout-button';
 
 const getCurrentDateTime = () => {
@@ -118,15 +156,15 @@ export function GetTime() {
   const isDayTime = hour >= 6 && hour < 18; // Daytime between 6 AM and 6 PM
 
   return (
-    <section className='flex items-center text-left w-full md:w-1/3 gap-5 h-40 dark:bg-gray-800 bg-white p-6 rounded-2xl shadow-lg'>
+    <section className='text-left w-full md:w-1/3 gap-5 min-h-40 dark:bg-gray-800 bg-white p-6 rounded-2xl shadow-lg'>
       {isDayTime ? (
-        <FaSun className="text-yellow-400 text-4xl" />
+        <FaSun className="text-yellow-400 text-5xl -mb-10 ml-auto" />
       ) : (
-        <FaMoon className="text-slate-400 text-4xl" />
+        <FaMoon className="text-slate-300 text-5xl  -mb-10 ml-auto" />
       )}
-      <div className="flex flex-col gap-3">
-        <p className="text-4xl font-bold">{time}</p>
-        <p className="text-xl">{date}</p>
+      <div className="flex flex-col gap-3 mt-2">
+        <p className="text-3xl font-bold">{time}</p>
+        <p className="text-lg">{date}</p>
       </div>
       
     </section>
