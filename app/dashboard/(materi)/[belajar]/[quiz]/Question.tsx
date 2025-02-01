@@ -134,7 +134,7 @@ export default function App({ user, quizM, title, link }: { user: string, quizM:
                             <div 
                                 key={i} 
                                 onClick={() => handleSelect(i + 1)}
-                                className={`w-16 h-16 flex cursor-pointer items-center justify-center rounded-lg ${i + 1 === currentQuestion ? 'bg-teal-400 text-gray-900' : 'bg-gray-800 text-white'}`}
+                                className={`w-16 h-16 flex cursor-pointer items-center justify-center rounded-lg ${i + 1 === currentQuestion ? 'bg-green-500 text-gray-900' : 'dark:bg-gray-800 outline-1 outline dark:outline-none'}`}
                             >
                                 {i + 1}
                             </div>
