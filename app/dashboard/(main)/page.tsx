@@ -22,7 +22,7 @@ export default async function Page() {
         <GetTime />
       </header>
       {
-        materi ? <Content materi={materi} /> 
+        materi ? <Content materi={JSON.stringify(materi)} /> 
         : <h1>{materi}</h1> 
       }
       

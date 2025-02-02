@@ -5,22 +5,38 @@ import { ResultSummary } from '../components/Summary';
 import { QuestionComponent } from '../components/QuestionComp';
 import { NavigationComponent } from '../components/Navigation';
 import { putUserScore } from '@/lib/admin/students';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { confirmEndTest } from '../components/Dialog';
+import { useConfirmEndTest } from '../components/Dialog';
 import { Question } from '../components/interface';
 import Header from '../components/Header-Layout';
+import { PiTimer } from 'react-icons/pi';
+import Modal from '../components/Modals';
+import { useRouter } from 'next/navigation';
 
-export default function App({ user, quizM, title, link }: { user: string, quizM: string, title: string, link: string }) {
-    const DURATION = 300
-    const [currentQuestion, setCurrentQuestion] = useState(1);
-    const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: string | null }>({});
+interface AppProps {
+    user: string;
+    quizM: string;
+    title: string;
+    link: string;
+}
+
+interface SelectedAnswers {
+    [key: number]: string;
+}
+
+export default function App({ user, quizM, title, link }: AppProps) {
+    const DURATION = 300;
+    const [currentQuestion, setCurrentQuestion] = useState<number>(1);
+    const [selectedAnswers, setSelectedAnswers] = useState<SelectedAnswers>({});
     const [finalScore, setFinalScore] = useState<number | null>(null);
-    const [timeLeft, setTimeLeft] = useState(DURATION); // 10 minutes = 600 seconds
-    const [isTimeUp, setIsTimeUp] = useState(false);
-    const [timerActive, setTimerActive] = useState(false); // Tracks whether the timer is active
+    const [timeLeft, setTimeLeft] = useState<number>(DURATION);
+    const [isTimeUp, setIsTimeUp] = useState<boolean>(false);
+    const [timerActive, setTimerActive] = useState<boolean>(false);
+    const [showStartModal, setShowStartModal] = useState<boolean>(true);
+    const [showResultModal, setShowResultModal] = useState<boolean>(false);
+    const [answers, setAnswers] = useState(0)
+    const router = useRouter()
     
-
     const quiz: Question[] = JSON.parse(quizM);
     const totalQuestions = quiz.length;
 
@@ -36,130 +52,107 @@ export default function App({ user, quizM, title, link }: { user: string, quizM:
 
     const handleStart = () => {
         setTimerActive(true);
+        setShowStartModal(false);
     };
 
     const handleAnswerClick = (label: string) => {
         if (timerActive && !isTimeUp) {
-            setSelectedAnswers(prev => ({ ...prev, [currentQuestion]: label })); // Save answer
+            setSelectedAnswers(prev => ({ ...prev, [currentQuestion]: label }));
         }
     };
 
-    const handleNext = () => {
-        if (currentQuestion < totalQuestions) {
-            setCurrentQuestion(prev => prev + 1);
-        }
-    };
-
-    const handlePrevious = () => {
-        if (currentQuestion > 1) {
-            setCurrentQuestion(prev => prev - 1);
-        }
-    };
-
+    let score = 0;
     const handleSubmit = async () => {
-        const calculateScore = async () => {
-            let score = 0;
-            quiz.forEach((question: Question, index: number) => {
-                const userAnswer = selectedAnswers[index + 1];
-                const correctAnswer = question.answers.find(answer => answer.isCorrect);
-                if (userAnswer === correctAnswer?.label) {
-                    score += 10;
-                }
-            });
-            await putUserScore(user, title, score);
-            return score;
-        };
-
-        const score = await calculateScore();
-        
+        quiz.forEach((question, index) => {
+            const userAnswer = selectedAnswers[index + 1];
+            const correctAnswer = question.answers.find(answer => answer.isCorrect);
+            if (userAnswer === correctAnswer?.label) {
+                score += 10;
+                setAnswers(prevAnswers => prevAnswers + 1)
+            }
+        });
+        await putUserScore(user, title, score);
         setFinalScore(score);
         setIsTimeUp(true);
         setTimerActive(false);
-        setTimeLeft(DURATION); // Reset the timer to 10 minutes
+        setShowResultModal(true);
     };
-
-    const handleSelect = (questionNumber: number) => {
-        if (timerActive && !isTimeUp) {
-            setCurrentQuestion(questionNumber);
-        }
-    };
-
+    
     const handleReset = () => {
+        setShowResultModal(false);
         setTimerActive(false);
         setTimeLeft(DURATION);
         setCurrentQuestion(1);
         setSelectedAnswers({});
         setFinalScore(null);
         setIsTimeUp(false);
+        
+        setTimeout(() => {
+            setShowStartModal(true);
+        }, 100);
     };
 
     const currentQuestionData = quiz[currentQuestion - 1];
-
+    const { confirmEndTest, modal } = useConfirmEndTest(handleSubmit);
+    
     return (
         <div className="mx-auto">
             <Header title={title} link={link} />
-            <div className="p-4 md:mx-32 mt-4 flex flex-col md:flex-row gap-4 md:gap-5">
-                <section className="md:w-1/3 w-full mx-auto">
-                    <div className="flex justify-between items-center mb-10">
-                        <span className="text-xl font-bold">
-                            Waktu tersisa: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' : ''}{timeLeft % 60}
-                        </span>
-                        {isTimeUp ? (
-                            <button onClick={handleReset} className="bg-orange-400 text-gray-900 px-4 py-2 rounded-lg">
-                                Ulangi Ujian
+            <div className="p-4 md:w-4/5 mx-auto mt-4 flex flex-col gap-4 md:gap-5">
+                <Modal isOpen={showStartModal} onClose={() => router.back()}>
+                    <h2 className="text-xl font-bold">Mulai Quiz</h2>
+                    <p>Klik tombol di bawah untuk memulai Quiz.</p>
+                    <button onClick={handleStart} className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg">
+                        Mulai Quiz
+                    </button>
+                </Modal>
+
+                {timerActive && (
+                    <section className="w-full mx-auto">
+                        <div className="flex justify-between items-center mb-4">
+                            <span className="text-xl flex items-center gap-1 font-bold">
+                                <PiTimer className='text-2xl'/> {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' : ''}{timeLeft % 60}
+                            </span>
+                            <button onClick={confirmEndTest} className="bg-red-500 text-white p-2 rounded">
+                            Akhiri Ujian
                             </button>
-                        ) : !timerActive ? (
-                            <button onClick={handleStart} className="bg-teal-400 text-gray-900 px-4 py-2 rounded-lg">
-                                Mulai Ujian
-                            </button>
-                        ) : (
-                            <button onClick={() => confirmEndTest(handleSubmit)} className="bg-red-500 text-white px-4 py-2 rounded-lg">
-                                Selesai
-                            </button>
-                        )}
-                    </div>
-                    {
-                        finalScore && 
-                        <ResultSummary
-                            message=''
-                            examtitle={title}
+                            {modal}
+                        </div>
+                    </section>
+                )}
+
+                {timerActive && (
+                    <section className="mx-auto w-full flex flex-col">
+                        <QuestionComponent
+                            category={currentQuestionData.category}
+                            questionText={currentQuestionData.questionText}
+                            answers={currentQuestionData.answers}
+                            selectedAnswer={selectedAnswers[currentQuestion] || null}
+                            onAnswerClick={handleAnswerClick}
+                        />
+                        <NavigationComponent
+                            onSelect={setCurrentQuestion}
                             currentQuestion={currentQuestion}
                             totalQuestions={totalQuestions}
-                            score={finalScore}
+                            onPrevious={() => setCurrentQuestion(prev => Math.max(1, prev - 1))}
+                            onNext={() => setCurrentQuestion(prev => Math.min(totalQuestions, prev + 1))}
+                            onSubmit={handleSubmit}
                         />
-                    }
-                    
-                    <div className="md:flex mx-auto gap-2 mt-5 hidden">
-                        {[...Array(totalQuestions)].map((_, i) => (
-                            <div 
-                                key={i} 
-                                onClick={() => handleSelect(i + 1)}
-                                className={`w-16 h-16 flex cursor-pointer items-center justify-center rounded-lg ${i + 1 === currentQuestion ? 'bg-green-500 text-gray-900' : 'dark:bg-gray-800 outline-1 outline dark:outline-none'}`}
-                            >
-                                {i + 1}
-                            </div>
-                        ))}
-                    </div>
-                </section>
-                <ToastContainer closeButton={false} />
-                <section className="mx-auto w-full flex flex-1 flex-col-reverse md:flex-col">
-                    
-                    <QuestionComponent
-                        category={currentQuestionData.category}
-                        questionText={currentQuestionData.questionText}
-                        answers={currentQuestionData.answers}
-                        selectedAnswer={selectedAnswers[currentQuestion] || null}
-                        onAnswerClick={handleAnswerClick}
-                    />
-                    <NavigationComponent
-                        onSelect={handleSelect}
-                        currentQuestion={currentQuestion}
+                    </section>
+                )}
+
+                <Modal isOpen={showResultModal} onClose={() => router.back()}>
+                    <ResultSummary
+                        correctAnswer={answers}
+                        message="Hasil ujian Anda"
+                        examtitle={title}
                         totalQuestions={totalQuestions}
-                        onPrevious={handlePrevious}
-                        onNext={handleNext}
-                        onSubmit={handleSubmit}
+                        score={finalScore}
                     />
-                </section>
+                    <button onClick={handleReset} className="mt-4 mx-auto w-full transition-all duration-500 hover:bg-orange-300 bg-orange-400 text-gray-900 px-4 py-2 rounded-lg">
+                        Ulangi Ujian
+                    </button>
+                </Modal>
             </div>
         </div>
     );

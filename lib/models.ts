@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { number } from "zod";
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -117,7 +116,8 @@ const sessionSchema = new mongoose.Schema({
 
 const scoreSchema = new mongoose.Schema({
   userId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
   },
   quiztitle: {

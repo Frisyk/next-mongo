@@ -28,7 +28,7 @@ export default function LogoutButton() {
     <div className="relative">
       <button
         ref={buttonRef}
-        className="flex items-center gap-3 rounded-lg dark:text-slate-400 px-3 py-2 text-sm font-medium text-slate-800 transition-all hover:text-slate-900"
+        className="flex items-center gap-3 rounded-lg dark:text-slate-200 px-3 py-2 text-sm font-medium text-slate-800 transition-all hover:text-slate-900"
         onClick={async () => {
           await logout();
         }}
@@ -74,7 +74,7 @@ export function LoginButton() {
       <Link
         ref={linkRef}
         href={'/login'}
-        className="flex items-center gap-3 rounded-lg dark:text-slate-400 px-3 py-2 text-sm font-medium text-slate-800 transition-all hover:text-slate-900"
+        className="flex items-center gap-3 rounded-lg dark:text-slate-200 px-3 py-2 text-sm font-medium text-slate-800 transition-all hover:text-slate-900"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >

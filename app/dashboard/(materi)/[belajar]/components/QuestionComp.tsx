@@ -12,10 +12,11 @@ export const QuestionComponent: React.FC<QuestionComponentProps> = ({ category, 
                         onClick={() => onAnswerClick(answer.label)}
                         className={`flex items-center space-x-2 p-2 rounded-lg cursor-pointer ${selectedAnswer === answer.label ? 'bg-gray-800 dark:bg-gray-700 text-white' : ''}`}
                     >
-                        <div className={`w-6 h-6 flex items-center text-lg justify-center rounded-full font-bold ${selectedAnswer === answer.label ? 'bg-teal-500' : ''}`}>
+                        <div className={`w-6 h-6 flex  items-center text-lg justify-center rounded-full font-bold`}>
                             <span>{answer.label}.</span>
                         </div>
-                        <p className="md:text-xl">{answer.text}</p>
+                        <p className="md:text-xl md:max-w-lg">{answer.text}</p>
+                        <hr className="border-gray-300 dark:border-slate-700 my-2" />
                     </div>
                 ))}
             </div>

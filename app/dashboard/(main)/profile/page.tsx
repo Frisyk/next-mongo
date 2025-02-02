@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import React from 'react';
 import { UserImage } from '../../(components)/Header';
-import { getUser } from '@/lib/dal';
+import { getUser, getUserScoresWithNames } from '@/lib/dal';
 import ScoreBoard from './ScoreBoard';
 import LogoutButton, { LoginButton } from '../../(components)/logout-button';
 import { getEvaluationsForUser } from '@/lib/admin/students';
@@ -31,10 +31,8 @@ export default async function Profile() {
     }
   };
   
-  // Usage
   const latestEvaluation = await getLatestEvaluation();
   
-
   return (
     <main>
       {
@@ -71,7 +69,6 @@ export default async function Profile() {
                     </p>
                   )}
             </section>
-
                 {/* Section ScoreBoard */}
             <ScoreBoard id={user ? user.id : null} />
           </section>

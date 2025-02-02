@@ -65,7 +65,7 @@ export function LoginForm() {
                 onClick={togglePasswordVisibility}
                 className="absolute inset-y-0 right-0 flex items-center px-3 text-sm text-zinc-600 dark:text-zinc-200 hover:text-zinc-800 dark:hover:text-zinc-100 focus:outline-none"
               >
-                {showPassword ? (<BiSolidShow/>)  : (<BiSolidHide/>)}
+                {!showPassword ? "Show"  : "Hide"}
               </button>
             </div>
             {state?.errors?.password && (

@@ -13,10 +13,10 @@ export interface Question {
 
 export interface ResultSummaryProps {
     examtitle: string;
-    currentQuestion: number;
     totalQuestions: number;
     score: number|null;
     message: string;
+    correctAnswer: number;
 }
 
 export interface QuestionComponentProps {
