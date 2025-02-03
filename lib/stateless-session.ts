@@ -40,11 +40,13 @@ export async function createSession(userId: string, isAdmin: boolean) {
     path: '/',
   });
 
-  if (isAdmin) {
-    await redirect('/admin');
-  } else {
-    await redirect('/dashboard');
-  }}
+  const lastPage = cookies().get('redirectAfterLogin')?.value || (isAdmin ? '/admin' : '/dashboard');
+
+  // Hapus cookie setelah digunakan
+  cookies().set('redirectAfterLogin', '', { expires: new Date(0), path: '/' });
+
+  return redirect(lastPage);
+}
 
 
 export async function verifySession() {

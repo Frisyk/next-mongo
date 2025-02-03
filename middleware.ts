@@ -2,46 +2,38 @@ import { NextRequest, NextResponse } from 'next/server';
 import { decrypt } from '@/lib/stateless-session';
 import { cookies } from 'next/headers';
 
-// Define protected patterns for admin and normal routes
-const protectedRoutePattern = /^\/dashboard\/[^\/]+\/[^\/]+$/; // Protects /dashboard/[belajar]/[quiz]
-const adminRoutePattern = /^\/admin/; // Protects any /admin routes
+const protectedRoutePattern = /^\/dashboard\/[^\/]+\/[^\/]+$/;
+const adminRoutePattern = /^\/admin/;
 const publicRoutes = ['/login', '/signup', '/'];
 
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
-
-  // Check if the route is protected or admin-only
   const isProtectedRoute = protectedRoutePattern.test(path);
   const isAdminRoute = adminRoutePattern.test(path);
   const isPublicRoute = publicRoutes.includes(path);
 
-  // Decrypt the session from the cookie
+  // Ambil session dari cookie
   const cookie = cookies().get('session')?.value;
   const session = await decrypt(cookie);
 
-  // Redirect logic for protected routes
+  // Simpan halaman terakhir yang diakses sebelum login
   if (isProtectedRoute && !session?.userId) {
-    return NextResponse.redirect(new URL('/redirect', req.nextUrl));
+    const response = NextResponse.redirect(new URL('/redirect', req.nextUrl));
+    response.cookies.set('redirectAfterLogin', path, { httpOnly: true, path: '/' });
+    return response;
   }
 
-  // Redirect logic for admin routes
+  // Jika user mengakses halaman admin tanpa hak akses
   if (isAdminRoute) {
     if (!session?.userId || !session?.isAdmin) {
-      // console.log(session);
-      return NextResponse.redirect(new URL('/', req.nextUrl)); // Redirect unauthorized users to login
+      return NextResponse.redirect(new URL('/', req.nextUrl));
     }
-    
   }
 
-  // Redirect logic for public routes
+  // Jika user yang sudah login mengakses halaman public
   if (isPublicRoute && session?.userId) {
-    if (session?.isAdmin) {
-      // Redirect admin users to /admin
-      return NextResponse.redirect(new URL('/admin', req.nextUrl));
-    } else {
-      // Redirect normal users to /dashboard
-      return NextResponse.redirect(new URL('/dashboard', req.nextUrl));
-    }
+    const redirectTo = cookies().get('redirectAfterLogin')?.value || (session?.isAdmin ? '/admin' : '/dashboard');
+    return NextResponse.redirect(new URL(redirectTo, req.nextUrl));
   }
 
   return NextResponse.next();
