@@ -27,7 +27,7 @@ export default function Navigation({ userI }: { userI: any }) {
   return (
     <div className="h-screen sticky z-20 top-0 flex overflow-hidden">
       {/* Sidebar Navigation */}
-      <div className={`hidden md:block border-r overflow-hidden border-slate-300 dark:border-slate-800 transition-all duration-300 ${isNavOpen ? 'w-64' : 'w-16'}`}>
+      <div className={`hidden md:block border-r overflow-hidden border-slate-300 dark:border-slate-800 transition-all duration-300 ${isNavOpen ? 'w-64' : 'w-20'}`}>
         <div className="flex h-screen flex-col gap-4 bg-white dark:bg-slate-800">
           {/* Header dengan Toggle */}
           <div className="h-14 flex items-center border-b border-slate-300 dark:border-slate-800 px-4">
@@ -47,13 +47,13 @@ export default function Navigation({ userI }: { userI: any }) {
                 <Link
                   prefetch={false}
                   className={clsx(
-                    'flex items-center gap-3 rounded-lg px-2 py-3 transition-all text-slate-500 hover:text-white hover:bg-slate-300 dark:text-slate-50 dark:hover:bg-slate-500',
+                    'flex items-center  gap-3 rounded-lg px-3 py-3 transition-all text-slate-500 hover:text-white hover:bg-slate-300 dark:text-slate-50 dark:hover:bg-slate-500',
                     { 'bg-slate-700 text-white': path === link.href }
                   )}
                   href={link.href}
                   key={link.title}
                 >
-                  {link.badge}
+                  <span className='text-center'>{link.badge}</span>
                   {isNavOpen && <span>{link.title}</span>}
                 </Link>
               ))}

@@ -24,9 +24,12 @@ export const putUserScore = async (userId: string, quiztitle: string, score: num
 };
 
 export const getUserScore = async (userId?: string) => {
+  
     try {
         await connecttoDB();
         const result = await Score.find({userId: userId}).sort({ createdAt: -1 })
+        // const result = await User.deleteMany()
+        
         if (!result) {
             throw new Error(`User with ID ${userId} not found`);
         }

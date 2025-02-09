@@ -1,13 +1,14 @@
 // pages/admin/student/[id].tsx (or the appropriate path)
 import { UserImage } from '@/app/dashboard/(components)/Header';
 import ScoreBoard from '@/app/dashboard/(main)/profile/ScoreBoard';
-import { getDetailsStudent, getEvaluationsForUser } from '@/lib/admin/students';
+import { getDetailsStudent, getEvaluationsForUser, getUserScore } from '@/lib/admin/students';
 import React from 'react';
 import EvaluationTable from './Evaluation'; // Ensure the path is correct
 
 export default async function Page({ params }: { params: any }) {
   const student = await getDetailsStudent(params.id);
   const evaluationsResult = await getEvaluationsForUser(student.id);
+  const scores = JSON.stringify(await getUserScore(student.id))
   const evaluations = evaluationsResult.success ? evaluationsResult.data : [];
 
   return (
@@ -33,7 +34,7 @@ export default async function Page({ params }: { params: any }) {
       {student && (
         <section>
           <EvaluationTable userId={student.id} Ievaluations={JSON.stringify(evaluations)} />
-          <ScoreBoard id={student.id} />
+          <ScoreBoard scores={JSON.parse(scores)} />
         </section>
       )}
     </main>

@@ -149,8 +149,8 @@ export default function App({ user, quizM, title, link }: AppProps) {
                         totalQuestions={totalQuestions}
                         score={finalScore}
                     />
-                    <button onClick={handleReset} className="mt-4 mx-auto w-full transition-all duration-500 hover:bg-orange-300 bg-orange-400 text-gray-900 px-4 py-2 rounded-lg">
-                        Ulangi Ujian
+                    <button onClick={() => router.back()} className="mt-4 mx-auto w-full transition-all duration-500 hover:bg-green-300 bg-green-400 text-gray-900 px-4 py-2 rounded-lg">
+                        Kembali ke materi 
                     </button>
                 </Modal>
             </div>

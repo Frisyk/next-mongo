@@ -110,6 +110,7 @@ export const getUserScoresWithNames = async () => {
           _id: 0, // Sembunyikan _id jika tidak diperlukan
           totalScore: 1,
           quizCount: 1,
+          class: "$userInfo.uclass",
           username: "$userInfo.username"
         }
       }
