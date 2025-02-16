@@ -3,6 +3,7 @@
 import { useState } from "react";
 import SideNav, { MarkdownToHtml } from "./Paragraph";
 import Image from "next/image";
+import TTSButton from "./TTS";
 
 export default function MainPage({ imateri }: { imateri: any }) {
     const [activeSection, setActiveSection] = useState<string>("section-1"); // Default aktif
@@ -73,6 +74,7 @@ function ClientSideContent({
       ) : (
         <p className="text-gray-500">Pilih bagian untuk menampilkan konten.</p>
       )}
+      <TTSButton text={content} />
     </div>
   );
 }

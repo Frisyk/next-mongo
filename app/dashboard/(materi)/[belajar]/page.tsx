@@ -7,6 +7,7 @@ import { Metadata } from "next";
 import SideNav, { MarkdownToHtml } from "./components/Paragraph";
 import ClientSideContent from "./components/PartPage";
 import MainPage from "./components/PartPage";
+import TTS from "./components/TTS";
 
 export const metadata: Metadata = {
     title: 'Learning'
