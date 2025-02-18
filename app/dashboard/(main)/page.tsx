@@ -4,7 +4,7 @@ import { GetTime } from '../(components)/Header';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Dashboard'
+  title: 'Belajar Etika'
 };
 
 export default async function Page() {

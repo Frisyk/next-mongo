@@ -13,7 +13,7 @@ export default async function Page() {
     ? await getEvaluationsForUser(user.id).then(res => res?.data?.[0] || null)
     : null;
 
-  const userScores = await getUserScore(user.id);
+  const userScores = user ? await getUserScore(user.id) : null
 
   return <Profile scores={JSON.stringify(userScores)} iuser={JSON.stringify(user)} ilatestEvaluation={JSON.stringify(latestEvaluation)} />;
 }

@@ -4,8 +4,32 @@ import { LogIn } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Home'
+  title: 'Batik - Belajar Etika dengan Interaktif & Menyenangkan',
+  description: 'Batik adalah platform edukasi interaktif yang membantu siswa memahami etika dan akhlak dengan cara yang menyenangkan dan mudah dipahami.',
+  keywords: 'belajar etika, pendidikan karakter, akhlak, nilai moral, pendidikan Islam, interaktif, anak-anak',
+  authors: [{ name: "Frisnadi Nurul Huda", url: "https://frisyk.vercel.app" }],
+  openGraph: {
+    title: 'Batik - Belajar Etika dengan Interaktif & Menyenangkan',
+    description: 'Platform edukasi interaktif yang mengajarkan etika dan akhlak dengan cara yang menyenangkan.',
+    url: 'https://batika.vercel.app',
+    type: 'website',
+    images: [
+      {
+        url: 'https://batika.vercel.app/og-image.png', 
+        width: 1200,
+        height: 630,
+        alt: 'Batik - Belajar Etika dengan Interaktif & Menyenangkan'
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Batik - Belajar Etika dengan Interaktif & Menyenangkan',
+    description: 'Platform edukasi interaktif yang mengajarkan etika dan akhlak dengan cara yang menyenangkan.',
+    images: ['https://batika.vercel.app/og-image.png']
+  }
 };
+
 
 export default function Home() {
   return <HomeComponent />;

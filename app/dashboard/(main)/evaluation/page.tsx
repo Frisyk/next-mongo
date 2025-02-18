@@ -2,6 +2,11 @@ import { ListItem } from "./Card";
 import pretest from '@/public/icons/exam.png'
 import posttest from '@/public/icons/test.png'
 import testing from '@/public/icons/ab-testing.png'
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Evaluasi',
+};
 
 export default function ListExample() {
   const items = [

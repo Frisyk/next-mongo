@@ -74,7 +74,7 @@ function ClientSideContent({
       ) : (
         <p className="text-gray-500">Pilih bagian untuk menampilkan konten.</p>
       )}
-      <TTSButton text={content} />
+      {/* <TTSButton text={content} /> */}
     </div>
   );
 }

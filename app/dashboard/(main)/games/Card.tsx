@@ -8,24 +8,12 @@ export interface Game {
     img: string,
 }
 
-export default function Card({title, slug, img}: Game) {
+export default function  Card({title, slug, img}: Game) {
   return (
-    <Link prefetch={false} href={`games/${slug}`}
-      className="m-2 group py-5 grow bg-white/10 rounded-lg flex flex-col items-center justify-center gap-2 relative after:absolute after:h-full after:bg-[#F99417] z-10 shadow-lg after:-z-10 after:w-full after:inset-0 after:rounded-lg transition-all duration-300 hover:transition-all hover:duration-300 after:transition-all after:duration-500 after:hover:transition-all after:hover:duration-500 overflow-hidden after:-translate-y-full after:hover:translate-y-0 [&_p]:delay-200 [&_p]:transition-all w-full md:w-1/3"
-    >
-        <Image
-            src={img}
-            width={500}
-            height={500}
-            className='rounded w-full h-60 p-2 object-cover'
-            alt='image'
-        />
-        <div className='flex w-full items-center justify-between px-4'>
-            <p className="font-semibold text-slate-600 group-hover:text-white text-2xl">
-                {title}
-            </p>
-        </div>
-      
-    </Link>
+<Link href={`games/${slug}`} className="m-2 p-5 bg-white/10 rounded-lg flex flex-col items-center justify-center gap-4 shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl hover:bg-[#F99417] duration-300">
+    <Image src={img} width={500} height={500} className="rounded-lg w-64 h-64 object-cover transition-transform transform hover:scale-110" alt="image" />
+    <p className="font-semibold  text-2xl group-hover:text-white transition-colors duration-300">{title}</p>
+</Link>
+
   );
 }

@@ -1,6 +1,11 @@
+import { Metadata } from 'next';
 import ButtonLogin from './ButtonLogin';
 import { LoginForm } from './form';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Login',
+};
 
 export default function Page() {
   return (
