@@ -93,7 +93,7 @@ export default function Profile({ iuser, ilatestEvaluation, scores }: ProfilePro
               Login
             </Link>
             <Link
-              href="/register"
+              href="/signup"
               className="flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg shadow-md font-semibold hover:bg-gray-200 transition-all"
             >
               <FaUserPlus className="text-xl" />
