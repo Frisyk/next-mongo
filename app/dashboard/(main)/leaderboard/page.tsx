@@ -13,7 +13,7 @@ export default async function page() {
   return (
     <>
     
-        <Leaderboard data={JSON.parse(leaderboardRank).sort((a:any, b:any) => b.totalScore - a.totalScore || (a.quizCount - b.quizCount))} />
+        <Leaderboard dataJson={leaderboardRank} />
      
     </> 
   )

@@ -13,6 +13,11 @@ interface ProfileProps {
   scores: string;
 }
 
+const formatMonthYear = (dateString: string) => {
+  const date = new Date(dateString + "-01"); // Tambahkan hari untuk menghindari kesalahan parsing
+  return date.toLocaleDateString("id-ID", { year: "numeric", month: "long" });
+};
+
 export default function Profile({ iuser, ilatestEvaluation, scores }: ProfileProps) {
     const user = JSON.parse(iuser)
     const latestEvaluation = JSON.parse(ilatestEvaluation)
@@ -53,7 +58,7 @@ export default function Profile({ iuser, ilatestEvaluation, scores }: ProfilePro
                   {latestEvaluation.content}
                 </p>
                 <span className="text-sm text-gray-500 dark:text-gray-400">
-                  {latestEvaluation.month}
+                  {formatMonthYear(latestEvaluation.month)}
                 </span>
               </div>
             ) : (

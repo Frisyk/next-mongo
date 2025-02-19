@@ -16,7 +16,7 @@ export default function Content({ materi }: { materi: any }) {
         {materials?.map((m: any, index: number) => (
           <motion.div
             key={m.id}
-            className="w-full sm:w-[20rem] grow md:w-[18rem] lg:w-[20rem] bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden"
+            className="w-full sm:w-[20rem] grow md:w-[18rem] lg:w-[18rem] bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }} // Delay for staggered animations
