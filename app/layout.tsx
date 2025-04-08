@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import AuthProvider from '@/providers/AuthProvider';
+import SessionSyncProvider from '@/components/ui/SessionSyncProvider';
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Batik',
-    default: 'Batik (Belajar etika)',
+    template: '%s | Batik Education',
+    default: 'Batik Education',
   },
-  description: "Batik Belajar Etika",
+  description: "Belajar tentang batik dan warisan budaya Indonesia melalui platform pembelajaran interaktif",
   generator: 'Next.js',
   applicationName: 'Batik Belajar Etika',
   referrer: 'origin-when-cross-origin',
@@ -24,9 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="id">
       <body className={inter.className}>
-          {children}
+        <SessionSyncProvider>
+          <AuthProvider>
+            {children}
+          </AuthProvider>
+        </SessionSyncProvider>
       </body>
     </html>
   );

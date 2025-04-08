@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
-import { getUser, getUserScoresWithNames } from '@/lib/dal';
+import { getUser } from '@/lib/dal';
 import { getEvaluationsForUser, getUserScore } from '@/lib/admin/students';
 import Profile from './Profile';
 
 export const metadata: Metadata = {
-  title: 'My Profile',
+  title: 'Profil Saya',
 };
 
 export default async function Page() {
@@ -13,7 +13,7 @@ export default async function Page() {
     ? await getEvaluationsForUser(user.id).then(res => res?.data?.[0] || null)
     : null;
 
-  const userScores = user ? await getUserScore(user.id) : null
+  const userScores = user ? await getUserScore(user.id) : null;
 
   return <Profile scores={JSON.stringify(userScores)} iuser={JSON.stringify(user)} ilatestEvaluation={JSON.stringify(latestEvaluation)} />;
 }

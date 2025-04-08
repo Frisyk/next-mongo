@@ -152,13 +152,7 @@ export const addMaterial = async (state: any, formData: FormData) => {
 
     // Get the form data fields
     const title = formData.get('title');
-    const understanding = formData.get('understanding');
-    const argumentsField = formData.get('arguments');
-    const traits = formData.get('traits');
-    const forms = formData.get('forms');
-    const values = formData.get('values');
-    const prevents = formData.get('prevents');
-    const examples = formData.get('examples');
+    const content = formData.get('content');
     const image = formData.get('imagePath') as File; // assuming the image is passed as a File object
     const quizId = formData.get('quizPath');
     const slug = formData.get('slug');
@@ -185,13 +179,13 @@ export const addMaterial = async (state: any, formData: FormData) => {
     // Create a new material in the database
     const newMaterial = await Materi.create({
       title,
-      understanding,
-      arguments: argumentsField,
-      forms,
-      values,
-      prevents,
-      traits,
-      examples,
+      understanding: content,
+      arguments: '',
+      forms: '',
+      values: '',
+      prevents: '',
+      traits: '',
+      examples: '',
       img: imagePath,
       quizId,
       slug,
@@ -199,15 +193,15 @@ export const addMaterial = async (state: any, formData: FormData) => {
 
     // If creation failed, return an error message
     if (!newMaterial) {
-      return { message: 'An error occurred while adding the material.' };
+      return { message: 'Terjadi kesalahan saat menambahkan materi.' };
     }
 
     // Return the created material
-    return { message: 'Add material successfully', material: newMaterial };
+    return { message: 'Materi berhasil ditambahkan', material: newMaterial };
 
   } catch (error) {
     console.error('Failed to add material:', error);
-    return { message: 'Failed to add material', error };
+    return { message: 'Gagal menambahkan materi', error };
   } finally {
     // Redirect after adding the material
     redirect('/admin/material');

@@ -1,6 +1,31 @@
 import { JWTPayload } from 'jose';
 import { z } from 'zod';
 
+// NextAuth types
+import 'next-auth';
+
+declare module 'next-auth' {
+  interface User {
+    id: string;
+    isAdmin: boolean;
+    point: number;
+    class: string;
+  }
+
+  interface Session {
+    user: User;
+  }
+}
+
+declare module 'next-auth/jwt' {
+  interface JWT {
+    id: string;
+    isAdmin: boolean;
+    point: number;
+    class: string;
+  }
+}
+
 export const SignupFormSchema = z.object({
   username: z
     .string()

@@ -37,6 +37,10 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  points: {
+    type: Number,
+    default: 0
+  }
 }, { timestamps: true });
 
 const evaluationSchema = new mongoose.Schema({
@@ -99,6 +103,47 @@ const materiSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true
+  }
+}, { timestamps: true });
+
+// Model baru untuk Material dalam format modern
+const materialSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  slug: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+  thumbnail: {
+    type: String,
+    required: true,
+  },
+  quizId: {
+    type: String,
+    required: false,
+  },
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: false,
+  },
+  viewCount: {
+    type: Number,
+    default: 0
+  },
+  tags: [{
+    type: String
+  }],
+  isPublished: {
+    type: Boolean,
+    default: true
   }
 }, { timestamps: true });
 
@@ -189,12 +234,37 @@ const storySchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
+const BabSchema = new mongoose.Schema({
+  nama: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  deskripsi: {
+    type: String,
+  },
+  urutan: {
+    type: Number,
+    default: 0,
+  },
+  thumbnail: {
+    type: String, // URL ke gambar thumbnail Bab
+    default: '/images/placeholder.jpg' // Default placeholder
+  },
+  active: {
+    type: Boolean,
+    default: true,
+  },
+}, { timestamps: true });
+
 export const User = mongoose.models.User || mongoose.model("User", userSchema);
 export const Materi = mongoose.models.Materi || mongoose.model("Materi", materiSchema);
+export const Material = mongoose.models.Material || mongoose.model("Material", materialSchema);
 export const Session = mongoose.models.Session || mongoose.model("Session", sessionSchema);
 export const Game = mongoose.models.Game || mongoose.model("Game", gameSchema);
 export const Score = mongoose.models.Score || mongoose.model("Score", scoreSchema);
 export const Quizi = mongoose.models.Quizi || mongoose.model("Quizi", quizSchema);
 export const Story = mongoose.models.Story || mongoose.model("Story", storySchema);
 export const Evaluation = mongoose.models.Evaluation || mongoose.model("Evaluation", evaluationSchema);
+export const Bab = mongoose.models.Bab || mongoose.model("Bab", BabSchema);
 

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import perahu from '@/public/images/1725866509688-22871218_6705806.jpg'
+import { FaArrowLeft, FaUserCircle, FaSignOutAlt, FaTrophy } from 'react-icons/fa';
+import { logout } from '@/lib/auth';
 
 const getInitials = (name: string) => {
   const initials = name
@@ -56,6 +58,10 @@ export default function Header({user, link}: {user?: any, link:string}) {
   };
 
   const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const handleLogout = async () => {
+    await logout();
+  };
 
   return (
     <header className="flex h-14 sticky top-0 z-30 bg-white dark:bg-slate-900 w-full justify-between items-center border-b dark:border-slate-800 px-4 md:gap-4 dark:text-white">
@@ -114,7 +120,18 @@ export default function Header({user, link}: {user?: any, link:string}) {
             </button>
             <hr className="border-gray-300 dark:border-slate-700 my-2" />
             {user ? (
-              <LogoutButton />
+              <>
+                <Link href="/dashboard/leaderboard">
+                  <div className="flex items-center p-2 rounded hover:bg-gray-700">
+                    <FaTrophy className="mr-3" />
+                    Papan Peringkat
+                  </div>
+                </Link>
+                <button onClick={handleLogout} className="w-full text-left flex items-center p-2 rounded hover:bg-gray-700">
+                  <FaSignOutAlt className="mr-3" />
+                  Logout
+                </button>
+              </>
             ) : (
               <LoginButton />
             )}

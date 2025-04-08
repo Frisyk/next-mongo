@@ -1,11 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { UserImage } from '../../(components)/Header';
 import ScoreBoard from './ScoreBoard';
 import Link from 'next/link';
 import { FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import ChatBot from "./ChatBot";
 
 interface ProfileProps {
   iuser: string;
@@ -21,6 +22,8 @@ const formatMonthYear = (dateString: string) => {
 export default function Profile({ iuser, ilatestEvaluation, scores }: ProfileProps) {
     const user = JSON.parse(iuser)
     const latestEvaluation = JSON.parse(ilatestEvaluation)
+    const userScores = scores ? JSON.parse(scores) : [];
+
   return (
     <main>
       {user ? (
@@ -102,6 +105,7 @@ export default function Profile({ iuser, ilatestEvaluation, scores }: ProfilePro
           </div>
         </motion.section>
       )}
+      <ChatBot />
     </main>
   );
 }
