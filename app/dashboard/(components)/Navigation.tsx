@@ -36,7 +36,7 @@ export default function Navigation({ userI }: { userI: any }) {
               className="flex items-center gap-3 font-semibold text-slate-900 dark:text-white"
             >
               <TbMenuDeep className="w-6 h-6" />
-              {isNavOpen && <span className="text-2xl font-bold">Batik.</span>}
+              {isNavOpen && <span className="text-2xl font-bold">Batika.</span>}
             </button>
           </div>
 

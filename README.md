@@ -1,4 +1,4 @@
-# Aplikasi Batik
+# Aplikasi Batika
 
 Aplikasi pembelajaran interaktif berbasis Next.js.
 

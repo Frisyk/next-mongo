@@ -14,7 +14,7 @@ export default async function Layout({
     console.log(user);
     
   return (
-    <div className="flex min-h-screen w-full">
+    <div className="flex w-full">
       {/* <Navigation userI={JSON.stringify(user)}/> */}
       <div className="flex w-full flex-col">
         <Header user={user? JSON.stringify(user.username) : null} link='#'/>

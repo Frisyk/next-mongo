@@ -4,12 +4,12 @@ import { LogIn } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Batik - Belajar Etika dengan Interaktif & Menyenangkan',
-  description: 'Batik adalah platform edukasi interaktif yang membantu siswa memahami etika dan akhlak dengan cara yang menyenangkan dan mudah dipahami.',
+  title: 'Batika - Belajar Etika dengan Interaktif & Menyenangkan',
+  description: 'Batika adalah platform edukasi interaktif yang membantu siswa memahami etika dan akhlak dengan cara yang menyenangkan dan mudah dipahami.',
   keywords: 'belajar etika, pendidikan karakter, akhlak, nilai moral, pendidikan Islam, interaktif, anak-anak',
   authors: [{ name: "Frisnadi Nurul Huda", url: "https://frisyk.vercel.app" }],
   openGraph: {
-    title: 'Batik - Belajar Etika dengan Interaktif & Menyenangkan',
+    title: 'Batika - Belajar Etika dengan Interaktif & Menyenangkan',
     description: 'Platform edukasi interaktif yang mengajarkan etika dan akhlak dengan cara yang menyenangkan.',
     url: 'https://batika.vercel.app',
     type: 'website',
@@ -18,13 +18,13 @@ export const metadata: Metadata = {
         url: 'https://batika.vercel.app/og-image.png', 
         width: 1200,
         height: 630,
-        alt: 'Batik - Belajar Etika dengan Interaktif & Menyenangkan'
+        alt: 'Batika - Belajar Etika dengan Interaktif & Menyenangkan'
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Batik - Belajar Etika dengan Interaktif & Menyenangkan',
+    title: 'Batika - Belajar Etika dengan Interaktif & Menyenangkan',
     description: 'Platform edukasi interaktif yang mengajarkan etika dan akhlak dengan cara yang menyenangkan.',
     images: ['https://batika.vercel.app/og-image.png']
   }
@@ -39,7 +39,7 @@ function HomeComponent() {
   return (
     <main className="relative w-full justify-between h-screen flex flex-col md:gap-20 bg-gradient-to-bl from-slate-900 via-slate-950 to-slate-900">
       <section className="flex justify-between items-center mr-5 animate-fadeIn">
-        <h1 className="text-2xl p-5 font-bold text-white">Batik.</h1>
+        <h1 className="text-2xl p-5 font-bold text-white">Batika.</h1>
         <Link href="/login" className="flex gap-2 items-center px-3 py-3 max-w-xs text-center text-md font-semibold text-white bg-slate-900 rounded-xl ring-1 shadow-lg hover:bg-slate-800 transition-colors">
           <LogIn className="w-4 h-4"/> Login
         </Link>

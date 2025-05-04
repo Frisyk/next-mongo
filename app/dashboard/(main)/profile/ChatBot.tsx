@@ -79,7 +79,7 @@ export default function ChatBot() {
   const generateResponse = (query: string) => {
     // Contoh sederhana respons berdasarkan input
     if (query.toLowerCase().includes('batik')) {
-      return 'Batik adalah teknik menggambar atau mewarnai kain dengan menggunakan lilin malam untuk mencegah penyerapan warna. Di Indonesia, batik memiliki nilai budaya yang sangat tinggi dan menjadi warisan budaya yang dilindungi UNESCO.';
+      return 'Batika adalah teknik menggambar atau mewarnai kain dengan menggunakan lilin malam untuk mencegah penyerapan warna. Di Indonesia, batik memiliki nilai budaya yang sangat tinggi dan menjadi warisan budaya yang dilindungi UNESCO.';
     } else if (query.toLowerCase().includes('apa kabar') || query.toLowerCase().includes('halo')) {
       return 'Saya baik-baik saja, terima kasih telah bertanya! Bagaimana dengan Anda?';
     } else if (query.toLowerCase().includes('terima kasih')) {
@@ -131,7 +131,7 @@ export default function ChatBot() {
             <div className="bg-blue-600 text-white p-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {getProviderIcon()}
-                <h3 className="font-bold">Batik Assistant</h3>
+                <h3 className="font-bold">Batika Assistant</h3>
               </div>
               <div className="flex items-center gap-2">
                 <select
