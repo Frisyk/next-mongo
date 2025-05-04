@@ -42,16 +42,20 @@ const userSchema = new mongoose.Schema({
 const evaluationSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // Referencing the User model
+    ref: 'User', // Referensi ke model User
     required: true,
+    unique: true, // Setiap user hanya bisa submit satu evaluasi
   },
-  month: {
+  rating: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 5,
+  },
+  description: {
     type: String,
     required: true,
-  },
-  content: {
-    type: String,
-    required: true,
+    trim: true,
   },
 }, { timestamps: true });
 
@@ -189,12 +193,49 @@ const storySchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
+// Skema BARU untuk Evaluasi Media Pembelajaran - Dengan Aspek
+const mediaEvaluationSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', 
+    required: true,
+    unique: true,
+  },
+  // Ganti satu rating dengan rating per aspek
+  ratingMateri: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 5,
+  },
+  ratingMedia: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 5,
+  },
+  ratingInteraktivitas: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 5,
+  },
+  // Ubah nama description menjadi overallFeedback
+  overallFeedback: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+}, { timestamps: true });
+
 export const User = mongoose.models.User || mongoose.model("User", userSchema);
+export const Evaluation = mongoose.models.Evaluation || mongoose.model("Evaluation", evaluationSchema);
 export const Materi = mongoose.models.Materi || mongoose.model("Materi", materiSchema);
 export const Session = mongoose.models.Session || mongoose.model("Session", sessionSchema);
 export const Game = mongoose.models.Game || mongoose.model("Game", gameSchema);
 export const Score = mongoose.models.Score || mongoose.model("Score", scoreSchema);
 export const Quizi = mongoose.models.Quizi || mongoose.model("Quizi", quizSchema);
 export const Story = mongoose.models.Story || mongoose.model("Story", storySchema);
-export const Evaluation = mongoose.models.Evaluation || mongoose.model("Evaluation", evaluationSchema);
+// Export model BARU untuk evaluasi media
+export const MediaEvaluation = mongoose.models.MediaEvaluation || mongoose.model("MediaEvaluation", mediaEvaluationSchema);
 

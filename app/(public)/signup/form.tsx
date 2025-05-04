@@ -58,6 +58,7 @@ export function SignupForm() {
               <option value="" disabled selected>
                 Pilih kelas
               </option>
+              <option value="tester">Tester</option>
               <option value="XA">XA</option>
               <option value="XB">XB</option>
               <option value="XC">XC</option>

@@ -11,40 +11,29 @@ export const metadata: Metadata = {
 export default function ListExample() {
   const items = [
     {
-      name: "Kuisoner Evaluasi Aplikasi",
+      name: "Evaluasi Media Pembelajaran",
       iconUrl: testing,
-      description: "Kasih rating mu untuk aplikasi ni yaa!.",
-      link: "",
+      description: "Bagikan pendapatmu tentang aplikasi ini!",
+      link: "/dashboard/evaluation/evaluation-media",
       isDisable: false
-    },
-    {
-      name: "Pre-Test",
-      iconUrl: pretest,
-      description: "Ayo liat seberapa jago kamu sebelum belajar.",
-      link: "",
-      isDisable: true
-    },
-    {
-      name: "Post-Test",
-      iconUrl: posttest,
-      description: "Uji pemahaman-mu lagi yuk setelah belajar.",
-      link: "",
-      isDisable: true
     },
   ];
 
   return (
-    <div className="flex w-full flex-wrap gap-6 items-center justify-center">
-      {items.map((item, index) => (
-        <ListItem
-          key={index}
-          name={item.name}
-          iconUrl={item.iconUrl}
-          description={item.description}
-          link={item.link}
-          isDisable={item.isDisable}
-        />
-      ))}
+    <div className="container mx-auto py-8 px-4">
+      {/* <h1 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">Pusat Evaluasi</h1> */}
+      <div className="flex w-full flex-wrap gap-6 ">
+        {items.map((item, index) => (
+          <ListItem
+            key={index}
+            name={item.name}
+            iconUrl={item.iconUrl}
+            description={item.description}
+            link={item.link}
+            isDisable={item.isDisable}
+          />
+        ))}
+      </div>
     </div>
   );
 }
