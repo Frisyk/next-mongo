@@ -60,7 +60,7 @@ export default function BabList({ groupedMaterials }: BabListProps) {
 
   return (
     // Gunakan list atau div dengan space
-    <div className="space-y-3">
+    <div className="space-y-3 flex">
       {enrichData.map((group, index) => (
         <motion.div
           key={group.babInfo._id}

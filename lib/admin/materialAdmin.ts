@@ -132,6 +132,59 @@ export const addNewMaterial = async (state: any, formData: FormData) => {
   }
 };
 
+// Fungsi untuk menambahkan material baru dengan API endpoints
+export async function addNewMaterialWithObject(data: {
+  title: string;
+  content: string;
+  babId: string;
+  thumbnail?: string;
+}) {
+  try {
+    await connecttoDB();
+
+    // Validasi data
+    if (!data.title || !data.content || !data.babId) {
+      return { success: false, message: "Semua field wajib diisi" };
+    }
+
+    // Generate slug dari title
+    const slug = data.title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, '')
+      .replace(/\s+/g, '-');
+
+    // Buat material baru
+    const newMaterial = await Material.create({
+      title: data.title,
+      content: data.content,
+      slug,
+      babId: data.babId,
+      thumbnail: data.thumbnail || '',
+      status: 'published'
+    });
+
+    if (!newMaterial) {
+      throw new Error("Gagal membuat material baru");
+    }
+
+    // Revalidasi path untuk memperbarui cache
+    revalidatePath('/materi');
+    revalidatePath('/admin/material');
+
+    return { 
+      success: true, 
+      message: "Material berhasil ditambahkan", 
+      data: newMaterial 
+    };
+  } catch (error) {
+    console.error("Error adding new material:", error);
+    return { 
+      success: false, 
+      message: error instanceof Error ? error.message : "Terjadi kesalahan saat menambahkan material" 
+    };
+  }
+}
+
 // Fungsi untuk memperbarui material
 export const updateMaterial = async (state: any, formData: FormData) => {
   try {

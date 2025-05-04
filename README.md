@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Aplikasi Batik
+
+Aplikasi pembelajaran interaktif berbasis Next.js.
 
 ## Getting Started
 
@@ -16,9 +18,50 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Konfigurasi Penyimpanan Supabase
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Aplikasi ini menggunakan Supabase untuk mengelola penyimpanan file (gambar, thumbnail, dll). Untuk mengatur Supabase, lakukan langkah-langkah berikut:
+
+1. Buat akun di [Supabase](https://supabase.io)
+2. Buat project baru
+3. Dapatkan URL dan Anon Key dari Settings > API
+4. Buat bucket bernama `batik-assets` di Storage
+5. Atur kebijakan akses bucket agar bisa publik (atau sesuai kebutuhan)
+6. Salin file `.env.local.example` ke `.env.local` dan isi dengan kredensial Supabase Anda:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
+```
+
+## Menggunakan Komponen Upload Gambar
+
+Aplikasi ini menyediakan komponen `ImageUpload` yang memudahkan upload gambar:
+
+```jsx
+import ImageUpload from '@/components/ui/image-upload';
+
+// Di dalam komponen React
+const [imageUrl, setImageUrl] = useState(null);
+const [isUploading, setIsUploading] = useState(false);
+
+<ImageUpload
+  value={imageUrl}
+  onChange={setImageUrl}
+  onUploading={setIsUploading}
+  folder="my-custom-folder"
+  maxSizeMB={2}
+  className="h-64"
+/>
+```
+
+## Struktur Project
+
+- `components/` - UI components
+- `lib/` - Library utilities & API
+  - `supabase.ts` - Utilitas Supabase untuk upload file
+- `app/` - Router & halaman aplikasi
+- `public/` - Static assets
 
 ## Learn More
 

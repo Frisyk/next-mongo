@@ -121,9 +121,14 @@ const materialSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  babId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Bab',
+    required: true,
+  },
   thumbnail: {
     type: String,
-    required: true,
+    required: false,
   },
   quizId: {
     type: String,
@@ -141,9 +146,10 @@ const materialSchema = new mongoose.Schema({
   tags: [{
     type: String
   }],
-  isPublished: {
-    type: Boolean,
-    default: true
+  status: {
+    type: String,
+    enum: ['draft', 'published', 'archived'],
+    default: 'published'
   }
 }, { timestamps: true });
 

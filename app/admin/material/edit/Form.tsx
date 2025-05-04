@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
 import { updateMaterial } from '@/lib/admin/materialAdmin';
 import { getAllBabs } from '@/lib/admin/babAdmin';
+import Image from 'next/image';
 
 export default function Form({m}: {m: string}) {
   const router = useRouter();
@@ -197,7 +198,9 @@ export default function Form({m}: {m: string}) {
             <div className="mb-2">
               {thumbnailPreview && (
                 <div className="relative w-40 h-40 overflow-hidden rounded-lg mb-2">
-                  <img 
+                  <Image
+                    width={400}
+                    height={400} 
                     src={thumbnailPreview} 
                     alt="Thumbnail Preview" 
                     className="object-cover w-full h-full"
