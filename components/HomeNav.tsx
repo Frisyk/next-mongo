@@ -25,7 +25,7 @@ export default function HomeNav() {
       <div className="flex gap-10 items-center h-14 border-b dark:border-slate-900 px-4">
         <Link prefetch={false} className="flex items-center gap-2 font-semibold" href="#">
           <PackageIcon className="h-6 w-6" />
-          <span>Batik</span>
+          <span>Batika</span>
         </Link>
         <nav className="flex gap-5 text-sm font-medium">
           {navLinks.map((link) => (

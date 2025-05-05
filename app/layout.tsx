@@ -6,15 +6,15 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Batik',
-    default: 'Batik (Belajar etika)',
+    template: '%s | Batika',
+    default: 'Batika (Belajar etika)',
   },
-  description: "Batik Belajar Etika",
+  description: "Batika Belajar Etika",
   generator: 'Next.js',
-  applicationName: 'Batik Belajar Etika',
+  applicationName: 'Batika Belajar Etika',
   referrer: 'origin-when-cross-origin',
-  keywords: ['Next.js', 'Belajar etika', 'batik', 'pendidikan agama islam','PAI', 'Edukasi', 'akhlak', 'islam'],
-  authors: [{ name: 'Frisnadi' }, { name: 'Batik', url: 'https://frisyk.vercel.app' }],
+  keywords: ['Next.js', 'Belajar etika', 'batika', 'pendidikan agama islam','PAI', 'Edukasi', 'akhlak', 'islam'],
+  authors: [{ name: 'Frisnadi' }, { name: 'Batika', url: 'https://frisyk.vercel.app' }],
   creator: 'Frisnadi Nurul Huda',
 };
 

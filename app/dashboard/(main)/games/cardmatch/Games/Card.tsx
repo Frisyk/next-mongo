@@ -12,7 +12,7 @@ interface CardComponentProps {
   const CardComponent: React.FC<CardComponentProps> = ({ card, handleClick, choiceOne, choiceTwo, matched }) => (
     <div className={card === choiceOne || card === choiceTwo || card.matched ? "card flipped w-full cursor-pointer lg:w-52 " : "card w-full cursor-pointer lg:w-52"} onClick={() => handleClick(card)}>
         <Image className="lg:min-w-52 w-20 max-h-40 object-contain front" src={card.src} alt="card front" />
-        <div className="w-full lg:min-w-52 h-40 bg-blue-500 back flex items-center justify-center text-xl text-blue-200 rounded-2xl">Batik</div>
+        <div className="w-full lg:min-w-52 h-40 bg-blue-500 back flex items-center justify-center text-xl text-blue-200 rounded-2xl">Batika</div>
     </div>
   );
   
