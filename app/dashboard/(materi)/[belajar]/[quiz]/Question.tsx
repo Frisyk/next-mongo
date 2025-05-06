@@ -12,7 +12,6 @@ import Header from '../components/Header-Layout';
 import { PiTimer } from 'react-icons/pi';
 import Modal from '../components/Modals';
 import { useRouter } from 'next/navigation';
-
 interface AppProps {
     user: string;
     quizM: string;

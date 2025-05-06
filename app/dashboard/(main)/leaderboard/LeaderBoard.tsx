@@ -14,6 +14,7 @@ export default function Leaderboard({ dataJson }: { dataJson: string }) {
     data = JSON.parse(dataJson).sort(
       (a: any, b: any) => b.totalScore - a.totalScore || a.quizCount - b.quizCount
     );
+    
   } catch (error) {
     console.error("Invalid JSON Data:", error);
   }
@@ -27,7 +28,7 @@ export default function Leaderboard({ dataJson }: { dataJson: string }) {
           <table className="w-full border-collapse">
             <thead className="bg-teal-500 dark:bg-teal-700 text-white">
               <tr>
-                <th className="p-3 text-left">Rank</th>
+                <th className="p-3 text-center">Rank</th>
                 <th className="p-3 text-left">Nama</th>
                 <th className="p-3 text-center">Kelas</th>
                 <th className="p-3 text-center">Skor</th>
@@ -43,7 +44,7 @@ export default function Leaderboard({ dataJson }: { dataJson: string }) {
                   transition={{ delay: index * 0.1 }}
                   className="border-b hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
-                  <td className="p-3 text-3xl">{index === 0 ? "🥇" : index + 1}</td>
+                  <td className="p-3 text-3xl text-center">{index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : index + 1  }</td>
                   <td className="p-3 font-medium">{user.username}</td>
                   <td className="p-3 text-center font-medium">{user.class}</td>
                   <td className="p-3 text-center font-bold text-teal-600 dark:text-teal-400">

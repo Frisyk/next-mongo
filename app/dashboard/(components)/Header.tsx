@@ -93,12 +93,12 @@ export default function Header({ user, link }: { user?: any; link: string }) {
       </Link>
 
       {/* Judul Halaman */}
-      <h1 className="md:block hidden text-lg font-semibold capitalize">{path}</h1>
+      {/* <h1 className="md:block hidden text-lg font-semibold capitalize">{path}</h1> */}
 
       {/* Tombol Theme di desktop */}
       <button
         onClick={toggleTheme}
-        className="md:flex items-center gap-2 p-2 hidden rounded-md hover:bg-gray-100 dark:hover:bg-slate-800 transition"
+        className="md:flex justify-center ml-auto items-center gap-2 p-2 hidden rounded-md hover:bg-gray-100 dark:hover:bg-slate-800 transition"
       >
         {theme !== 'light' ? (
           <>

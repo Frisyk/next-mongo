@@ -37,12 +37,16 @@ export default async function Games() {
   ]
 
   return (
-    <div className='flex flex-col md:flex-row flex-wrap p-4 gap-5 -z-10'>
-      {
+    <main className='p-4'>
+      <h1 className='text-4xl pb-2 ml-4 font-bold'>Game Seru</h1>
+      <p className='text-gray-500 ml-4'>Pilih game yang ingin kamu mainkan </p>
+        <div className='flex flex-col py-4 md:flex-row flex-wrap gap-5 -z-10'>
+        {
         gamesList?.map((game, index) => (
           <Card key={index} title={game.title} img={game.img} slug={game.slug} />
         ))
       }
     </div>
+    </main>
   )
 }

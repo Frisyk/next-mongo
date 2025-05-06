@@ -1,6 +1,6 @@
 import { GameResources } from "@/lib/data";
 import GamesCard from "../Games/CardMatch";
-
+import { ToastContainer } from "react-toastify";
 export const generateMetadata = async ({params}: {params: MateriParams}) => {
   const title = GameResources.find(gr => gr.level == params.level.replace(/%20/g, " "))
   return {
