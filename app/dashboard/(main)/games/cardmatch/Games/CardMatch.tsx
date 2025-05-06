@@ -65,14 +65,14 @@ export default function GamesCard({ level, back }: { level?: string; back: strin
 
     setTimeout(() => {
       if (isMatch) {
-        toast.success('Kartu Cocok!');
+        // toast.success('Kartu Cocok!');
         setCards(prev =>
           prev.map(card =>
             card.name === choiceOne.name ? { ...card, matched: true } : card
           )
         );
       } else {
-        toast.warn('Kartu Tidak Cocok');
+        // toast.warn('Kartu Tidak Cocok');
       }
       resetChoices();
     }, 1000);

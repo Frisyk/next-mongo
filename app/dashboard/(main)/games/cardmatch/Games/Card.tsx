@@ -19,7 +19,7 @@ interface CardComponentProps {
       }`} 
       onClick={() => handleClick(card)}
     >
-        <Image className="lg:min-w-52 w-20 max-h-40 object-contain front animate-pulse" src={card.src} alt="card front" />
+        <Image className="lg:min-w-52 w-20 max-h-40 front animate-pulse" src={card.src} alt="card front" />
         <div className={`w-full lg:min-w-52 h-40 ${
           index % 2 === 0 
             ? "bg-blue-500 dark:bg-blue-700" 
