@@ -11,26 +11,33 @@ interface CardComponentProps {
   }
   
   const CardComponent: React.FC<CardComponentProps> = ({ card, index, handleClick, choiceOne, choiceTwo, matched }) => (
-    <div 
-      className={`card w-full cursor-pointer lg:w-52 transition-all duration-500 transform ${
-        card === choiceOne || card === choiceTwo || card.matched 
-          ? "flipped scale-105" 
+    <div
+      className={`card aspect-square w-full max-w-[180px] rounded-2xl overflow-hidden shadow-lg cursor-pointer transition-transform duration-300 ease-in-out ${
+        card === choiceOne || card === choiceTwo || card.matched
+          ? "flipped scale-105"
           : "hover:scale-95"
-      }`} 
+      }`}
       onClick={() => handleClick(card)}
     >
-        <Image className="lg:min-w-52 w-20 max-h-40 front animate-pulse" src={card.src} alt="card front" />
-        <div className={`w-full lg:min-w-52 h-40 ${
-          index % 2 === 0 
-            ? "bg-blue-500 dark:bg-blue-700" 
+      <Image
+        className="w-full h-full object-contain front"
+        width={180}
+        height={180}
+        src={card.src}
+        alt="card front"
+    />
+
+      <div
+        className={`absolute top-0 left-0 w-full h-full back flex items-center justify-center text-white font-bold text-lg lg:text-2xl rounded-2xl ${
+          index % 2 === 0
+            ? "bg-blue-500 dark:bg-blue-700"
             : "bg-teal-700 dark:bg-teal-900"
-          } back flex items-center justify-center text-white font-bold text-2xl rounded-2xl ${
-            card.matched ? "matched animate-bounce" : ""
-          }`
-        }>
-          Batika
-        </div>
+        } ${card.matched ? "matched" : ""}`}
+      >
+        Batika
+      </div>
     </div>
+
   );
   
   export default CardComponent;

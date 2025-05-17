@@ -4,7 +4,7 @@ import LevelList from "./Games/ListLevel";
 import { Info } from "lucide-react";
 
 export default function CardSortPage() {
-  const levels = ["Gerakan Shalat", "Bacaan Shalat", "Waktu Shalat"];
+  const levels = ["Gerakan Shalat", "Hikmah", "Waktu Shalat"];
   const [showGameplay, setShowGameplay] = useState(false);
 
   const handleShowGameplay = () => {

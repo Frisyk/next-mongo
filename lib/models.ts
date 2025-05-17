@@ -42,20 +42,16 @@ const userSchema = new mongoose.Schema({
 const evaluationSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // Referensi ke model User
+    ref: 'User', // Referencing the User model
     required: true,
-    unique: true, // Setiap user hanya bisa submit satu evaluasi
   },
-  rating: {
-    type: Number,
-    required: true,
-    min: 1,
-    max: 5,
-  },
-  description: {
+  month: {
     type: String,
     required: true,
-    trim: true,
+  },
+  content: {
+    type: String,
+    required: true,
   },
 }, { timestamps: true });
 
