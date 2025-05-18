@@ -43,13 +43,13 @@ export default function ScoreBoard({ scores}: ScoreBoardProps) {
           </p>
         </motion.div>
       ) : (
-        <>
-          <table className="min-w-full text-sm table-auto">
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-sm overflow-x-scroll table-auto">
             <thead className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white dark:bg-gradient-to-r dark:from-blue-700 dark:to-indigo-800">
               <tr>
                 <th className="py-3 px-4">Nama Kuis</th>
                 <th className="py-3 px-4">Skor</th>
-                <th className="py-3 px-4">Waktu Ujian</th>
+                <th className="py-3 px-4">Waktu</th>
               </tr>
             </thead>
             <tbody>
@@ -78,7 +78,7 @@ export default function ScoreBoard({ scores}: ScoreBoardProps) {
               ))}
             </tbody>
           </table>
-        </>
+        </div>
       )}
     </motion.div>
   );
