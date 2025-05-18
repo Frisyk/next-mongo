@@ -21,7 +21,7 @@ export default function Content({ materi }: { materi: any }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }} // Delay for staggered animations
           >
-            <Link prefetch={false} href={`/dashboard/${m.slug}`}>
+            <Link href={`/dashboard/${m.slug}`}>
               <div className="flex flex-col h-full">
                 {/* Image Section */}
                 <motion.div

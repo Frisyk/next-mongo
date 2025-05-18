@@ -52,7 +52,7 @@ function Navigation({ userI }: { userI: any }) {
       <div className="hidden md:block w-80 border-r border-slate-300 dark:border-slate-800">
         <div className="flex h-screen flex-col gap-2 bg-white dark:bg-slate-900">
           <div className="h-14 items-center border-b border-slate-300 dark:border-slate-800 px-4 flex">
-            <Link prefetch={false} className="flex items-center gap-2 font-semibold text-slate-900 dark:text-white" href="/">
+            <Link  className="flex items-center gap-2 font-semibold text-slate-900 dark:text-white" href="/">
               <span className="text-2xl font-bold">Batika</span>
             </Link>
             <button
@@ -71,7 +71,7 @@ function Navigation({ userI }: { userI: any }) {
             <nav className="flex flex-col gap-5 px-4 text-sm font-medium">
               {navLinks.map((link) => (
                 <Link
-                  prefetch={false}
+                  
                   className={clsx(
                     'flex items-center gap-3 rounded-lg px-3 py-2 transition-all text-slate-300 hover:text-white hover:bg-slate-600 dark:text-slate-50 dark:hover:bg-slate-800',
                     {
@@ -98,7 +98,7 @@ function Navigation({ userI }: { userI: any }) {
         <nav className="flex justify-around w-full py-2">
           {navLinks.map((link) => (
             <Link
-              prefetch={false}
+              
               className={clsx(
                 'flex flex-col items-center gap-1 px-3 py-2 rounded-xl transition-all',
                 {
@@ -138,7 +138,7 @@ function DeleteButton({id, path}:{id:string, path:string}) {
 function UpdateButton({slug, path}:{slug:string, path:string}) {
   
   return (
-    <Link prefetch={false} href={{
+    <Link  href={{
       pathname: `/admin/${path}/edit`,
       query: {
         path: slug,

@@ -24,7 +24,7 @@ export default function Leaderboard({ dataJson }: { dataJson: string }) {
       <h2 className="text-2xl font-bold text-center mb-4 dark:text-white">📜 Leaderboard</h2>
       
       {data.length > 0 ? (
-        <div className="overflow-hidden border rounded-lg">
+        <div className="overflow-x-auto border rounded-lg">
           <table className="w-full border-collapse">
             <thead className="bg-teal-500 dark:bg-teal-700 text-white">
               <tr>

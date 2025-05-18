@@ -17,7 +17,7 @@ export default function Navigation({ userI }: { userI: any }) {
   const navLinks = [
     { title: 'Belajar', href: '/dashboard', badge: <GoHomeFill className='w-6 h-6' /> },
     { title: 'Games', href: '/dashboard/games', badge: <MdGames className='w-6 h-6' /> },
-    { title: 'Evaluasi', href: '/dashboard/evaluation', badge: <FaNoteSticky className='w-6 h-6 text-yellow-300 bg-slate-950 rounded-md' /> },
+    // { title: 'Evaluasi', href: '/dashboard/evaluation', badge: <FaNoteSticky className='w-6 h-6 text-yellow-300 bg-slate-950 rounded-md' /> },
     { title: 'LeaderBoard', href: '/dashboard/leaderboard', badge: <FaAward className='w-6 h-6' /> },
     { title: 'Profil', href: '/dashboard/profile', badge: <FaUserCircle className='w-6 h-6' /> },
   ];
@@ -45,7 +45,6 @@ export default function Navigation({ userI }: { userI: any }) {
             <nav className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <Link
-                  prefetch={false}
                   className={clsx(
                     'flex items-center  gap-3 rounded-lg px-3 py-3 transition-all text-slate-500 hover:text-white hover:bg-slate-300 dark:text-slate-50 dark:hover:bg-slate-500',
                     { 'bg-slate-700 text-white': path === link.href }
@@ -75,7 +74,6 @@ export default function Navigation({ userI }: { userI: any }) {
         <nav className="flex justify-around w-full py-3 px-3">
           {navLinks.map((link) => (
             <Link
-              prefetch={false}
               className={clsx(
                 'flex flex-col items-center gap-1 px-3 py-3 rounded-xl transition-all',
                 {
