@@ -5,7 +5,7 @@ export interface Card {
     name: string;
     src: StaticImageData;
     matched: boolean;
-    // color: string;
+    color?: string;
   }
   
 export interface ListProps {

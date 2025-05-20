@@ -99,10 +99,10 @@ export default function App({ user, quizM, title, link }: AppProps) {
             <Header title={title} link={link} />
             <div className="p-4 md:w-4/5 mx-auto mt-4 flex flex-col gap-4 md:gap-5">
                 <Modal isOpen={showStartModal} onClose={() => router.back()}>
-                    <h2 className="text-xl font-bold">Mulai Quiz</h2>
-                    <p>Klik tombol di bawah untuk memulai Quiz.</p>
+                    <h2 className="text-xl font-bold mb-2">Kuis {title}</h2>
+                    <p className='mb-4'>Silakan pilih satu jawaban yang paling tepat dari pilihan yang ada.</p>
                     <button onClick={handleStart} className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg">
-                        Mulai Quiz
+                        Mulai Kuis
                     </button>
                 </Modal>
 

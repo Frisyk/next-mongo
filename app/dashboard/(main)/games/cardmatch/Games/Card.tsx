@@ -9,6 +9,21 @@ interface CardComponentProps {
     matched: boolean;
     index: number;
   }
+
+  const bgColor = (color: string) => {
+    switch (color) {
+      case "blue":
+        return "bg-blue-500";
+      case "green":
+        return "bg-green-500";
+      case "orange":
+        return "bg-orange-500";
+      case "violet":
+        return "bg-violet-500";
+      default:
+        return "bg-blue-500";
+    }
+  };
   
   const CardComponent: React.FC<CardComponentProps> = ({ card, index, handleClick, choiceOne, choiceTwo, matched }) => (
     <div
@@ -29,9 +44,7 @@ interface CardComponentProps {
 
       <div
         className={`absolute top-0 left-0 w-full h-full back flex items-center justify-center text-white font-bold text-lg lg:text-2xl rounded-2xl ${
-          index % 2 === 0
-            ? "bg-blue-500 dark:bg-blue-700"
-            : "bg-teal-700 dark:bg-teal-900"
+          bgColor(card.color || "blue")
         } ${card.matched ? "matched" : ""}`}
       >
         Batika
