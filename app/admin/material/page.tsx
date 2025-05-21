@@ -35,10 +35,10 @@ export default async function Materials() {
                 <th className="py-3 px-6">Pengertian</th>
                 <th className="py-3 px-6">Dalil Naqli</th>
                 <th className="py-3 px-6">Bentuk/Sebab</th>
-                <th className="py-3 px-6">Ciri-Ciri</th>
-                <th className="py-3 px-6">Contoh</th>
+                {/* <th className="py-3 px-6">Ciri-Ciri</th> */}
+                {/* <th className="py-3 px-6">Contoh</th> */}
                 <th className="py-3 px-6">Nilai-Nilai</th>
-                <th className="py-3 px-6">Cara Menghindari</th>
+                {/* <th className="py-3 px-6">Cara Menghindari</th> */}
                 <th className="py-3 px-6">Actions</th>
               </tr>
             </thead>
@@ -53,10 +53,10 @@ export default async function Materials() {
                   <td className="py-3 px-6">{limitText(material.understanding)}</td>
                   <td className="py-3 px-6">{limitText(material.arguments)}</td>
                   <td className="py-3 px-6">{limitText(material.forms)}</td>
-                  <td className="py-3 px-6">{limitText(material.trait)}</td>
-                  <td className="py-3 px-6">{limitText(material.examples)}</td>
+                  {/* <td className="py-3 px-6">{limitText(material.trait)}</td> */}
+                  {/* <td className="py-3 px-6">{limitText(material.examples)}</td> */}
                   <td className="py-3 px-6">{limitText(material.values)}</td>
-                  <td className="py-3 px-6">{limitText(material.prevents)}</td>
+                  {/* <td className="py-3 px-6">{limitText(material.prevents)}</td> */}
                   <td className="py-3 px-6">
                     <div className="flex items-center space-x-4">
                       <UpdateButton path="material" slug={material.slug} />

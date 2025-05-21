@@ -2,6 +2,7 @@ import Link from "next/link";
 import { HomeIcon } from "@/components/ui/icons";
 import { LogIn } from "lucide-react";
 import { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: 'Batika - Belajar Etika dengan Interaktif & Menyenangkan',
@@ -37,18 +38,26 @@ export default function Home() {
 
 function HomeComponent() {
   return (
-    <main className="relative w-full justify-between h-screen flex flex-col md:gap-20 bg-gradient-to-bl from-slate-900 via-slate-950 to-slate-900">
+    <main style={{
+      backgroundImage: 'url(/assets/hero1.jpg)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed'
+    }} className="relative w-full justify-between h-screen flex flex-col md:gap-20 bg-gradient-to-bl from-slate-900 via-slate-950 to-slate-900">
       <section className="flex justify-between items-center mr-5 animate-fadeIn">
-        <h1 className="text-2xl p-5 font-bold text-white">Batika.</h1>
+        {/* <h1 className="text-2xl p-5 font-bold text-white">Batika.</h1> */}
+        <div className=" bg-slate-900 px-3 py-2 rounded-xl m-2"><Image src="/assets/icon.png" alt="Batika Logo" className="" width={100} height={150} /></div>
         <Link href="/login" className="flex gap-2 items-center px-3 py-3 max-w-xs text-center text-md font-semibold text-white bg-slate-900 rounded-xl ring-1 shadow-lg hover:bg-slate-800 transition-colors">
           <LogIn className="w-4 h-4"/> Login
         </Link>
       </section>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900 opacity-70"></div>
       <section className="relative z-20 mx-auto flex flex-col md:w-4/5 items-center md:text-center p-8 md:p-12 gap-5 animate-fadeIn">
         <h1 className="text-3xl md:text-6xl uppercase font-bold text-white leading-normal md:leading-relaxed">
-          Belajar Akhlak📑  dengan Asik dan Menyenangkan🎯
+          Belajar Akhlak dengan Asik dan Menyenangkan
         </h1>
-        <h1 className="text-sm md:text-lg md:w-4/5 text-slate-400">&quot;Tidak sesuatu yang lebih berat dalam timbangan seorang mukmin kelak pada hari kiamat daripada akhlak yang baik. Sesungguhnya Allah amatlah murka terhadap seorang yang keji lagi jahat.&quot;<br /> HR. Tirmidzi</h1>
+        <h1 className="text-sm md:text-lg md:w-4/5 text-slate-100">&quot;Tidak ada sesuatu yang lebih berat dalam timbangan seorang mukmin kelak pada hari kiamat daripada akhlak yang baik. Sesungguhnya Allah amatlah murka terhadap seorang yang keji lagi jahat.&quot;<br /> HR. Tirmidzi</h1>
         <div className="flex flex-col md:flex-row gap-2 md:gap-5 w-full items-center justify-center">
         <Link href="/dashboard" className="flex gap-2 mt-4 px-6 py-3 md:max-w-xs text-center text-xl font-semibold text-slate-900 bg-slate-50 border border-slate-900 rounded-xl shadow-lg hover:bg-slate-800 w-full md:w-fit  hover:text-white hover:ring-1 transition-colors items-center md:justify-between">
           <HomeIcon /> Halaman Utama
