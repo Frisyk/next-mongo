@@ -99,7 +99,7 @@ export function LoginButton() {
       type="submit" 
       className="w-full px-4 py-3 tracking-wide text-white transition-colors duration-200 transform bg-gradient-to-r from-slate-600 to-slate-500 rounded-lg hover:from-slate-700 hover:to-slate-600 focus:outline-none focus:ring-4 focus:ring-slate-400 dark:focus:ring-slate-800 mt-4"
     >
-      {pending ? 'Submitting...' : "Let's Go"}
+      {pending ? 'Tunggu Sebentar...' : "Let's Go"}
     </Button>
   );
 }

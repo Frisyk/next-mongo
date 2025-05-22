@@ -58,7 +58,6 @@ export function SignupForm() {
               <option value="" disabled selected>
                 Pilih kelas
               </option>
-              <option value="tester">Tester</option>
               <option value="XA">XA</option>
               <option value="XB">XB</option>
               <option value="XC">XC</option>
@@ -149,7 +148,7 @@ export function SignupButton() {
       type="submit" 
       className="w-full px-4 py-3 tracking-wide text-white transition-colors duration-200 transform bg-gradient-to-r from-slate-600 to-slate-500 rounded-lg hover:from-slate-700 hover:to-slate-600 focus:outline-none focus:ring-4 focus:ring-slate-400 dark:focus:ring-slate-800 mt-4"
     >
-      {pending ? 'Submitting...' : 'Sign Up'}
+      {pending ? 'Tunggu Sebentar...' : 'Doftar Akun'}
     </Button>
   );
 }
